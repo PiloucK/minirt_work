@@ -1,0 +1,11 @@
+.DS_Store
+*.o
+*.a
+pft/
+a.out
+main.c
+tests/
+42TESTERS-PRINTF/
+ftprintfdestructor/
+pft_2019/
+*.gch
