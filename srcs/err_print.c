@@ -15,6 +15,7 @@
 int
     arg_err_print(int code)
 {
-    (code == 1)
+    (code == 1) ? write(2, "Error : No arguments \n\
+        Expected command: ./minirt SCENE_FILE.rt [-save]\n", 79) : 0;
     return (-1);
 }

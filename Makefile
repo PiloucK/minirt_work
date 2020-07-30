@@ -13,7 +13,11 @@
 NAME			=  minirt
 
 SRCS			:= \
+srcs/err_print.c\
 srcs/minirt.c
+
+LIB				:= \
+libft
 
 OBJS			= $(SRCS:%.c=%.o)
 
@@ -25,20 +29,33 @@ RM				= rm -f
 
 all:			$(NAME)
 
-$(NAME):		$(OBJS)
-	$(CC) $(CFLAGS) $(MLX_LINKS) -o $@ $<
+$(NAME):		libcomp $(OBJS)
+	@echo "\n\033[0;33mCompiling..."
+	$(CC) $(CFLAGS) -o $@ $(MLX_LINKS) $(OBJS)
 
-bonus:			all
+%.o:			%.c
+	$(CC) $(CFLAGS) -I $(LIB) -c $< -o $@
 
-clean:
+libcomp:
+	@echo "\n\033[0;33mLib_Compiling..."
+	make -C $(LIB)
+
+clean:			cleanlib
 	$(RM) $(OBJS)
 
-fclean:			clean
+fclean:			fcleanlib
+	$(RM) $(OBJS)
 	$(RM) $(NAME)
+
+cleanlib:
+	make --directory=$(LIB) clean
+
+fcleanlib:
+	make --directory=$(LIB) fclean
 
 norme:
 	norminette *.c *.h
 
 re:				fclean all
 
-.PHONY: all clean bonus norme re
+.PHONY: all clean bonus norme re libcomp cleanlib fcleanlib

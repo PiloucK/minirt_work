@@ -14,7 +14,12 @@
 
 int
     main(int ac, char **av)
-{  
+{
+    (void)av;
+    if (ac == 1)
+        arg_err_print(1);
+    else
+    {
     // void *mlx;
     // void *window;
 
@@ -22,5 +27,6 @@ int
     // window = mlx_new_window(mlx, 1000, 1000, "Title");
 
     // mlx_loop(mlx);
+    }
     return (0);
 }

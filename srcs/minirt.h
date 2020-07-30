@@ -13,8 +13,10 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
+# include "libft.h"
 # include <math.h>
-# include <stdlib.h>
 # include <mlx.h>
+
+int     arg_err_print(int code);
 
 #endif
