@@ -12,6 +12,21 @@
 
 #include "minirt.h"
 
+int		ft_close(t_info *info)
+{
+    mlx_destroy_window(info->mlx, info->win.ptr);
+	exit(0);
+	return (1);
+}
+
+int		ft_key(int key, void *arg)
+{
+	if (key == ESC)
+		ft_close(arg);
+	return (1);
+}
+
+
 int
     main(int ac, char **av)
 {
@@ -20,13 +35,14 @@ int
         arg_err_print(1);
     else
     {
-    // void *mlx;
-    // void *window;
+        t_info  info;
 
-    // mlx = mlx_init();
-    // window = mlx_new_window(mlx, 1000, 1000, "Title");
+        info.mlx = mlx_init();
+        info.win.ptr = mlx_new_window(info.mlx, 1000, 1000, "Title");
 
-    // mlx_loop(mlx);
+        mlx_hook(info.win.ptr, 2, 0, ft_key, &info);
+        mlx_hook(info.win.ptr, 17, 0, ft_close, &info);
+        mlx_loop(info.win.ptr);
     }
     return (0);
 }

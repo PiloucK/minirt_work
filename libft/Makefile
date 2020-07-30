@@ -12,7 +12,7 @@
 
 NAME			= libft.a
 
-SRCS			:= \
+LIBC			:= \
 ft_atoi.c					ft_memchr.c					ft_strjoin.c\
 ft_bzero.c					ft_memcmp.c					ft_strlcat.c\
 ft_calloc.c					ft_memcpy.c					ft_strlcpy.c\
@@ -27,7 +27,7 @@ ft_iswspace.c				ft_split.c					ft_substr.c\
 ft_itoa.c					ft_strchr.c					ft_tolower.c\
 ft_memccpy.c				ft_strdup.c					ft_toupper.c
 
-B_SRCS			:= \
+LST				:= \
 ft_lstadd_back.c\
 ft_lstadd_front.c\
 ft_lstclear.c\
@@ -38,9 +38,23 @@ ft_lstmap.c\
 ft_lstnew.c\
 ft_lstsize.c
 
-OBJS			= $(SRCS:%.c=%.o)
+PRINTF			:= \
+ft_printf_bonus.c\
+printf_handler.c\
+handler_bonus.c\
+get_options.c\
+utils.c
 
-B_OBJS			= $(B_SRCS:%.c=%.o)
+GNL				:= \
+get_next_line.c
+
+FILES			:= \
+$(addprefix libc/, $(LIBC))\
+$(addprefix printf/, $(PRINTF))\
+$(addprefix lst/, $(LST))\
+$(addprefix gnl/, $(GNL))
+
+OBJS			= $(FILES:%.c=%.o)
 
 CC				= gcc
 CFLAGS			= -c -Wall -Wextra -Werror
@@ -54,11 +68,7 @@ $(NAME):		$(OBJS)
 	ranlib $(NAME)
 
 %.o:			%.c
-	$(CC) $(CFLAGS) $< -o $@
-
-bonus:			all $(B_OBJS)
-	ar rc $(NAME) $(B_OBJS)
-	ranlib $(NAME)
+	$(CC) $(CFLAGS) -I . $< -o $@
 
 clean:
 	$(RM) $(OBJS) $(B_OBJS)

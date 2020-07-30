@@ -16,12 +16,40 @@
 # include <stdlib.h>
 # include <limits.h>
 # include <unistd.h>
+# include <stdarg.h>
+
+# define BUFSIZE 16
+# define BUFFER_SIZE 64
 
 typedef struct	s_list
 {
 	void			*content;
 	struct s_list	*next;
 }				t_list;
+
+typedef struct	s_follower
+{
+	char			buf[BUFFER_SIZE];
+	int				i;
+	int				len;
+	int				junk;
+	int				doing;
+}				t_follower;
+
+typedef struct	s_flags
+{
+	int		length;
+	int		prec;
+	int		ladjust;
+	char	padc;
+	int		plus_sign;
+	int		sign_char;
+	int		base;
+	int		u_print;
+	int		caps;
+	int		ptr;
+	int		altfm;
+}				t_flags;
 
 void			*ft_memset(void *b, int c, size_t len);
 void			ft_bzero(void *s, size_t n);
@@ -73,5 +101,23 @@ void			ft_lstclear(t_list **lst, void (*del)(void *));
 void			ft_lstiter(t_list *lst, void (*f)(void *));
 t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
 	void (*del)(void *));
+
+int				get_next_line(int fd, char **line);
+
+int				ft_printf(const char *fmt, ...);
+void			get_flags(const char **fmt, t_flags *options);
+void			get_length(const char **fmt, t_flags *options,
+	va_list *arg_ptr);
+void			get_precision(const char **fmt, t_flags *options,
+	va_list *arg_ptr);
+void			ft_nb_print(va_list *arg_ptr, t_flags *options);
+void			ft_c_print(va_list *arg_ptr, t_flags *options);
+void			ft_s_print(va_list *arg_ptr, t_flags *options);
+void			ft_p_print(va_list *arg_ptr, t_flags *options);
+void			ladjust_print(int i, char *buf, t_flags *options);
+void			single_print(int c, t_flags *options);
+int				do_write(char c, int info);
+void			ft_altx_print(va_list *arg_ptr, t_flags *options);
+int             fill_nb_buf(va_list *arg_ptr, t_flags *options, char *buf);
 
 #endif

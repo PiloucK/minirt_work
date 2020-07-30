@@ -17,6 +17,23 @@
 # include <math.h>
 # include <mlx.h>
 
-int     arg_err_print(int code);
+# define ESC 53
+
+typedef void *	t_mlx;
+
+typedef struct	s_win
+{
+	void		*ptr;
+	int			x;
+	int			y;
+}				t_win;
+
+typedef	struct	s_info
+{
+	t_mlx		mlx;
+	t_win		win;
+}				t_info;
+
+int				arg_err_print(int code);
 
 #endif
