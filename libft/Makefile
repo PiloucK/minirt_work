@@ -6,7 +6,7 @@
 #    By: clkuznie <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/13 19:53:29 by clkuznie          #+#    #+#              #
-#    Updated: 2020/07/28 16:36:32 by clkuznie         ###   ########.fr        #
+#    Updated: 2019/10/14 11:58:22 by clkuznie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,12 +82,12 @@ $(NAME):		$(OBJS)
 %.o:			%.c
 	$(CC) $(CFLAGS) $< -o $@
 
-bonus:			$(OBJS) $(B_OBJS)
+bonus:			all $(B_OBJS)
 	ar rc $(NAME) $(B_OBJS)
 	ranlib $(NAME)
 
 clean:
-	$(RM) $(OBJS)
+	$(RM) $(OBJS) $(B_OBJS)
 
 fclean:			clean
 	$(RM) $(NAME)

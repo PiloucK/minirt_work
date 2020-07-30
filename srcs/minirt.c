@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   minirt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clkuznie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/29 14:12:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/07/29 14:12:21 by clkuznie         ###   ########.fr       */
+/*   Created: 2020/07/30 08:59:45 by clkuznie          #+#    #+#             */
+/*   Updated: 2020/07/30 08:59:46 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include "minirt.h"
 
-// # include "libft.h"
-# include <math.h>
-# include <stdlib.h>
-# include <mlx.h>
+int
+    main(int ac, char **av)
+{  
+    // void *mlx;
+    // void *window;
 
-#endif
+    // mlx = mlx_init();
+    // window = mlx_new_window(mlx, 1000, 1000, "Title");
+
+    // mlx_loop(mlx);
+    return (0);
+}

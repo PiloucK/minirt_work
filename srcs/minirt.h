@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tolower.c                                       :+:      :+:    :+:   */
+/*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clkuznie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/08 19:05:23 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/07/30 09:48:44 by clkuznie         ###   ########.fr       */
+/*   Created: 2020/07/29 14:12:20 by clkuznie          #+#    #+#             */
+/*   Updated: 2020/07/29 14:12:21 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int
-	ft_tolower(int c)
-{
-	if (c >= 'A' && c <= 'Z')
-		c += 32;
-	return (c);
-}
+#ifndef MINIRT_H
+# define MINIRT_H
+
+# include <math.h>
+# include <stdlib.h>
+# include <mlx.h>
+
+#endif
