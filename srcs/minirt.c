@@ -21,7 +21,7 @@ int		ft_close(t_info *info)
 
 int		ft_key(int key, void *arg)
 {
-	if (key == ESC)
+	if (key == KEY_ESC)
 		ft_close(arg);
 	return (1);
 }
@@ -45,9 +45,9 @@ int
         info.mlx = mlx_init();
         info.win.ptr = mlx_new_window(info.mlx, 1000, 1000, "MiniRT");
 
-        mlx_hook(info.win.ptr, KEY_ESC, 0, ft_key, &info);
+        // mlx_hook(info.win.ptr, KEY_ESC, 0, ft_key, &info);
         mlx_hook(info.win.ptr, 17, 0, ft_close, &info);
-        // mlx_key_hook(info.win.ptr, &key_control, info);
+        mlx_key_hook(info.win.ptr, &ft_key, &info);
         mlx_loop(info.win.ptr);
     return (0);
 }
