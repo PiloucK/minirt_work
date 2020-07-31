@@ -10,14 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+// #include "minirt.h"
 
-void
-    arg_err_print(int code)
-{
-    (code == 1) ? ft_printf("Error : No arguments\n\
-        Expected command: ./minirt SCENE_FILE.rt [-save]\n") : 0;
-    (code == 2) ? ft_printf("Error : %s\n\
-        Expected command: ./minirt SCENE_FILE.rt [-save]\n", strerror(E2BIG)) : 0;
-    exit(EXIT_FAILURE);
-}
+// void
+//     arg_err_print(int code)
+// {
+//     (code == 1) ? ft_printf("Error : Invalid arguments\n\
+//         Expected command: ./minirt SCENE_FILE.rt [-save]\n") : 0;
+//     exit(EXIT_FAILURE);
+// }

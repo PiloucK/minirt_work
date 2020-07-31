@@ -81,7 +81,7 @@
 #  define KEY_MINUS (27)
 #  define KEY_PGUP (116)
 #  define KEY_PGDN (121)
-#  define KEY_ESC (53)
+#  define KEY_ESC (53) //DONE
 #  define KEY_NUM_1 (83)
 #  define KEY_NUM_2 (84)
 #  define KEY_NUM_3 (85)
@@ -93,8 +93,8 @@
 #  define KEY_NUM_9 (92)
 #  define KEY_NUM_PLUS (69)
 #  define KEY_NUM_MINUS (78)
-#  define KEY_NUM_DOT (42) //TODO
-#  define KEY_NUM_0 (42) //TODO
+#  define KEY_NUM_DOT (42)
+#  define KEY_NUM_0 (42)
 # endif
 
 # define KEY_MOVE_RIGHT (KEY_NUM_6)

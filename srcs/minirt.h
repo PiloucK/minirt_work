@@ -18,8 +18,7 @@
 # include <math.h>
 # include <mlx.h>
 # include <string.h>
-
-# define ESC 53
+#include <stdbool.h>
 
 typedef void *	t_mlx;
 

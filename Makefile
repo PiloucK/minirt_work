@@ -13,8 +13,8 @@
 NAME			=  minirt
 
 SRCS			:= \
-err_print.c\
 minirt.c
+# err_print.c\
 
 LIB				:= \
 includes/libft
