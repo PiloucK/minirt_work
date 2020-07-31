@@ -13,13 +13,16 @@
 NAME			=  minirt
 
 SRCS			:= \
-srcs/err_print.c\
-srcs/minirt.c
+err_print.c\
+minirt.c
 
 LIB				:= \
-libft
+includes/libft
 
-OBJS			= $(SRCS:%.c=%.o)
+FILES			:= \
+$(addprefix srcs/, $(SRCS))
+
+OBJS			= $(FILES:%.c=%.o)
 
 CC				= gcc
 CFLAGS			= -Wall -Wextra -Werror
@@ -31,10 +34,10 @@ all:			$(NAME)
 
 $(NAME):		libcomp $(OBJS)
 	@echo "\n\033[0;33mCompiling..."
-	$(CC) $(CFLAGS) -o $@ $(MLX_LINKS) $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $(MLX_LINKS) $(OBJS) $(LIB)/libft.a
 
 %.o:			%.c
-	$(CC) $(CFLAGS) -I $(LIB) -c $< -o $@
+	$(CC) $(CFLAGS) -I $(LIB) -I includes -c $< -o $@
 
 libcomp:
 	@echo "\n\033[0;33mLib_Compiling..."

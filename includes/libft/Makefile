@@ -40,7 +40,7 @@ ft_lstsize.c
 
 PRINTF			:= \
 ft_printf_bonus.c\
-printf_handler.c\
+print_handler.c\
 handler_bonus.c\
 get_options.c\
 utils.c

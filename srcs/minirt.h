@@ -14,8 +14,10 @@
 # define MINIRT_H
 
 # include "libft.h"
+# include "key_codes.h"
 # include <math.h>
 # include <mlx.h>
+# include <string.h>
 
 # define ESC 53
 
@@ -34,6 +36,6 @@ typedef	struct	s_info
 	t_win		win;
 }				t_info;
 
-int				arg_err_print(int code);
+void			arg_err_print(int code);
 
 #endif

@@ -12,10 +12,12 @@
 
 #include "minirt.h"
 
-int
+void
     arg_err_print(int code)
 {
-    (code == 1) ? write(2, "Error : No arguments \n\
-        Expected command: ./minirt SCENE_FILE.rt [-save]\n", 79) : 0;
-    return (-1);
+    (code == 1) ? ft_printf("Error : No arguments\n\
+        Expected command: ./minirt SCENE_FILE.rt [-save]\n") : 0;
+    (code == 2) ? ft_printf("Error : %s\n\
+        Expected command: ./minirt SCENE_FILE.rt [-save]\n", strerror(E2BIG)) : 0;
+    exit(EXIT_FAILURE);
 }
