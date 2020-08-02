@@ -24,6 +24,12 @@ $(addprefix srcs/, $(SRCS))
 
 OBJS			= $(FILES:%.c=%.o)
 
+INCLUDES		=	-I includes\
+					-I includes/libft
+					# -I includes/libmlx
+
+LIB_SRCS		=	includes/libft/libft.a
+
 CC				= gcc
 CFLAGS			= -Wall -Wextra -Werror
 MLX_LINKS		= -lmlx -framework OpenGL -framework AppKit
@@ -37,7 +43,7 @@ $(NAME):		libcomp $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $(MLX_LINKS) $(OBJS) $(LIB)/libft.a
 
 %.o:			%.c
-	$(CC) $(CFLAGS) -I $(LIB) -I includes -c $< -o $@
+	$(CC) $(CFLAGS) -I $(LIB) $(INCLUDES) -c $< -o $@
 
 libcomp:
 	@echo "\n\033[0;33mLib_Compiling..."
