@@ -50,10 +50,13 @@ void
 void
     arg_check(int ac, char **av)
 {
+    int     fd;
+
     if ((ac != 2 && ac != 3) ||
         (ac == 3 && ft_memcmp(av[2], "-save", 6)) ||
         iswrong_file_format(av[1]))
         err_print(1, NULL);
+    fd = open(av[1], O_RDONLY);
 }
 
 int
