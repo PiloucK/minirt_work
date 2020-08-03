@@ -60,9 +60,11 @@ fclean:			fcleanlib
 
 cleanlib:
 	make --directory=includes/libft clean
+	make --directory=includes/libmlx clean
 
 fcleanlib:
 	make --directory=includes/libft fclean
+	make --directory=includes/libmlx clean
 
 norme:
 	norminette *.c *.h
