@@ -51,15 +51,14 @@ void
 void
     init_infos(int ac, t_info *info)
 {
-    int i;
-    int j;
-
     if (!(info = malloc(sizeof(t_info))))
         err_print(2, info);
     info->do_save = (ac == 3 ? true : false);
-    mlx_get_screen_size(info->mlx, &i, &j);
-    info->win.size_x = i;
-    info->win.size_y = j;
+    info->mlx = mlx_init();
+    mlx_get_screen_size(info->mlx, &info->win.size_x, &info->win.size_y);
+    info->elems = NULL;
+    info->last_read_str = NULL;
+    info->win.ptr = NULL;
 }
 
 void
@@ -106,12 +105,11 @@ int
     t_info  info;
 
     arg_reading(ac, av, &info);
-    
 
     //     info.mlx = mlx_init();
-    //     info.win.ptr = mlx_new_window(info.mlx, 1000, 1000, "MiniRT");
+    //     info->win.ptr = mlx_new_window(info->mlx, info->win.size_x, info->win.size_x, "MiniRT");
 
-    //     mlx_hook(info.win.ptr, 17, 0, err_close, &info);
-    //     mlx_key_hook(info.win.ptr, &key_hooked, &info);
-    // mlx_loop(info.win.ptr);
+    //     mlx_hook(info->win.ptr, 17, 0, err_close, &info);
+    //     mlx_key_hook(info->win.ptr, &key_hooked, &info);
+    // mlx_loop(info->win.ptr);
 }

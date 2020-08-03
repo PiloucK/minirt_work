@@ -66,7 +66,7 @@ typedef	struct	s_info
 {
 	t_mlx		mlx;
 	t_win		win;
-    t_elem_lst  elems;
+    t_elem_lst  *elems;
     bool        do_save;
     char        *last_read_str;
 }				t_info;
