@@ -20,7 +20,7 @@
 # include <string.h>
 # include <stdbool.h>
 # include <fcntl.h>
-# include <sys/errno.h>
+# include <errno.h>
 
 typedef void *	t_mlx;
 

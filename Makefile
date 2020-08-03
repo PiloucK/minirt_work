@@ -14,10 +14,7 @@ NAME			=  minirt
 
 SRCS			:= \
 minirt.c
-# err_print.c\
-
-LIB				:= \
-includes/libft
+# err_print.c
 
 FILES			:= \
 $(addprefix srcs/, $(SRCS))
@@ -25,17 +22,18 @@ $(addprefix srcs/, $(SRCS))
 OBJS			= $(FILES:%.c=%.o)
 
 INCLUDES		= \
+-I includes/libmlx\
+-I includes/libmlx/X11\
 -I includes\
 -I includes/libft
-# -I includes/libmlx
 
 LIB_SRCS		= \
-includes/libft/libft.a
-# includes/libmlx/
+includes/libft/libft.a\
+includes/libmlx/libmlx.a
 
 CC				= gcc
 CFLAGS			= -Wall -Wextra -Werror
-MLX_LINKS		= -lmlx -framework OpenGL -framework AppKit
+MLX_LINKS		= -lm -lbsd -lX11 -lXext
 
 RM				= rm -f
 
@@ -43,14 +41,15 @@ all:			$(NAME)
 
 $(NAME):		libcomp $(OBJS)
 	@echo "\n\033[0;33mCompiling..."
-	$(CC) $(CFLAGS) -o $@ $(MLX_LINKS) $(OBJS) $(LIB)/libft.a
+	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LIB_SRCS) $(MLX_LINKS)
 
 %.o:			%.c
-	$(CC) $(CFLAGS) -I $(LIB) $(INCLUDES) -c $< -o $@
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@ -g
 
 libcomp:
 	@echo "\n\033[0;33mLib_Compiling..."
-	make -C $(LIB)
+	make -C includes/libft
+	make -C includes/libmlx
 
 clean:			cleanlib
 	$(RM) $(OBJS)
@@ -60,10 +59,10 @@ fclean:			fcleanlib
 	$(RM) $(NAME)
 
 cleanlib:
-	make --directory=$(LIB) clean
+	make --directory=includes/libft clean
 
 fcleanlib:
-	make --directory=$(LIB) fclean
+	make --directory=includes/libft fclean
 
 norme:
 	norminette *.c *.h
