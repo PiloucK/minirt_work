@@ -28,7 +28,7 @@ int		key_hooked(int key, void *arg)
 	return (0);
 }
 
-bool	iswrong_file_format(char *filename)
+bool	is_wrong_file_format(char *filename)
 {
 	int	i;
 
@@ -44,27 +44,66 @@ void
 {
     (code == 1) ? ft_printf("Error : Invalid arguments\n\
         Expected command: ./minirt SCENE_FILE.rt [-save]\n") : 0;
+    (code == 2) ? ft_printf("Error : %s\n", strerror(errno)) : 0;
     err_close(info);
 }
 
 void
-    arg_check(int ac, char **av)
+    init_infos(int ac, t_info *info)
+{
+    if (!(info = malloc(sizeof(t_info))))
+        err_print(2, info);
+    info->do_save = (ac == 3 ? true : false);
+    // mlx_get_screen_size(info->mlx, &info->win.size_x, &info->win.size_y);
+    info->win.size_x = 1920;
+    info->win.size_y = 1080;
+}
+
+void
+    line_parse(t_info *info)
+{
+    ft_printf("%s\n", info->last_read_str);
+}
+
+void
+    parsed_check(t_info *info)
+{
+    (void)info;
+}
+
+void
+    arg_reading(int ac, char **av, t_info *info)
 {
     int     fd;
+    int     gnl_ret;
 
     if ((ac != 2 && ac != 3) ||
         (ac == 3 && ft_memcmp(av[2], "-save", 6)) ||
-        iswrong_file_format(av[1]))
+        is_wrong_file_format(av[1]))
         err_print(1, NULL);
-    fd = open(av[1], O_RDONLY);
+    if ((fd = open(av[1], O_RDONLY)) < 0)
+        err_print(2, NULL);
+    init_infos(ac, info);
+    while ((gnl_ret = get_next_line(fd, &info->last_read_str)) == 1)
+    {
+        if (*info->last_read_str != '#')
+            line_parse(info);
+        free(info->last_read_str);
+        info->last_read_str = NULL;
+    }
+    if (gnl_ret == -1)
+        err_print(2, NULL);
+    parsed_check(info);
+    close(fd);
 }
 
 int
     main(int ac, char **av)
 {
-    arg_check(ac, av);
+    t_info  info;
+
+    arg_reading(ac, av, &info);
     
-        t_info  info;
 
         info.mlx = mlx_init();
         info.win.ptr = mlx_new_window(info.mlx, 1000, 1000, "MiniRT");

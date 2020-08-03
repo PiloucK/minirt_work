@@ -24,11 +24,14 @@ $(addprefix srcs/, $(SRCS))
 
 OBJS			= $(FILES:%.c=%.o)
 
-INCLUDES		=	-I includes\
-					-I includes/libft
-					# -I includes/libmlx
+INCLUDES		= \
+-I includes\
+-I includes/libft
+# -I includes/libmlx
 
-LIB_SRCS		=	includes/libft/libft.a
+LIB_SRCS		= \
+includes/libft/libft.a
+# includes/libmlx/
 
 CC				= gcc
 CFLAGS			= -Wall -Wextra -Werror
