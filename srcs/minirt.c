@@ -42,13 +42,13 @@ bool	is_wrong_file_format(char *filename)
 }
 
 void
-    err_print(int code, t_info *info)
+    err_print(int code, t_info *info, char *extra_comment)
 {
     (code == 1) ? ft_printf("Error : Invalid arguments\n\
         Expected command: ./minirt SCENE_FILE.rt [-save]\n") : 0;
     (code == 2) ? ft_printf("Error : %s\n", strerror(errno)) : 0;
-    (code == 3) ? ft_printf("Error : RAFL Unknown object type\n\
-        \"%s\"\n", info->last_read_str) : 0;
+    (code == 3) ? ft_printf("Error : %s\n\
+        \"%s\"\n", extra_comment, info->last_read_str) : 0;
     err_close(info);
 }
 
@@ -56,9 +56,9 @@ void
     init_infos(int ac, t_info *info)
 {
     if (!(info = malloc(sizeof(t_info))))
-        err_print(2, info);
+        err_print(2, info, NULL);
     if (!(info->win = malloc(sizeof(t_win))))
-        err_print(2, info);
+        err_print(2, info, NULL);
     info->do_save = (ac == 3 ? true : false);
     info->mlx = mlx_init();
     info->elems = NULL;
@@ -105,9 +105,26 @@ void
     parse_rafl(char **splited_str, t_info *info)
 {
     (void)splited_str;
-    err_print(3, info);
+    err_print(3, info, "RAFL Unknown object type");
 }
 
+int
+    splited_count(char **splited_str)
+{
+    int     i;
+
+    i = 0;
+    while (splited_str[i])
+        i++;
+    return (i);
+}
+
+void
+    parse_resolution(char **splited_str, t_info *info)
+{
+    if (splited_count(splited_str) != 3)
+        err_print(3, info, "Wrong resolution line format");
+}
 
 void
     parse_array_init()
@@ -117,7 +134,7 @@ void
     i = 0;
     while (i < 256)
         parse_array[i++] = parse_rafl;
-    // parse_array[] = ;
+    parse_array[R] = parse_resolution;
 }
 
 int
@@ -152,7 +169,7 @@ void
     uniforme(info->last_read_str);
     splited_str = ft_split(info->last_read_str, ' ');
     if (!splited_str)
-        err_print(2, info);
+        err_print(2, info, NULL);
 ft_printf("given type = %i for %s\n", type_get(splited_str[0]), splited_str[0]);
     (*parse_array[type_get(splited_str[0])])(splited_str, info);
     splited_free(splited_str);
@@ -168,9 +185,9 @@ void
     if ((ac != 2 && ac != 3) ||
         (ac == 3 && ft_memcmp(av[2], "-save", 6)) ||
         is_wrong_file_format(av[1]))
-        err_print(1, NULL);
+        err_print(1, NULL, NULL);
     if ((fd = open(av[1], O_RDONLY)) < 0)
-        err_print(2, NULL);
+        err_print(2, NULL, NULL);
     init_infos(ac, info);
     parse_array_init();
     while ((gnl_ret = get_next_line(fd, &info->last_read_str)) == 1)
@@ -181,7 +198,7 @@ void
         info->last_read_str = NULL;
     }
     if (gnl_ret == -1)
-        err_print(2, NULL);
+        err_print(2, NULL, NULL);
     parsed_check(info);
     close(fd);
 }
