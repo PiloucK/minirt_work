@@ -54,6 +54,53 @@ typedef struct	s_color {
 	double      b;
 }				t_color;
 
+typedef	struct	s_info
+{
+	t_mlx		mlx;
+	t_win		*win;
+    t_elem_lst  *elems;
+    bool        do_save;
+    char        *last_read_str;
+}				t_info;
+
+typedef enum    e_type
+{
+    R,
+    A,
+    C,
+    L,
+    SP,
+    PL,
+    SQ,
+    CY,
+    TR,
+}               t_type;
+
+typedef struct  s_object
+{
+    char        type;
+}               t_object;
+
+typedef struct  s_vect
+{
+    double      dirx;
+    double      diry;
+    double      dirz;
+}               t_vect;
+
+typedef struct  s_ambiant
+{
+    t_ratio     lum;
+    t_color     color;
+}               t_ambiant;
+
+typedef struct  s_camera
+{
+    t_vect      dir_vect;
+    t_pos       pos;
+    int         fov;
+}               t_camera;
+
 typedef struct  s_light
 {
     t_pos       pos;
@@ -61,16 +108,45 @@ typedef struct  s_light
     t_color     color;
 }               t_light;
 
-
-typedef	struct	s_info
+typedef struct  s_sphere
 {
-	t_mlx		mlx;
-	t_win		win;
-    t_elem_lst  *elems;
-    bool        do_save;
-    char        *last_read_str;
-}				t_info;
+    t_pos       pos;
+    double      diameter;
+    t_color     color;
+}               t_sphere;
 
-void			arg_err_print(int code);
+typedef struct  s_plane
+{
+    t_pos       pos;
+    t_vect      dir_vect;
+    t_color     color;
+}               t_plane;
+
+typedef struct  s_square
+{
+    t_pos       pos;
+    t_vect      dir_vect;
+    double      height;
+    t_color     color;
+}               t_square;
+
+typedef struct  s_cylinder
+{
+    t_pos       pos;
+    t_vect      dir_vect;
+    double      diameter;
+    double      height;
+    t_color     color;
+}               t_cylinder;
+
+typedef struct  s_triangle
+{
+    t_pos       fp_pos;
+    t_pos       sp_pos;
+    t_pos       tp_pos;
+    t_color     color;
+}               t_triangle;
+
+typedef void    (*t_parse_fnct)(char **splited_str, t_info *info);
 
 #endif
