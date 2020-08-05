@@ -153,7 +153,7 @@ void
     splited_str = ft_split(info->last_read_str, ' ');
     if (!splited_str)
         err_print(2, info);
-ft_printf("given type = %i\n", type_get(splited_str[0]));
+ft_printf("given type = %i for %s\n", type_get(splited_str[0]), splited_str[0]);
     (*parse_array[type_get(splited_str[0])])(splited_str, info);
     splited_free(splited_str);
 // ft_printf("%s\n", info->last_read_str);
