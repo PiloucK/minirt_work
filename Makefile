@@ -13,8 +13,14 @@
 NAME			=  minirt
 
 SRCS			:= \
-minirt.c
-# err_print.c
+main.c\
+error_handler.c\
+arg_reading.c\
+line_redirect.c\
+resolution_parse.c\
+utils.c\
+inits.c\
+testing_prints.c
 
 FILES			:= \
 $(addprefix srcs/, $(SRCS))
