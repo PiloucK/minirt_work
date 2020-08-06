@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   err_print.c                                        :+:      :+:    :+:   */
+/*   inits.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clkuznie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/30 09:38:18 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/07/30 09:38:20 by clkuznie         ###   ########.fr       */
+/*   Created: 2020/08/06 16:00:25 by clkuznie          #+#    #+#             */
+/*   Updated: 2020/08/06 16:00:26 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "minirt.h"
+#include "minirt.h"
 
-// void
-//     arg_err_print(int code)
-// {
-//     (code == 1) ? ft_printf("Error : Invalid arguments\n\
-//         Expected command: ./minirt SCENE_FILE.rt [-save]\n") : 0;
-//     exit(EXIT_FAILURE);
-// }
+void
+    init_infos(int ac, t_info *info)
+{
+    info->mlx = NULL;
+    info->win = NULL;
+    info->elems = NULL;
+    info->do_save = ac;
+    info->last_read_str = NULL;
+    print_all_info(info);
+}
