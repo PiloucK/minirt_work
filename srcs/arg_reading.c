@@ -25,11 +25,10 @@ static int
 }
 
 void
-    arg_reading(int ac, char **av, t_info *info)
+    arg_reading(int ac, char **av, t_info **info)
 {
     int     fd;
     int     gnl_ret;
-    char    *test;
 
     if ((ac != 2 && ac != 3) ||
         (ac == 3 && ft_memcmp(av[2], "-save", 6)) ||
@@ -37,22 +36,17 @@ void
         err_print(1, NULL, NULL);
     if ((fd = open(av[1], O_RDONLY)) < 0)
         err_print(2, NULL, NULL);
-    info->do_save=9;
     init_infos(ac, info);
-
-    ft_printf("toto-------------------------\n");
-    print_all_info(info);
-    while ((gnl_ret = get_next_line(fd, &test)) == 1)
+    while ((gnl_ret = get_next_line(fd, &(*info)->last_read_str)) == 1)
     {
-        info->last_read_str = test;
-    print_all_info(info);
-        if (*info->last_read_str && *info->last_read_str != '#')
-            line_redirect(info);
-        free(info->last_read_str);
-        info->last_read_str = NULL;
+        if (*(*info)->last_read_str && *(*info)->last_read_str != '#')
+            line_redirect(*info);
+        ft_printf("%s\n", (*info)->last_read_str);
+        free((*info)->last_read_str);
+        (*info)->last_read_str = NULL;
     }
     if (gnl_ret == -1)
         err_print(2, NULL, NULL);
-    parsed_check(info);
+    parsed_check(*info);
     close(fd);
 }

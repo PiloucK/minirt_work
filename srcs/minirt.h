@@ -28,6 +28,8 @@ typedef struct	s_win
 	void		*ptr;
 	int			size_x;
 	int			size_y;
+    int         res_status;
+    int         ambiant_status;
 }				t_win;
 
 typedef struct  s_elem_lst
@@ -56,7 +58,7 @@ typedef struct	s_color {
 typedef	struct	s_info
 {
 	t_mlx		mlx;
-	t_win		*win;
+	t_win		win;
     t_elem_lst  *elems;
     int         do_save;
     char        *last_read_str;
@@ -147,17 +149,17 @@ typedef struct  s_triangle
 }               t_triangle;
 
 // typedef void    (*t_parse_fnct)(char **splited_str, t_info *info);
-void            arg_reading(int ac, char **av, t_info *info);
+void            arg_reading(int ac, char **av, t_info **info);
 void            line_redirect(t_info *info);
 void            resolution_parse(char **object_params, t_info *info);
 int             util_object_params_count(char **object_params_str);
 void            object_params_free(char **object_params);
 void            parse_rafl(char **object_params, t_info *info);
 void            parsed_check(t_info *info);
-void            init_infos(int ac, t_info *info);
-void            err_print(int code, t_info, char *extra_comment);
+void            init_infos(int ac, t_info **info);
+void            err_print(int code, t_info *info, char *extra_comment);
 int             err_close(t_info *info);
 void            print_infos(t_info *info);
-void            print_win_info(t_info *info);
+int		key_hooked(int key, void *arg);
 
 #endif

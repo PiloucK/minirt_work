@@ -15,25 +15,20 @@
 void
     print_infos(t_info *info)
 {
+    ft_printf("%i\n", info->do_save);
     ft_printf("%p\n", info);
     ft_printf("mlx_ptr = %p\n\
-    win struct ptr = %p\n\
+    win ptr = %p\n\
+    win x size = %i\n\
+    win y size = %i\n\
     t_elem_lst first elem = %p\n\
     do_save = %i\n\
     char *last_read_str = %s\n\n",
     info->mlx,
-    info->win,
+    info->win.ptr,
+    info->win.size_x,
+    info->win.size_y,
     info->elems,
+    info->do_save,
     info->last_read_str);
-}
-
-void
-    print_win_info(t_info *info)
-{
-    ft_printf("win_ptr = %p\n\
-    win x size = %i\n\
-    win y size = %i\n\n",
-    info->win->ptr,
-    info->win->size_x,
-    info->win->size_y);
 }

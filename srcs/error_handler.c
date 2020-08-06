@@ -16,6 +16,7 @@ int		err_close(t_info *info)
 {
     if (!info)
         exit(EXIT_FAILURE);
+    free(info);
 	exit(0);
 }
 
