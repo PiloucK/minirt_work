@@ -18,7 +18,6 @@
 # include <math.h>
 # include <mlx.h>
 # include <string.h>
-# include <stdbool.h>
 # include <fcntl.h>
 # include <errno.h>
 
@@ -59,7 +58,7 @@ typedef	struct	s_info
 	t_mlx		mlx;
 	t_win		*win;
     t_elem_lst  *elems;
-    bool        do_save;
+    int         do_save;
     char        *last_read_str;
 }				t_info;
 

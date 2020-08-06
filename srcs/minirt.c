@@ -12,7 +12,23 @@
 
 #include "minirt.h"
 
-t_parse_fnct    parse_array[256];
+// t_parse_fnct    parse_array[256];
+
+void
+    print_all_info(t_info *info)
+{
+    ft_printf("%p\n", info);
+    ft_printf("mlx_ptr = %p\n\
+    win struct ptr = %p\n\
+    t_elem_lst first elem = %p\n\
+    do_save = %i\n\
+    char *last_read_str = %s\n",
+    info->mlx,
+    info->win,
+    info->elems,
+    info->last_read_str);
+    // ft_printf("mlx_ptr = %p\n\    win struct ptr = %p\n\    t_elem_lst first elem = %p\n\    do_save = %i\n\    char *last_read_str = %s\n\    win_ptr from new window = %p\n\    win x size = %i\n\    win y size = %i\n",    info->mlx,  info->win,  info->elems,   info->last_read_str,   info->win->ptr,   info->win->size_x,info->win->size_y);
+}
 
 int		err_close(t_info *info)
 {
@@ -30,7 +46,7 @@ int		key_hooked(int key, void *arg)
 	return (0);
 }
 
-bool	is_wrong_file_format(char *filename)
+int 	is_wrong_file_format(char *filename)
 {
 	int	i;
 
@@ -55,15 +71,12 @@ void
 void
     init_infos(int ac, t_info *info)
 {
-    if (!(info = malloc(sizeof(t_info))))
-        err_print(2, info, NULL);
-    if (!(info->win = malloc(sizeof(t_win))))
-        err_print(2, info, NULL);
-    info->do_save = (ac == 3 ? true : false);
-    info->mlx = mlx_init();
+    info->mlx = NULL;
+    info->win = NULL;
     info->elems = NULL;
+    info->do_save = ac;
     info->last_read_str = NULL;
-    info->win->ptr = NULL;
+    print_all_info(info);
 }
 
 static void
@@ -120,45 +133,94 @@ int
 }
 
 void
-    parse_resolution(char **splited_str, t_info *info)
+    resolution_parse(char **splited_str, t_info *info)
 {
+    t_win   *tmp;
+
     if (splited_count(splited_str) != 3)
         err_print(3, info, "Wrong resolution line format");
+    // if (!(info->win = malloc(sizeof(t_win))))
+    //     err_print(2, info, NULL);
+    print_all_info(info);
+    if (!(tmp = malloc(sizeof(t_win))))
+        err_print(2, info, NULL);
+    tmp->size_x = ft_atoi(splited_str[1]);
+    tmp->size_y = ft_atoi(splited_str[2]);
+    info->win = tmp;
+    info->win->size_x = tmp->size_x;
+    info->win->size_y = tmp->size_y;
+    print_all_info(info);
+        // info->mlx = mlx_init();
+// ft_printf("%p\n", info->mlx);
+    // info->win->size_x = tmp->size_x;
+    // info->win->size_y = tmp->size_y;
+    // ft_printf("%i, %i\n", info->win->size_x, info->win->size_y);
+
+// tmp->ptr = mlx_new_window(info->mlx, &tmp->size_x, &tmp->size_y, "MiniRT");
+    // info->win->ptr = mlx_new_window(info->mlx, info->win->size_x, info->win->size_x, "MiniRT");
+    // mlx_hook(info->win->ptr, 17, 0, err_close, &info);
+    // mlx_key_hook(info->win->ptr, &key_hooked, &info);
+    // mlx_loop(info->win->ptr);
 }
+
+// void
+//     parse_array_init()
+// {
+//     int     i;
+
+//     i = 0;
+//     while (i < 256)
+//         parse_array[i++] = parse_rafl;
+//     parse_array[R] = parse_resolution;
+// }
+
+// int
+//     type_get(char *input_type)
+// {
+//     if (!ft_memcmp(input_type, "R", 2))
+//         return (R);
+//     if (!ft_memcmp(input_type, "A", 2))
+//         return (A);
+//     if (!ft_memcmp(input_type, "c", 2))
+//         return (C);
+//     if (!ft_memcmp(input_type, "l", 2))
+//         return (L);
+//     if (!ft_memcmp(input_type, "sp", 3))
+//         return (SP);
+//     if (!ft_memcmp(input_type, "pl", 3))
+//         return (PL);
+//     if (!ft_memcmp(input_type, "sq", 3))
+//         return (SQ);
+//     if (!ft_memcmp(input_type, "cy", 3))
+//         return (CY);
+//     if (!ft_memcmp(input_type, "tr", 3))
+//         return (TR);
+//     return (-1);
+// }
 
 void
-    parse_array_init()
+    parse_switch(char **splited_str, t_info *info)
 {
-    int     i;
-
-    i = 0;
-    while (i < 256)
-        parse_array[i++] = parse_rafl;
-    parse_array[R] = parse_resolution;
-}
-
-int
-    type_get(char *input_type)
-{
-    if (!ft_memcmp(input_type, "R", 2))
-        return (R);
-    if (!ft_memcmp(input_type, "A", 2))
-        return (A);
-    if (!ft_memcmp(input_type, "c", 2))
-        return (C);
-    if (!ft_memcmp(input_type, "l", 2))
-        return (L);
-    if (!ft_memcmp(input_type, "sp", 3))
-        return (SP);
-    if (!ft_memcmp(input_type, "pl", 3))
-        return (PL);
-    if (!ft_memcmp(input_type, "sq", 3))
-        return (SQ);
-    if (!ft_memcmp(input_type, "cy", 3))
-        return (CY);
-    if (!ft_memcmp(input_type, "tr", 3))
-        return (TR);
-    return (-1);
+    if (!ft_memcmp(splited_str[0], "R", 2))
+        resolution_parse(splited_str, info);
+    else if (!ft_memcmp(splited_str[0], "A", 2))
+        return ;
+    else if (!ft_memcmp(splited_str[0], "c", 2))
+        return ;
+    else if (!ft_memcmp(splited_str[0], "l", 2))
+        return ;
+    else if (!ft_memcmp(splited_str[0], "sp", 3))
+        return ;
+    else if (!ft_memcmp(splited_str[0], "pl", 3))
+        return ;
+    else if (!ft_memcmp(splited_str[0], "sq", 3))
+        return ;
+    else if (!ft_memcmp(splited_str[0], "cy", 3))
+        return ;
+    else if (!ft_memcmp(splited_str[0], "tr", 3))
+        return ;
+    else
+        err_print(3, info, "RAFL Unknown object type");
 }
 
 void
@@ -170,8 +232,9 @@ void
     splited_str = ft_split(info->last_read_str, ' ');
     if (!splited_str)
         err_print(2, info, NULL);
-ft_printf("given type = %i for %s\n", type_get(splited_str[0]), splited_str[0]);
-    (*parse_array[type_get(splited_str[0])])(splited_str, info);
+// ft_printf("given type = %i for %s\n", type_get(splited_str[0]), splited_str[0]);
+    parse_switch(splited_str, info);
+    // (*parse_array[type_get(splited_str[0])])(splited_str, info);
     splited_free(splited_str);
 // ft_printf("%s\n", info->last_read_str);
 }
@@ -188,10 +251,14 @@ void
         err_print(1, NULL, NULL);
     if ((fd = open(av[1], O_RDONLY)) < 0)
         err_print(2, NULL, NULL);
+    info->do_save=9;
     init_infos(ac, info);
-    parse_array_init();
-    while ((gnl_ret = get_next_line(fd, &info->last_read_str)) == 1)
+
+    ft_printf("toto-------------------------\n");
+    print_all_info(info);
+    while ((gnl_ret = get_next_line(fd, &(info->last_read_str))) == 1)
     {
+    print_all_info(info);
         if (*info->last_read_str && *info->last_read_str != '#')
             line_parse(info);
         free(info->last_read_str);
@@ -206,7 +273,10 @@ void
 int
     main(int ac, char **av)
 {
-    t_info  info;
+    t_info  *info;
 
-    arg_reading(ac, av, &info);
+
+    if (!(info = malloc(sizeof(t_info))))
+        err_print(2, info, NULL);
+    arg_reading(ac, av, info);
 }
