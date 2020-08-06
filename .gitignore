@@ -3,7 +3,6 @@
 *.a
 pft/
 a.out
-main.c
 tests/
 42TESTERS-PRINTF/
 ftprintfdestructor/
