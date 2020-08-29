@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:48:45 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/08/25 17:01:00 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/08/29 18:21:52 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void
     info->win.ptr,
     info->win.size_x,
     info->win.size_y,
-    info->elems,
+    info->first_elem,
     info->do_save,
     info->last_read_str);
     ft_printf("side info:\n\
