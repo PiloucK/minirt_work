@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clkuznie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/12 11:15:10 by clkuznie          #+#    #+#             */
-/*   Updated: 2019/10/15 06:48:39 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/08/27 17:57:39 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,7 @@ void			single_print(int c, t_flags *options);
 int				do_write(char c, int info);
 void			ft_altx_print(va_list *arg_ptr, t_flags *options);
 int             fill_nb_buf(va_list *arg_ptr, t_flags *options, char *buf);
+
+double			ft_strtod(const char *str);
 
 #endif

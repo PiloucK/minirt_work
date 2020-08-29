@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   inits.c                                            :+:      :+:    :+:   */
+/*   ambiant_parse.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/06 16:00:25 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/08/25 17:00:40 by clkuznie         ###   ########.fr       */
+/*   Created: 2020/08/25 13:44:20 by clkuznie          #+#    #+#             */
+/*   Updated: 2020/08/25 19:25:04 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 void
-    init_infos(int ac, t_info **info)
+    ambiant_parse(char **object_params, t_info *info)
 {
-    if (!(*info = malloc(sizeof(t_info))))
-        err_print(2, *info, NULL);
-    (*info)->mlx = mlx_init();
-    (*info)->win.ptr = NULL;
-    (*info)->win.size_x = 0;
-    (*info)->win.size_y = 0;
-    (*info)->win.res_status = 0;
-    (*info)->ambiant.status = 0;
-    (*info)->elems = NULL;
-    (*info)->do_save = (ac != 3 ? 0 : 1);
-    (*info)->last_read_str = NULL;
+    if (util_object_params_count(object_params) != 3)
+        err_print(3, info, "Wrong ambiant line format");
+    if (info->ambiant.status)
+        err_print(3, info, "Redefinition of 'A'");
+    info->ambiant.ratio = double_value_parse(object_params[1]);
+    info->ambiant.color = color_parse(object_params[2]);
+    info->ambiant.status = 1;
 }

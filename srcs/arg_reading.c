@@ -40,8 +40,9 @@ void
     while ((gnl_ret = get_next_line(fd, &(*info)->last_read_str)) == 1)
     {
         if (*(*info)->last_read_str && *(*info)->last_read_str != '#')
-            line_redirect(*info);
+            parse_redirect(*info);
         ft_printf("%s\n", (*info)->last_read_str);
+        print_infos(*info);
         free((*info)->last_read_str);
         (*info)->last_read_str = NULL;
     }

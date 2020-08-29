@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: clkuznie <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/13 19:53:29 by clkuznie          #+#    #+#              #
-#    Updated: 2019/10/14 11:58:22 by clkuznie         ###   ########.fr        #
+#    Updated: 2020/08/27 17:57:48 by clkuznie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,11 +48,15 @@ utils.c
 GNL				:= \
 get_next_line.c
 
+NEW_UTILS		:= \
+ft_strtod.c
+
 FILES			:= \
 $(addprefix libc/, $(LIBC))\
 $(addprefix printf/, $(PRINTF))\
 $(addprefix lst/, $(LST))\
-$(addprefix gnl/, $(GNL))
+$(addprefix gnl/, $(GNL))\
+$(addprefix new_utils/, $(NEW_UTILS))
 
 OBJS			= $(FILES:%.c=%.o)
 

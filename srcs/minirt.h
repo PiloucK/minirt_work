@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clkuznie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 14:12:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/07/29 14:12:21 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/08/25 16:59:46 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ typedef struct	s_win
 	int			size_x;
 	int			size_y;
     int         res_status;
-    int         ambiant_status;
 }				t_win;
 
 typedef struct  s_elem_lst
@@ -54,15 +53,6 @@ typedef struct	s_color {
 	double      g;
 	double      b;
 }				t_color;
-
-typedef	struct	s_info
-{
-	t_mlx		mlx;
-	t_win		win;
-    t_elem_lst  *elems;
-    int         do_save;
-    char        *last_read_str;
-}				t_info;
 
 typedef enum    e_type
 {
@@ -93,6 +83,7 @@ typedef struct  s_ambiant
 {
     t_ratio     lum;
     t_color     color;
+    int         status;
 }               t_ambiant;
 
 typedef struct  s_camera
@@ -148,10 +139,21 @@ typedef struct  s_triangle
     t_color     color;
 }               t_triangle;
 
+typedef	struct	s_info
+{
+	t_mlx		mlx;
+	t_win		win;
+    t_ambiant   ambiant;
+    t_elem_lst  *elems;
+    int         do_save;
+    char        *last_read_str;
+}				t_info;
+
 // typedef void    (*t_parse_fnct)(char **splited_str, t_info *info);
 void            arg_reading(int ac, char **av, t_info **info);
-void            line_redirect(t_info *info);
+void            parse_redirect(t_info *info);
 void            resolution_parse(char **object_params, t_info *info);
+void            ambiant_parse(char **object_params, t_info *info);
 int             util_object_params_count(char **object_params_str);
 void            object_params_free(char **object_params);
 void            parse_rafl(char **object_params, t_info *info);
@@ -160,6 +162,6 @@ void            init_infos(int ac, t_info **info);
 void            err_print(int code, t_info *info, char *extra_comment);
 int             err_close(t_info *info);
 void            print_infos(t_info *info);
-int		key_hooked(int key, void *arg);
+int		        key_hooked(int key, void *arg);
 
 #endif

@@ -29,7 +29,7 @@ static void
     if (!ft_memcmp(object_params[0], "R", 2))
         resolution_parse(object_params, info);
     else if (!ft_memcmp(object_params[0], "A", 2))
-        return ;
+        ambiant_parse(object_params, info);
     else if (!ft_memcmp(object_params[0], "c", 2))
         return ;
     else if (!ft_memcmp(object_params[0], "l", 2))
@@ -49,7 +49,7 @@ static void
 }
 
 void
-    line_redirect(t_info *info)
+    parse_redirect(t_info *info)
 {
     char    **object_params;
 
