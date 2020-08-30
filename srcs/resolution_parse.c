@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   resolution_parse.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clkuznie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:45:29 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/08/06 15:45:30 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/08/30 02:23:31 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ static void
     int     display_y;
 
     mlx_get_screen_size(info->mlx, &display_x, &display_y);
-    if (display_x < info->win.size_x)
-        info->win.size_x = display_x;
-    if (display_x < info->win.size_y)
-        info->win.size_y = display_y;
+    if (display_x < info->res->x_size)
+        info->res->x_size = display_x;
+    if (display_x < info->res->y_size)
+        info->res->y_size = display_y;
 }
 
 void
@@ -41,15 +41,16 @@ void
 {
     if (util_object_params_count(object_params) != 3)
         err_print(3, info, "Wrong resolution line format");
-    if (info->win.res_status)
+    if (info->res)
         err_print(3, info, "Redefinition of 'R'");
     if (!is_full_digits(object_params[1]) || !is_full_digits(object_params[2]))
         err_print(3, info, "Only digits are allowed");
-    info->win.size_x = ft_atoi(object_params[1]);
-    info->win.size_y = ft_atoi(object_params[2]);
+    if (!(info->res = malloc(sizeof(t_res))))
+        err_print(2, info, NULL);
+    info->res->x_size = ft_atoi(object_params[1]);
+    info->res->y_size = ft_atoi(object_params[2]);
     if (!info->do_save)
         resize(info);
-    if (info->win.size_x <= 0 || info->win.size_y <= 0)
+    if (info->res->x_size <= 0 || info->res->y_size <= 0)
         err_print(3, info, "Can't use suggested size");
-    info->win.res_status = 1;
 }

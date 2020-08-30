@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:48:45 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/08/29 18:21:52 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/08/30 02:31:06 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@ void
     do_save = %i\n\
     char *last_read_str = %s\n",
     info->mlx,
-    info->win.ptr,
-    info->win.size_x,
-    info->win.size_y,
+    info->win,
+    info->res->x_size,
+    info->res->y_size,
     info->first_elem,
     info->do_save,
     info->last_read_str);
     ft_printf("side info:\n\
     res status = %i\n\
     ambiant status = %i\n\n",
-    info->win.res_status,
-    info->ambiant.status);
+    !!info->res,
+    !!info->ambiant);
 }
