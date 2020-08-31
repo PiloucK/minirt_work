@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 14:12:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/08/30 02:28:05 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/08/31 19:37:47 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,6 @@ typedef struct  s_triangle
 typedef struct  s_elem_lst
 {
 	int			id;
-	// int         index;
 	void        *elem_detail;
 	void        *next_elem;
 }               t_elem_list;

@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:57:56 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/08/30 02:27:32 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/08/31 19:37:26 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ t_elem_list *
 	if (!(newelem = malloc(sizeof(*newelem))))
 		err_print(2, info, NULL);
 	newelem->id = id;
-	// newelem->index = 0;
 	newelem->elem_detail = details;
 	newelem->next_elem = NULL;
 	return (newelem);

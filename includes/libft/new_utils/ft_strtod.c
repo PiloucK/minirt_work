@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 17:58:16 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/08/30 02:02:46 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/08/31 20:30:45 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static int
 }
 
 static int
-	skim_exp(const char *str, int *dotnexp, int i)
+	skim_exp(const char *str, int *dotnexp, int i, char **endptr)
 {
 	int     exp_sign;
 	int     exp;
@@ -114,6 +114,8 @@ static int
 		*dotnexp = *dotnexp - exp;
 	else
 		*dotnexp = *dotnexp + exp;
+	if (*endptr)
+		*endptr = str + i;
 	if (*dotnexp < 0 && (*dotnexp = -*dotnexp))
 		return (-1);
 	else
@@ -139,7 +141,7 @@ static double
 }
 
 double
-	ft_strtod(const char *str)
+	ft_strtod(const char *str, char **endptr)
 {
 	double  d;
 	int     sign;
@@ -157,7 +159,7 @@ double
 		i++;
 	mant_size = mant_size_count(str, &dotnexp, &i);
 	d = no_exp_value(str, mant_size, &dotnexp, &i);
-	i = skim_exp(str, &dotnexp, i);
+	i = skim_exp(str, &dotnexp, i, endptr);
 	if (i == -1)
 		d /= power_base_to2(dotnexp);
 	else
