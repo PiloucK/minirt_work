@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 14:12:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/08/31 19:37:47 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/01 21:23:37 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,5 +155,8 @@ void            err_print(int code, t_info *info, char *extra_comment);
 int             err_close(t_info *info);
 void            print_infos(t_info *info);
 int		        key_hooked(int key, void *arg);
+double			double_parse_inrange(char *value,
+	double min_range, double max_range, t_info *info);
+t_color			color_parse(char *s, t_info *info);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/12 11:15:10 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/08/31 20:26:40 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/01 19:32:41 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,6 @@ int				do_write(char c, int info);
 void			ft_altx_print(va_list *arg_ptr, t_flags *options);
 int             fill_nb_buf(va_list *arg_ptr, t_flags *options, char *buf);
 
-double			ft_strtod(const char *str, char **endptr);
+double			ft_strtod(char *str, char **endptr);
 
 #endif

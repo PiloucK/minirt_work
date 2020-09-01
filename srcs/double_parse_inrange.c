@@ -6,19 +6,25 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/31 19:39:32 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/08/31 20:22:08 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/01 21:23:41 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 double
-    double_parse_inrange(const char *s, double min_range, double max_range)
+    double_parse_inrange(char *value,
+        double min_range, double max_range, t_info *info)
 {
     double  d;
+    char    *c;
 
-    d = strtod(s);
+    if (!(c = malloc(sizeof(*c))))
+        err_print(2, info, NULL);
+    d = strtod(value, &c);
     if (d < min_range || d > max_range)
-        errprint(3, info, "Wrong value in line (too big or too small)");
+        err_print(3, info, "Wrong value in line (too big or too small)");
+    if (*c)
+        err_print(3, info, "Wrong float number format");
     return (d);
 }

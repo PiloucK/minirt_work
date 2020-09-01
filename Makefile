@@ -6,7 +6,7 @@
 #    By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/30 08:42:51 by clkuznie          #+#    #+#              #
-#    Updated: 2020/08/25 17:01:41 by clkuznie         ###   ########.fr        #
+#    Updated: 2020/09/01 19:28:47 by clkuznie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,9 @@ resolution_parse.c\
 ambiant_parse.c\
 utils.c\
 inits.c\
-testing_prints.c
+testing_prints.c\
+double_parse_inrange.c\
+color_parse.c
 
 FILES			:= \
 $(addprefix srcs/, $(SRCS))

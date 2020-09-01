@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 17:58:16 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/08/31 20:30:45 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/01 19:31:44 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ g_powersof10[] = {
 };
 
 static int
-	mant_size_count(const char *str, int *dotnexp, int *i)
+	mant_size_count(char *str, int *dotnexp, int *i)
 {
 	int     mant_size;
 	
@@ -47,7 +47,7 @@ static int
 }
 
 static int
-	half_max_collect(const char *str, int *mant_size, int *i)
+	half_max_collect(char *str, int *mant_size, int *i)
 {
 	int     frac;
 	int     limit;
@@ -70,7 +70,7 @@ static int
 }
 
 static int
-	no_exp_value(const char *str, int mant_size, int *dotnexp, int *i)
+	no_exp_value(char *str, int mant_size, int *dotnexp, int *i)
 {
 	int     frac1;
 	int     frac2;
@@ -93,7 +93,7 @@ static int
 }
 
 static int
-	skim_exp(const char *str, int *dotnexp, int i, char **endptr)
+	skim_exp(char *str, int *dotnexp, int i, char **endptr)
 {
 	int     exp_sign;
 	int     exp;
@@ -141,7 +141,7 @@ static double
 }
 
 double
-	ft_strtod(const char *str, char **endptr)
+	ft_strtod(char *str, char **endptr)
 {
 	double  d;
 	int     sign;
