@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:48:45 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/08/30 02:31:06 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/08 21:41:31 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void
     print_infos(t_info *info)
 {
-    ft_printf("%p\n", info);
     ft_printf("    mlx_ptr = %p\n\
     win ptr = %p\n\
     win x size = %i\n\

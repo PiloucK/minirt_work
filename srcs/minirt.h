@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 14:12:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/01 21:23:37 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/08 21:38:08 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,5 +158,8 @@ int		        key_hooked(int key, void *arg);
 double			double_parse_inrange(char *value,
 	double min_range, double max_range, t_info *info);
 t_color			color_parse(char *s, t_info *info);
+void			camera_parse(char **object_params, t_info *info);
+void			util_addelem(t_info *info, void *details, int id);
+t_vect			vector_parse(char *object_param, t_info *info);
 
 #endif

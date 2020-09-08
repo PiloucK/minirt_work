@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:57:56 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/08/31 19:37:26 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/08 21:37:02 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int
 	return (i);
 }
 
-t_elem_list *
+static t_elem_list *
 	util_newelem(void *details, int id, t_info *info)
 {
 	t_elem_list	*newelem;

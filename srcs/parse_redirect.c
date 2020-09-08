@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:47:59 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/08/29 18:22:28 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/08 21:32:36 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void
     else if (!ft_memcmp(object_params[0], "A", 2))
         ambiant_parse(object_params, info);
     else if (!ft_memcmp(object_params[0], "c", 2))
-        return ;
+        camera_parse(object_params, info);
     else if (!ft_memcmp(object_params[0], "l", 2))
         return ;
     else if (!ft_memcmp(object_params[0], "sp", 3))
