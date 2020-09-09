@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clkuznie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:46:24 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/08/06 15:46:27 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/09 17:22:53 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,6 @@ int		key_hooked(int key, void *arg)
 }
 
 void
-    object_params_free(char **object_params)
-{
-    int     i;
-
-    i = 0;
-    while (object_params[i])
-        free(object_params[i++]);
-    free(object_params);
-}
-
-void
     parsed_check(t_info *info)
 {
     (void)info;
@@ -47,7 +36,7 @@ void
 }
 
 void
-    parse_rafl(char **object_params, t_info *info)
+    parse_rafl(char ***object_params, t_info *info)
 {
     (void)object_params;
     err_print(3, info, "RAFL Unknown object type");

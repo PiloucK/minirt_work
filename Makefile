@@ -6,7 +6,7 @@
 #    By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/30 08:42:51 by clkuznie          #+#    #+#              #
-#    Updated: 2020/09/08 21:38:28 by clkuznie         ###   ########.fr        #
+#    Updated: 2020/09/09 13:48:42 by clkuznie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ testing_prints.c\
 double_parse_inrange.c\
 color_parse.c\
 camera_parse.c\
-vector_parse.c
+vector_parse.c\
+clean_space.c
 
 FILES			:= \
 $(addprefix srcs/, $(SRCS))

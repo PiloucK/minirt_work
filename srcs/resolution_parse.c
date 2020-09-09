@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:45:29 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/08/30 02:23:31 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/09 17:23:29 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,21 @@ static void
 }
 
 void
-    resolution_parse(char **object_params, t_info *info)
+    resolution_parse(char ***object_params, t_info *info)
 {
-    if (util_object_params_count(object_params) != 3)
+    if (util_object_params_count(*object_params) != 3)
         err_print(3, info, "Wrong resolution line format");
     if (info->res)
         err_print(3, info, "Redefinition of 'R'");
-    if (!is_full_digits(object_params[1]) || !is_full_digits(object_params[2]))
+    if (!is_full_digits((*object_params)[1]) || !is_full_digits((*object_params)[2]))
         err_print(3, info, "Only digits are allowed");
     if (!(info->res = malloc(sizeof(t_res))))
         err_print(2, info, NULL);
-    info->res->x_size = ft_atoi(object_params[1]);
-    info->res->y_size = ft_atoi(object_params[2]);
+    info->res->x_size = ft_atoi((*object_params)[1]);
+    info->res->y_size = ft_atoi((*object_params)[2]);
     if (!info->do_save)
         resize(info);
     if (info->res->x_size <= 0 || info->res->y_size <= 0)
         err_print(3, info, "Can't use suggested size");
+    arrfree(object_params);
 }

@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/31 19:39:32 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/08 21:35:55 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/09 17:21:08 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ double
     double  d;
     char    *c;
 
-    if (!(c = malloc(sizeof(*c))))
-        err_print(2, info, NULL);
+    // if (!(c = malloc(sizeof(*c))))
+    //     err_print(2, info, NULL);
     d = strtod(value, &c);
     if (min_range && max_range)
     {

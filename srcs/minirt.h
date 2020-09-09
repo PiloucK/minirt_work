@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 14:12:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/08 21:38:08 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/09 17:20:15 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,27 +139,30 @@ typedef	struct	s_info
     t_elem_list  *first_elem;
     int         do_save;
     char        *last_read_str;
+	char		***splited_line;
+	char		***splited_value;
 }				t_info;
 
 // typedef void    (*t_parse_fnct)(char **splited_str, t_info *info);
+void            ambiant_parse(char ***object_params, t_info *info);
 void            arg_reading(int ac, char **av, t_info **info);
-void            parse_redirect(t_info *info);
-void            resolution_parse(char **object_params, t_info *info);
-void            ambiant_parse(char **object_params, t_info *info);
-int             util_object_params_count(char **object_params_str);
-void            object_params_free(char **object_params);
-void            parse_rafl(char **object_params, t_info *info);
-void            parsed_check(t_info *info);
-void            init_infos(int ac, t_info **info);
-void            err_print(int code, t_info *info, char *extra_comment);
-int             err_close(t_info *info);
-void            print_infos(t_info *info);
-int		        key_hooked(int key, void *arg);
+void			arrfree(char ***arrtofree);
+void			camera_parse(char ***object_params, t_info *info);
+t_color			color_parse(char *s, t_info *info);
 double			double_parse_inrange(char *value,
 	double min_range, double max_range, t_info *info);
-t_color			color_parse(char *s, t_info *info);
-void			camera_parse(char **object_params, t_info *info);
+int             err_close(t_info *info);
+void            err_print(int code, t_info *info, char *extra_comment);
+void            init_infos(int ac, t_info **info);
+int		        key_hooked(int key, void *arg);
+void            parse_rafl(char ***object_params, t_info *info);
+void            parse_redirect(t_info *info);
+void            parsed_check(t_info *info);
+void            print_infos(t_info *info);
+void            resolution_parse(char ***object_params, t_info *info);
 void			util_addelem(t_info *info, void *details, int id);
+int             util_object_params_count(char **object_params_str);
 t_vect			vector_parse(char *object_param, t_info *info);
+void			info_free(t_info *info);
 
 #endif
