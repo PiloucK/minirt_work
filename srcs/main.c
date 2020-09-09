@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:46:24 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/09 17:22:53 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/09 19:53:50 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,6 @@ int
     t_info  *info;
 
     arg_reading(ac, av, &info);
+    info_free(info);
+    err_close(NULL);
 }

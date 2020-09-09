@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/01 17:08:10 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/09 17:25:10 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/09 19:04:12 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ t_color
 	colors.g = double_parse_inrange(values[1], 0.0, 255.0, info);
 	colors.b = double_parse_inrange(values[2], 0.0, 255.0, info);
 	arrfree(&values);
+	info->splited_value = NULL;
 	return (colors);
 }

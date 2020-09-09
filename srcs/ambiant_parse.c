@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 13:44:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/09 17:19:21 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/09 19:08:26 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,4 @@ void
     info->ambiant->lum =
         double_parse_inrange((*object_params)[1], 0.0, 1.0, info);
     info->ambiant->color = color_parse((*object_params)[2], info);
-	arrfree(object_params);
 }

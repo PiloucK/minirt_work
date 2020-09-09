@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 14:12:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/09 17:20:15 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/09 20:18:20 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,7 @@ int		        key_hooked(int key, void *arg);
 void            parse_rafl(char ***object_params, t_info *info);
 void            parse_redirect(t_info *info);
 void            parsed_check(t_info *info);
+t_pos			position_parse(char *object_param, t_info *info);
 void            print_infos(t_info *info);
 void            resolution_parse(char ***object_params, t_info *info);
 void			util_addelem(t_info *info, void *details, int id);

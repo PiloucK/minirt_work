@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/09 13:48:24 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/09 17:33:10 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/09 20:02:50 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,26 @@
 void
     arrfree(char ***arrtofree)
 {
-    int     i;
+    int         i;
 
     i = 0;
     while ((*arrtofree)[i])
         free((*arrtofree)[i++]);
     free(*arrtofree);
     *arrtofree = NULL;
+}
+
+void
+    clean_list(t_elem_list *first_elem)
+{
+    t_elem_list *tmp;
+
+    tmp = first_elem->next_elem;
+    if (first_elem->elem_detail)
+        free(first_elem->elem_detail);
+    if (first_elem->next_elem)
+        clean_list(tmp);
+    free(first_elem);
 }
 
 void
@@ -37,7 +50,9 @@ void
         free(info->ambiant);
     if (info->last_read_str)
         free(info->last_read_str);
-    // if (info->first_elem)
-    //     clean_list(info->first_elem);
+    if (info->first_elem)
+        clean_list(info->first_elem);
+    if (info->mlx)
+        free(info->mlx);
     free(info);
 }

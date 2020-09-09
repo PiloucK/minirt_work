@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector_parse.c                                     :+:      :+:    :+:   */
+/*   position_parse.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/28 21:09:54 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/09 19:04:41 by clkuznie         ###   ########.fr       */
+/*   Created: 2020/09/09 20:15:23 by clkuznie          #+#    #+#             */
+/*   Updated: 2020/09/09 20:19:43 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_vect
-	vector_parse(char *object_param, t_info *info)
+t_pos
+    position_parse(char *object_param, t_info *info)
 {
-	char	**values;
-	t_vect  vectors;
+    char	**values;
+	t_pos  positions;
 
 	values = ft_split(object_param, ',');
 	info->splited_value = &values;
 	if (!values)
 		err_print(2, info, NULL);
 	if (util_object_params_count(values) != 3)
-		err_print(3, info, "Wrong vector values format");
-	vectors.xdir = double_parse_inrange(values[0], -1.0, 1.0, info);
-	vectors.ydir = double_parse_inrange(values[1], -1.0, 1.0, info);
-	vectors.zdir = double_parse_inrange(values[2], -1.0, 1.0, info);
+		err_print(3, info, "Wrong position values format");
+	positions.x = double_parse_inrange(values[0], 0, 0, info);
+	positions.y = double_parse_inrange(values[1], 0, 0, info);
+	positions.z = double_parse_inrange(values[2], 0, 0, info);
 	arrfree(&values);
 	info->splited_value = NULL;
-	return (vectors);
+	return (positions);
 }

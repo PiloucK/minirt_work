@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:45:29 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/09 17:23:29 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/09 19:09:31 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,4 @@ void
         resize(info);
     if (info->res->x_size <= 0 || info->res->y_size <= 0)
         err_print(3, info, "Can't use suggested size");
-    arrfree(object_params);
 }

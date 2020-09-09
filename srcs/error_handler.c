@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:45:46 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/09 17:22:24 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/09 19:52:55 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int		err_close(t_info *info)
 {
-    if (!info)
-        exit(EXIT_FAILURE);
-    free(info);
+    // if (info)
+    //     exit(EXIT_FAILURE);
+(void)info;
 	exit(0);
 }
 
