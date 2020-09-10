@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 14:12:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/09 20:18:20 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/10 19:48:01 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ typedef struct  s_camera
 {
 	t_vect      dir_vect;
 	t_pos       pos;
-	int         fov;
+	double      fov;
 }               t_camera;
 
 typedef struct  s_light
@@ -155,12 +155,14 @@ int             err_close(t_info *info);
 void            err_print(int code, t_info *info, char *extra_comment);
 void            init_infos(int ac, t_info **info);
 int		        key_hooked(int key, void *arg);
+void			light_parse(char ***object_params, t_info *info);
 void            parse_rafl(char ***object_params, t_info *info);
 void            parse_redirect(t_info *info);
 void            parsed_check(t_info *info);
 t_pos			position_parse(char *object_param, t_info *info);
 void            print_infos(t_info *info);
 void            resolution_parse(char ***object_params, t_info *info);
+void			sphere_parse(char ***object_params, t_info *info);
 void			util_addelem(t_info *info, void *details, int id);
 int             util_object_params_count(char **object_params_str);
 t_vect			vector_parse(char *object_param, t_info *info);

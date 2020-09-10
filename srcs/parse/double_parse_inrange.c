@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/31 19:39:32 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/09 17:21:08 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/10 19:26:49 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,14 @@ double
     double  d;
     char    *c;
 
-    // if (!(c = malloc(sizeof(*c))))
-    //     err_print(2, info, NULL);
     d = strtod(value, &c);
+ft_printf("____________________%c_\n", *(c));
     if (min_range && max_range)
     {
         if (d < min_range || d > max_range)
             err_print(3, info, "Wrong value in line (too big or too small)");
-        if (*c)
-            err_print(3, info, "Wrong float number format");
     }
+    if (*c)
+        err_print(3, info, "Wrong float number format");
     return (d);
 }

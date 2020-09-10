@@ -6,31 +6,39 @@
 #    By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/30 08:42:51 by clkuznie          #+#    #+#              #
-#    Updated: 2020/09/09 20:18:40 by clkuznie         ###   ########.fr        #
+#    Updated: 2020/09/10 19:43:25 by clkuznie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			=  minirt
 
 SRCS			:= \
-main.c\
-error_handler.c\
 arg_reading.c\
-parse_redirect.c\
-resolution_parse.c\
-ambiant_parse.c\
-utils.c\
-inits.c\
-testing_prints.c\
-double_parse_inrange.c\
-color_parse.c\
-camera_parse.c\
-vector_parse.c\
 clean_space.c\
-position_parse.c
+error_handler.c\
+inits.c\
+main.c\
+testing_prints.c\
+utils.c
+
+PARSE			:= \
+ambiant_parse.c\
+camera_parse.c\
+color_parse.c\
+double_parse_inrange.c\
+light_parse.c\
+parse_redirect.c\
+position_parse.c\
+resolution_parse.c\
+sphere_parse.c\
+vector_parse.c
+
+PARSE_FILES		:= \
+$(addprefix parse/, $(PARSE))
 
 FILES			:= \
-$(addprefix srcs/, $(SRCS))
+$(addprefix srcs/, $(SRCS))\
+$(addprefix srcs/, $(PARSE_FILES))
 
 OBJS			= $(FILES:%.c=%.o)
 

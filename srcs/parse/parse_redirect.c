@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:47:59 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/09 19:09:22 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/10 19:43:56 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ static void
     else if (!ft_memcmp((*object_params)[0], "c", 2))
         camera_parse(object_params, info);
     else if (!ft_memcmp((*object_params)[0], "l", 2))
-        return ;
+        light_parse(object_params, info);
     else if (!ft_memcmp((*object_params)[0], "sp", 3))
-        return ;
+        sphere_parse(object_params, info);
     else if (!ft_memcmp((*object_params)[0], "pl", 3))
         return ;
     else if (!ft_memcmp((*object_params)[0], "sq", 3))

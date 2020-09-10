@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 21:38:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/09 20:19:11 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/10 18:31:38 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ void
         err_print(2, info, NULL);
     details->pos = position_parse((*object_params)[1], info);
     details->dir_vect = vector_parse((*object_params)[2], info);
-    details->fov = ft_atoi((*object_params)[3]);
-    if (details->fov < 0 || details->fov > 180)
-        err_print(3, info, "Impossible fov value");
+    details->fov = double_parse_inrange((*object_params)[3], 0, 180, info);
     util_addelem(info, details, C);
 }
