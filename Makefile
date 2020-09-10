@@ -6,7 +6,7 @@
 #    By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/30 08:42:51 by clkuznie          #+#    #+#              #
-#    Updated: 2020/09/10 19:43:25 by clkuznie         ###   ########.fr        #
+#    Updated: 2020/09/10 20:15:12 by clkuznie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,12 +25,16 @@ PARSE			:= \
 ambiant_parse.c\
 camera_parse.c\
 color_parse.c\
+cylinder_parse.c\
 double_parse_inrange.c\
 light_parse.c\
 parse_redirect.c\
+plane_parse.c\
 position_parse.c\
 resolution_parse.c\
 sphere_parse.c\
+square_parse.c\
+triangle_parse.c\
 vector_parse.c
 
 PARSE_FILES		:= \

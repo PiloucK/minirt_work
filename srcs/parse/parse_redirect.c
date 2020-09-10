@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:47:59 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/10 19:43:56 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/10 20:15:54 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ static void
     else if (!ft_memcmp((*object_params)[0], "sp", 3))
         sphere_parse(object_params, info);
     else if (!ft_memcmp((*object_params)[0], "pl", 3))
-        return ;
+        plane_parse(object_params, info);
     else if (!ft_memcmp((*object_params)[0], "sq", 3))
-        return ;
+        square_parse(object_params, info);
     else if (!ft_memcmp((*object_params)[0], "cy", 3))
-        return ;
+        cylinder_parse(object_params, info);
     else if (!ft_memcmp((*object_params)[0], "tr", 3))
-        return ;
+        triangle_parse(object_params, info);
     else
         err_print(3, info, "RAFL Unknown object type");
 }

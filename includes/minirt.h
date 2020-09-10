@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 14:12:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/10 19:48:01 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/10 20:15:36 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,9 +117,9 @@ typedef struct  s_cylinder
 
 typedef struct  s_triangle
 {
-	t_pos       fp_pos;
-	t_pos       sp_pos;
-	t_pos       tp_pos;
+	t_pos       first_point;
+	t_pos       second_point;
+	t_pos       third_point;
 	t_color     color;
 }               t_triangle;
 
@@ -149,6 +149,7 @@ void            arg_reading(int ac, char **av, t_info **info);
 void			arrfree(char ***arrtofree);
 void			camera_parse(char ***object_params, t_info *info);
 t_color			color_parse(char *s, t_info *info);
+void			cylinder_parse(char ***object_params, t_info *info);
 double			double_parse_inrange(char *value,
 	double min_range, double max_range, t_info *info);
 int             err_close(t_info *info);
@@ -159,10 +160,13 @@ void			light_parse(char ***object_params, t_info *info);
 void            parse_rafl(char ***object_params, t_info *info);
 void            parse_redirect(t_info *info);
 void            parsed_check(t_info *info);
+void			plane_parse(char ***object_params, t_info *info);
 t_pos			position_parse(char *object_param, t_info *info);
 void            print_infos(t_info *info);
 void            resolution_parse(char ***object_params, t_info *info);
 void			sphere_parse(char ***object_params, t_info *info);
+void			square_parse(char ***object_params, t_info *info);
+void			triangle_parse(char ***object_params, t_info *info);
 void			util_addelem(t_info *info, void *details, int id);
 int             util_object_params_count(char **object_params_str);
 t_vect			vector_parse(char *object_param, t_info *info);
