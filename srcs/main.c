@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:46:24 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/09 19:53:50 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/11 16:12:01 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,24 @@ void
     err_print(3, info, "RAFL Unknown object type");
 }
 
+void
+    test_render(t_info *info)
+{
+    (void)info;
+    info->win = mlx_new_window(info->mlx, info->res->x_size, info->res->y_size, "MiniRT");
+
+    mlx_hook(info->win, 17, 0, err_close, &info);
+    mlx_key_hook(info->win, &key_hooked, &info);
+    mlx_loop(info->mlx);
+}
+
 int
     main(int ac, char **av)
 {
     t_info  *info;
 
     arg_reading(ac, av, &info);
+test_render(info);
     info_free(info);
     err_close(NULL);
 }

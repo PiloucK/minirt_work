@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/31 19:39:32 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/10 19:26:49 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/11 16:06:06 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ double
     char    *c;
 
     d = strtod(value, &c);
-ft_printf("____________________%c_\n", *(c));
     if (min_range && max_range)
     {
         if (d < min_range || d > max_range)
