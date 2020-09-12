@@ -6,7 +6,7 @@
 #    By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/30 08:42:51 by clkuznie          #+#    #+#              #
-#    Updated: 2020/09/11 16:08:49 by clkuznie         ###   ########.fr        #
+#    Updated: 2020/09/12 15:57:20 by clkuznie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ clean_space.c\
 error_handler.c\
 inits.c\
 main.c\
+render.c\
 testing_prints.c\
 utils.c
 
@@ -31,6 +32,7 @@ light_parse.c\
 parse_redirect.c\
 plane_parse.c\
 position_parse.c\
+rafl_parse.c\
 resolution_parse.c\
 sphere_parse.c\
 square_parse.c\
