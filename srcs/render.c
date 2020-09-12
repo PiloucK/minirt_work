@@ -6,11 +6,22 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 15:56:59 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/12 19:21:31 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/12 20:56:02 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+t_intersect_fnct[256];
+
+int
+    intersect_rafl(double closest, t_ray *ray, void *elem_detail)
+{
+    (void)closest;
+    (void)ray;
+    (void)elem_detail;
+    err_print()
+}
 
 static t_sphere *
     find_next_sphere(t_elem_list *first_elem)
@@ -30,7 +41,7 @@ static t_sphere *
 }
 
 static int
-    ray_calc(t_ray *ray, t_info *info)
+    intersection(t_ray *ray, t_info *info)
 {
     t_sphere    *sphere;
     t_pos       distance;
@@ -40,7 +51,6 @@ static int
     sphere = find_next_sphere(info->first_elem);
     if (!sphere)
         return 0;
-printf("sphere infos :\npos = %lf, %lf, %lf\nsize = %lf\n", sphere->pos.x, sphere->pos.y, sphere->pos.z, sphere->diameter);
     distance.x = sphere->pos.x - ray->pos.x;
     distance.y = sphere->pos.y - ray->pos.y;
     distance.z = sphere->pos.z - ray->pos.z;
@@ -73,28 +83,28 @@ printf("sphere infos :\npos = %lf, %lf, %lf\nsize = %lf\n", sphere->pos.x, spher
 }
 
 void
-    render(t_info *info)
+    screen_scan(t_info *info)
 {
     int     x;
     int     y;
     t_ray   ray;
 
-    x = 0;
+    x = -100;
     ray.pos.z = -1000.0;
     ray.dir.xdir = 0.0;
     ray.dir.ydir = 0.0;
     ray.dir.zdir = 1.0;
-    while (x < info->res->x_size)
+    while (x + 100 < info->res->x_size)
     {
-        y = 0;
-        while (y < info->res->y_size)
+        y = -100;
+        while (y + 100 < info->res->y_size)
         {
             ray.pos.x = x;
             ray.pos.y = y;
-            if (ray_calc(&ray, info))
-                mlx_pixel_put (info->mlx, info->win, x, y, 0x00ff0000);
+            if (intersection(&ray, info))
+                mlx_pixel_put (info->mlx, info->win, x + 100, y + 100, 0x00ff0000);
             else
-                mlx_pixel_put (info->mlx, info->win, x, y, 0x0000ff00);
+                mlx_pixel_put (info->mlx, info->win, x + 100, y + 100, 0x0000ff00);
             y++;
         }
         x++;

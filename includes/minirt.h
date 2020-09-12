@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 14:12:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/12 19:16:46 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/12 20:51:34 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ typedef	struct	s_info
 	char		***splited_value;
 }				t_info;
 
-// typedef void    (*t_parse_fnct)(char **splited_str, t_info *info);
+typedef void    (*t_intersect_fnct)(double closest, t_ray *ray, void *elem_detail);
 void            ambiant_parse(char ***object_params, t_info *info);
 void            arg_reading(int ac, char **av, t_info **info);
 void			arrfree(char ***arrtofree);
@@ -173,7 +173,7 @@ void            parsed_check(t_info *info);
 void			plane_parse(char ***object_params, t_info *info);
 t_pos			position_parse(char *object_param, t_info *info);
 void            print_infos(t_info *info);
-void			render(t_info *info);
+void			screen_scan(t_info *info);
 void            resolution_parse(char ***object_params, t_info *info);
 void			sphere_parse(char ***object_params, t_info *info);
 void			square_parse(char ***object_params, t_info *info);
