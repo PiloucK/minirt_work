@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 14:12:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/10 20:15:36 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/12 16:09:42 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,7 @@ void            parsed_check(t_info *info);
 void			plane_parse(char ***object_params, t_info *info);
 t_pos			position_parse(char *object_param, t_info *info);
 void            print_infos(t_info *info);
+void			render(t_info *info);
 void            resolution_parse(char ***object_params, t_info *info);
 void			sphere_parse(char ***object_params, t_info *info);
 void			square_parse(char ***object_params, t_info *info);

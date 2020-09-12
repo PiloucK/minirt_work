@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:46:24 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/12 15:33:10 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/12 16:22:26 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@
 int		key_hooked(int key, void *arg)
 {
     ft_printf("key :%i\n", key);
-	if (key == KEY_ESC)
+    if (key == 32)
+        render(arg);
+	else if (key == KEY_ESC)
 		err_close(arg);
 	return (0);
 }
@@ -41,8 +43,8 @@ void
     (void)info;
     info->win = mlx_new_window(info->mlx, info->res->x_size, info->res->y_size, "MiniRT");
 
-    mlx_hook(info->win, 17, 0, err_close, &info);
-    mlx_key_hook(info->win, &key_hooked, &info);
+    mlx_hook(info->win, 17, 0, err_close, info);
+    mlx_key_hook(info->win, &key_hooked, info);
     mlx_loop(info->mlx);
 }
 
@@ -53,6 +55,7 @@ int
 
     arg_reading(ac, av, &info);
 test_render(info);
+    // render(info);
     info_free(info);
     err_close(NULL);
 }
