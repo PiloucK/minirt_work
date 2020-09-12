@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 14:12:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/12 16:09:42 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/12 19:16:46 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 # include <string.h>
 # include <fcntl.h>
 # include <errno.h>
+
+
+#include <stdio.h>
 
 typedef enum    e_type
 {
@@ -43,7 +46,8 @@ typedef struct  s_pos
 	double      z;
 }               t_pos;
 
-typedef struct	s_color {
+typedef struct	s_color
+{
 	double      r;
 	double      g;
 	double      b;
@@ -55,6 +59,12 @@ typedef struct  s_vect
 	double      ydir;
 	double      zdir;
 }               t_vect;
+
+typedef struct	s_ray
+{
+	t_pos		pos;
+	t_vect		dir;
+}				t_ray;
 
 typedef struct  s_ambiant
 {
@@ -123,7 +133,7 @@ typedef struct  s_triangle
 	t_color     color;
 }               t_triangle;
 
-typedef struct  s_elem_lst
+typedef struct  s_elem_list
 {
 	int			id;
 	void        *elem_detail;

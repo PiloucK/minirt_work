@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:45:46 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/09 19:52:55 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/12 16:44:49 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@ int		err_close(t_info *info)
 {
     // if (info)
     //     exit(EXIT_FAILURE);
+    // mlx_destroy_window(info->mlx, info->win);
 (void)info;
-	exit(0);
+	exit (0);
 }
 
 void

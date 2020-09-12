@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:46:24 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/12 16:22:26 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/12 16:44:14 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int		key_hooked(int key, void *arg)
     ft_printf("key :%i\n", key);
     if (key == 32)
         render(arg);
-	else if (key == KEY_ESC)
-		err_close(arg);
+	else if (key == 65307)
+		exit (0);
 	return (0);
 }
 

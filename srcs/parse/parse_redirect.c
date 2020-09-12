@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:47:59 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/10 20:15:54 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/12 17:17:45 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void
     info->splited_line = &object_params;
 	if (!object_params)
 		err_print(2, info, NULL);
-	parse_switch(&object_params, info);
+    if (object_params[0])
+	    parse_switch(&object_params, info);
 	arrfree(&object_params);
     info->splited_line = NULL;
 }
