@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:45:46 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/12 20:57:04 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/12 21:07:42 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void
     (code == 2) ? ft_printf("Error : %s\n", strerror(errno)) : 0;
     (code == 3) ? ft_printf("Error : %s\n\
         \"%s\"\n", extra_comment, info->last_read_str) : 0;
-    (code == 4) ? ft_printf("Error : %s\n", extra_comment);
+    (code == 4) ? ft_printf("Error : %s\n", extra_comment) : 0;
     if (info)
         info_free(info);
     err_close(info);

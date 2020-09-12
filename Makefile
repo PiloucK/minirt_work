@@ -6,7 +6,7 @@
 #    By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/30 08:42:51 by clkuznie          #+#    #+#              #
-#    Updated: 2020/09/12 15:57:20 by clkuznie         ###   ########.fr        #
+#    Updated: 2020/09/12 22:07:21 by clkuznie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,8 @@ includes/libft/libft.a\
 includes/libmlx/libmlx.a
 
 CC				= gcc
-CFLAGS			= -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS			= -Wall -Wextra -Werror
+SANITIZE		= -g3 -fsanitize=address
 MLX_LINKS		= -lm -lbsd -lX11 -lXext
 
 RM				= rm -f
