@@ -55,6 +55,9 @@ double
         closest = t0;
     if (t1 > 0.1 && t1 < closest)
         closest = t1;
+    ray->color = sphere->color.r;
+    ray->color = (ray->color << 8) + sphere->color.g;
+    ray->color = (ray->color << 8) + sphere->color.b;
     return (closest);
 }
 
@@ -77,6 +80,9 @@ static double
     
     cur_elem = info->first_elem;
     closest = 1000000000;
+    ray->color = info->ambiant->color.r * info->ambiant->lum;
+    ray->color = (ray->color << 8) + info->ambiant->color.g * info->ambiant->lum;
+    ray->color = (ray->color << 8) + info->ambiant->color.b * info->ambiant->lum;
     while (cur_elem)
     {
         closest = (*intersect_arr[cur_elem->id])(closest, ray, cur_elem->elem_detail);
@@ -105,10 +111,8 @@ void
         {
             ray.pos.x = x;
             ray.pos.y = y;
-            if (intersection(&ray, info) < 1000000000)
-                mlx_pixel_put (info->mlx, info->win, x, y, 0x00ff0000);
-            else
-                mlx_pixel_put (info->mlx, info->win, x, y, 0x0000ff00);
+            intersection(&ray, info);
+            mlx_pixel_put (info->mlx, info->win, x, y, ray.color);
             y++;
         }
         x++;

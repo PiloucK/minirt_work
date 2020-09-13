@@ -64,6 +64,7 @@ typedef struct	s_ray
 {
 	t_pos		pos;
 	t_vect		dir;
+	int			color;
 }				t_ray;
 
 typedef struct  s_ambiant
