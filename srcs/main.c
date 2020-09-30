@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clkuznie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:46:24 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/08/06 15:46:27 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/30 22:29:56 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,16 @@
 int		key_hooked(int key, void *arg)
 {
     ft_printf("key :%i\n", key);
-	if (key == KEY_ESC)
-		err_close(arg);
+    if (key == 32)
+        screen_scan(arg);
+	else if (key == 65363)
+        camera_switch(arg);
+	else if (key == 65307)
+    {
+        info_free(arg);
+		exit (0);
+    }
 	return (0);
-}
-
-void
-    object_params_free(char **object_params)
-{
-    int     i;
-
-    i = 0;
-    while (object_params[i])
-        free(object_params[i++]);
-    free(object_params);
 }
 
 void
@@ -47,10 +43,14 @@ void
 }
 
 void
-    parse_rafl(char **object_params, t_info *info)
+    test_render(t_info *info)
 {
-    (void)object_params;
-    err_print(3, info, "RAFL Unknown object type");
+    (void)info;
+    info->win = mlx_new_window(info->mlx, info->res->x_size, info->res->y_size, "MiniRT");
+
+    mlx_hook(info->win, 17, 0, err_close, info);
+    mlx_key_hook(info->win, &key_hooked, info);
+    mlx_loop(info->mlx);
 }
 
 int
@@ -59,4 +59,10 @@ int
     t_info  *info;
 
     arg_reading(ac, av, &info);
+    camera_switch(info);
+    if (!info->do_save)
+        test_render(info);
+    // render(info);
+    info_free(info);
+    err_close(NULL);
 }

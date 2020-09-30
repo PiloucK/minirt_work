@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arg_reading.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clkuznie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:46:43 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/08/06 15:46:45 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/29 18:37:50 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void
         if (*(*info)->last_read_str && *(*info)->last_read_str != '#')
             parse_redirect(*info);
         ft_printf("%s\n", (*info)->last_read_str);
-        print_infos(*info);
         free((*info)->last_read_str);
         (*info)->last_read_str = NULL;
     }

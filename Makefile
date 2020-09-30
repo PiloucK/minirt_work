@@ -6,27 +6,47 @@
 #    By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/30 08:42:51 by clkuznie          #+#    #+#              #
-#    Updated: 2020/09/01 19:28:47 by clkuznie         ###   ########.fr        #
+#    Updated: 2020/09/29 19:44:55 by clkuznie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			=  minirt
 
 SRCS			:= \
-main.c\
-error_handler.c\
 arg_reading.c\
-parse_redirect.c\
-resolution_parse.c\
-ambiant_parse.c\
-utils.c\
+camera_switch.c\
+clean_space.c\
+error_handler.c\
 inits.c\
+main.c\
+ray_gen.c\
+render.c\
 testing_prints.c\
+utils.c
+
+PARSE			:= \
+ambiant_parse.c\
+camera_parse.c\
+color_parse.c\
+cylinder_parse.c\
 double_parse_inrange.c\
-color_parse.c
+light_parse.c\
+parse_redirect.c\
+plane_parse.c\
+position_parse.c\
+rafl_parse.c\
+resolution_parse.c\
+sphere_parse.c\
+square_parse.c\
+triangle_parse.c\
+vector_parse.c
+
+PARSE_FILES		:= \
+$(addprefix parse/, $(PARSE))
 
 FILES			:= \
-$(addprefix srcs/, $(SRCS))
+$(addprefix srcs/, $(SRCS))\
+$(addprefix srcs/, $(PARSE_FILES))
 
 OBJS			= $(FILES:%.c=%.o)
 
@@ -42,6 +62,7 @@ includes/libmlx/libmlx.a
 
 CC				= gcc
 CFLAGS			= -Wall -Wextra -Werror
+SANITIZE		= -g3 -fsanitize=address
 MLX_LINKS		= -lm -lbsd -lX11 -lXext
 
 RM				= rm -f
