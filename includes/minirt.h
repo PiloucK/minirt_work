@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 14:12:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/30 18:38:40 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/30 22:29:23 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,6 +184,6 @@ int             util_object_params_count(char **object_params_str);
 t_vect			vector_parse(char *object_param, t_info *info);
 void			info_free(t_info *info);
 void			ray_gen(t_ray *ray, t_info *info);
-void			next_camera(t_info *info);
+void			camera_switch(t_info *info);
 
 #endif

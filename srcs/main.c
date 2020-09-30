@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:46:24 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/29 19:43:10 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/30 22:29:56 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int		key_hooked(int key, void *arg)
     ft_printf("key :%i\n", key);
     if (key == 32)
         screen_scan(arg);
+	else if (key == 65363)
+        camera_switch(arg);
 	else if (key == 65307)
     {
         info_free(arg);
@@ -57,7 +59,7 @@ int
     t_info  *info;
 
     arg_reading(ac, av, &info);
-    next_camera(info);
+    camera_switch(info);
     if (!info->do_save)
         test_render(info);
     // render(info);
