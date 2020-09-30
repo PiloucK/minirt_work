@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 14:12:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/12 22:03:16 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/30 18:38:40 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@
 # include <fcntl.h>
 # include <errno.h>
 
-
-#include <stdio.h>
+											#include <stdio.h>
 
 typedef enum    e_type
 {
@@ -147,7 +146,8 @@ typedef	struct	s_info
 	void		*win;
 	t_res		*res;
 	t_ambiant	*ambiant;
-    t_elem_list  *first_elem;
+	t_camera	*cur_camera;
+    t_elem_list *first_elem;
     int         do_save;
     char        *last_read_str;
 	char		***splited_line;
@@ -183,5 +183,7 @@ void			util_addelem(t_info *info, void *details, int id);
 int             util_object_params_count(char **object_params_str);
 t_vect			vector_parse(char *object_param, t_info *info);
 void			info_free(t_info *info);
+void			ray_gen(t_ray *ray, t_info *info);
+void			next_camera(t_info *info);
 
 #endif

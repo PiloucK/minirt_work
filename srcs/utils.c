@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:57:56 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/09 17:23:59 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/29 19:33:44 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,6 @@ void
 {
 	t_elem_list *current_elem;
 
-	if (!info->first_elem)
-	{
-		info->first_elem = util_newelem(details, id, info);
-		return ;
-	}
 	current_elem = info->first_elem;
 	while (current_elem)
 	{
@@ -54,5 +49,8 @@ void
 		else
 			break ;
 	}
-	current_elem->next_elem = util_newelem(details, id, info);
+	if (current_elem)
+		current_elem->next_elem = util_newelem(details, id, info);
+	else
+		info->first_elem = util_newelem(details, id, info);
 }

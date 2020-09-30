@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/09 13:48:24 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/12 17:05:05 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/29 19:36:45 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,21 @@ void
 void
     info_free(t_info *info)
 {
-    if (info->splited_value)
-        arrfree(info->splited_value);
-    if (info->splited_line)
-        arrfree(info->splited_line);
+    if (info->mlx)
+        free(info->mlx);
     if (info->res)
         free(info->res);
     if (info->ambiant)
         free(info->ambiant);
-    if (info->last_read_str)
-        free(info->last_read_str);
+    if (info->cur_camera)
+        free(info->cur_camera);
     if (info->first_elem)
         clean_list(info->first_elem);
-    if (info->mlx)
-        free(info->mlx);
+    if (info->last_read_str)
+        free(info->last_read_str);
+    if (info->splited_line)
+        arrfree(info->splited_line);
+    if (info->splited_value)
+        arrfree(info->splited_value);
     free(info);
 }

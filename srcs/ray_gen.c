@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   inits.c                                            :+:      :+:    :+:   */
+/*   ray_gen.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/06 16:00:25 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/29 19:32:40 by clkuznie         ###   ########.fr       */
+/*   Created: 2020/09/29 18:44:24 by clkuznie          #+#    #+#             */
+/*   Updated: 2020/09/29 19:37:22 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 void
-    init_infos(int ac, t_info **info)
+    ray_gen(t_ray *ray, t_info *info)
 {
-    if (!(*info = malloc(sizeof(t_info))))
-        err_print(2, *info, NULL);
-    (*info)->mlx = mlx_init();
-    (*info)->win = NULL;
-    (*info)->res = NULL;
-    (*info)->ambiant = NULL;
-    (*info)->cur_camera = NULL;
-    (*info)->first_elem = NULL;
-    (*info)->do_save = (ac != 3 ? 0 : 1);
-    (*info)->last_read_str = NULL;
-    (*info)->splited_line = NULL;
-    (*info)->splited_value = NULL;
+    (void)info;
+    if (!info->cur_camera)
+        err_print(4, info, "No camera found");
+    // ray->pos.z = -1000.0;
+    // ray->dir.xdir = 0.0;
+    // ray->dir.ydir = 0.0;
+    // ray->dir.zdir = 1.0;;
+    // ray->pos.z = info->cur_cameras->;
+    ray->dir.xdir = 0.0;
+    ray->dir.ydir = 0.0;
+    ray->dir.zdir = 1.0;;
 }

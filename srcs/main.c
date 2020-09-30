@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:46:24 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/12 20:43:53 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/29 19:43:10 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ int		key_hooked(int key, void *arg)
     if (key == 32)
         screen_scan(arg);
 	else if (key == 65307)
+    {
+        info_free(arg);
 		exit (0);
+    }
 	return (0);
 }
 
@@ -54,7 +57,9 @@ int
     t_info  *info;
 
     arg_reading(ac, av, &info);
-test_render(info);
+    next_camera(info);
+    if (!info->do_save)
+        test_render(info);
     // render(info);
     info_free(info);
     err_close(NULL);

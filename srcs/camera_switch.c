@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   inits.c                                            :+:      :+:    :+:   */
+/*   camera_switch.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/06 16:00:25 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/29 19:32:40 by clkuznie         ###   ########.fr       */
+/*   Created: 2020/09/29 19:43:45 by clkuznie          #+#    #+#             */
+/*   Updated: 2020/09/29 19:48:03 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 void
-    init_infos(int ac, t_info **info)
+    next_camera(t_info *info)
 {
-    if (!(*info = malloc(sizeof(t_info))))
-        err_print(2, *info, NULL);
-    (*info)->mlx = mlx_init();
-    (*info)->win = NULL;
-    (*info)->res = NULL;
-    (*info)->ambiant = NULL;
-    (*info)->cur_camera = NULL;
-    (*info)->first_elem = NULL;
-    (*info)->do_save = (ac != 3 ? 0 : 1);
-    (*info)->last_read_str = NULL;
-    (*info)->splited_line = NULL;
-    (*info)->splited_value = NULL;
+    t_elem_list     *cur_elem;
+
+    cur_elem = info->first_elem;
+    while (cur_elem)
+    {
+        if (cur_elem->id != C)
+            cur_elem = cur_elem->next_elem;
+    }
 }

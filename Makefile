@@ -6,7 +6,7 @@
 #    By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/30 08:42:51 by clkuznie          #+#    #+#              #
-#    Updated: 2020/09/12 22:07:21 by clkuznie         ###   ########.fr        #
+#    Updated: 2020/09/29 19:44:55 by clkuznie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,12 @@ NAME			=  minirt
 
 SRCS			:= \
 arg_reading.c\
+camera_switch.c\
 clean_space.c\
 error_handler.c\
 inits.c\
 main.c\
+ray_gen.c\
 render.c\
 testing_prints.c\
 utils.c

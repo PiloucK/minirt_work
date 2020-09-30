@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 15:56:59 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/12 22:47:51 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/09/29 18:49:55 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,8 @@ void
     ray.pos.z = -1000.0;
     ray.dir.xdir = 0.0;
     ray.dir.ydir = 0.0;
-    ray.dir.zdir = 1.0;
+    ray.dir.zdir = 1.0;;
+    // ray_gen(&ray, info);
     intersect_arr_init();
     while (x < info->res->x_size)
     {
