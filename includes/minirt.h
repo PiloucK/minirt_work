@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 14:12:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/30 22:29:23 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/10/01 19:47:22 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libft.h"
 # include "key_codes.h"
+# include "vector.h"
 # include <math.h>
 # include <mlx.h>
 # include <string.h>

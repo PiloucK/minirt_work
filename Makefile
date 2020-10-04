@@ -6,7 +6,7 @@
 #    By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/30 08:42:51 by clkuznie          #+#    #+#              #
-#    Updated: 2020/09/29 19:44:55 by clkuznie         ###   ########.fr        #
+#    Updated: 2020/10/01 19:48:43 by clkuznie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,12 +41,25 @@ square_parse.c\
 triangle_parse.c\
 vector_parse.c
 
+VECTOR			:= \
+vecangle.c\
+vecdotprod.c\
+vecmag.c\
+vecnew.c\
+vecprod.c\
+vecsum.c\
+veczero.c
+
 PARSE_FILES		:= \
 $(addprefix parse/, $(PARSE))
 
+VECTOR_FILES	:= \
+$(addprefix vector/, $(VECTOR))
+
 FILES			:= \
 $(addprefix srcs/, $(SRCS))\
-$(addprefix srcs/, $(PARSE_FILES))
+$(addprefix srcs/, $(PARSE_FILES))\
+$(addprefix srcs/, $(VECTOR_FILES))
 
 OBJS			= $(FILES:%.c=%.o)
 
@@ -54,7 +67,7 @@ INCLUDES		= \
 -I includes/libmlx\
 -I includes/libmlx/X11\
 -I includes\
--I includes/libft
+-I includes/libft\
 
 LIB_SRCS		= \
 includes/libft/libft.a\

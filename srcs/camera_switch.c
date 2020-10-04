@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 19:43:45 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/30 22:42:01 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/10/01 19:05:07 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void
     cur_elem = next_camera(cur_elem->next_elem);
     if (!cur_elem)
         cur_elem = next_camera(info->first_elem);
+    if (cur_elem->elem_detail == info->cur_camera)
+        return ;
     info->cur_camera = cur_elem->elem_detail;
 printf("%lf\n", info->cur_camera->pos.x);
     screen_scan(info);

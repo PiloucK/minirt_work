@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:46:43 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/29 18:37:50 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/10/01 19:54:59 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int
 	return (i < 4 ||
             filename[i - 3] != '.' ||
 			filename[i - 2] != 'r' ||
-			filename[i - 1] != 't');
+			filename[i - 1] != 't');    
 }
 
 void
