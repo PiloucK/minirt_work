@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:45:29 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/09 19:09:31 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/10/06 10:53:36 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ static void
     int     display_y;
 
     mlx_get_screen_size(info->mlx, &display_x, &display_y);
-    if (display_x < info->res->x_size)
-        info->res->x_size = display_x;
-    if (display_x < info->res->y_size)
-        info->res->y_size = display_y;
+    if (display_x < info->res->x)
+        info->res->x = display_x;
+    if (display_x < info->res->y)
+        info->res->y = display_y;
 }
 
 void
@@ -47,10 +47,10 @@ void
         err_print(3, info, "Only digits are allowed");
     if (!(info->res = malloc(sizeof(t_res))))
         err_print(2, info, NULL);
-    info->res->x_size = ft_atoi((*object_params)[1]);
-    info->res->y_size = ft_atoi((*object_params)[2]);
+    info->res->x = ft_atoi((*object_params)[1]);
+    info->res->y = ft_atoi((*object_params)[2]);
     if (!info->do_save)
         resize(info);
-    if (info->res->x_size <= 0 || info->res->y_size <= 0)
+    if (info->res->x <= 0 || info->res->y <= 0)
         err_print(3, info, "Can't use suggested size");
 }

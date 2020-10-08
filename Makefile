@@ -6,21 +6,24 @@
 #    By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/30 08:42:51 by clkuznie          #+#    #+#              #
-#    Updated: 2020/10/01 19:48:43 by clkuznie         ###   ########.fr        #
+#    Updated: 2020/10/06 12:05:01 by clkuznie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			=  minirt
 
-SRCS			:= \
+INTERSECT		:= \
+intersect_ntdh.c\
+intersect_setup.c\
+intersect_sphere.c
+
+MAIN			:= \
 arg_reading.c\
 camera_switch.c\
 clean_space.c\
 error_handler.c\
 inits.c\
 main.c\
-ray_gen.c\
-render.c\
 testing_prints.c\
 utils.c
 
@@ -41,27 +44,35 @@ square_parse.c\
 triangle_parse.c\
 vector_parse.c
 
+RAY				:= \
+ray_gen.c
+
+RENDER			:= \
+render.c
+
 VECTOR			:= \
 vecangle.c\
 vecdotprod.c\
 vecmag.c\
 vecnew.c\
+vecnorm.c\
 vecprod.c\
+vecsub.c\
 vecsum.c\
 veczero.c
 
-PARSE_FILES		:= \
-$(addprefix parse/, $(PARSE))
-
-VECTOR_FILES	:= \
+SRCS			:= \
+$(addprefix intersect/, $(INTERSECT))\
+$(addprefix main/, $(MAIN))\
+$(addprefix parse/, $(PARSE))\
+$(addprefix ray/, $(RAY))\
+$(addprefix render/, $(RENDER))\
 $(addprefix vector/, $(VECTOR))
 
-FILES			:= \
-$(addprefix srcs/, $(SRCS))\
-$(addprefix srcs/, $(PARSE_FILES))\
-$(addprefix srcs/, $(VECTOR_FILES))
+SRCS_FILES			:= \
+$(addprefix srcs/, $(SRCS))
 
-OBJS			= $(FILES:%.c=%.o)
+OBJS			= $(SRCS_FILES:%.c=%.o)
 
 INCLUDES		= \
 -I includes/libmlx\

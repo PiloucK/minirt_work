@@ -6,17 +6,17 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/09 20:15:23 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/09 20:19:43 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/10/06 10:51:13 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_pos
+t_vec3lf
     position_parse(char *object_param, t_info *info)
 {
     char	**values;
-	t_pos  positions;
+	t_vec3lf  positions;
 
 	values = ft_split(object_param, ',');
 	info->splited_value = &values;

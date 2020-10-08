@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vecnew.c                                           :+:      :+:    :+:   */
+/*   intersect_ntdh.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/30 18:13:43 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/06 13:22:15 by clkuznie         ###   ########.fr       */
+/*   Created: 2020/10/06 08:23:31 by clkuznie          #+#    #+#             */
+/*   Updated: 2020/10/06 08:23:51 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
+#include "minirt.h"
 
-t_vec3lf
-    vecnew(const t_vec3lf *origin, const t_vec3lf *dest)
+double
+    intersect_rafl(double closest, t_ray *ray, void *elem_detail)
 {
-    t_vec3lf    vector;
-
-    vector.x = dest->x - origin->x;
-    vector.y = dest->y - origin->y;
-    vector.z = dest->z - origin->z;
-    return (vector);
+    (void)closest;
+    (void)ray;
+    (void)elem_detail;
+    return (closest);
 }

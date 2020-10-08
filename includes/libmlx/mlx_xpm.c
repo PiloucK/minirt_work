@@ -41,7 +41,7 @@ char	*mlx_int_get_line(char *ptr,int *pos,int size)
 }
 
 
-unsigned int	strlcpy_is_not_posix(char *dest, char *src, unsigned int size)
+unsigned int	strlcpy_is_not_vec3lfix(char *dest, char *src, unsigned int size)
 {
 	unsigned	count;
 	unsigned	i;
@@ -75,7 +75,7 @@ char	*mlx_int_static_line(char **xpm_data,int *pos,int size)
 					return ((char *)0);
 			len = len2;
 	}
-	strlcpy_is_not_posix(copy, str, len2);
+	strlcpy_is_not_vec3lfix(copy, str, len2);
 	
 	return (copy);
 }
