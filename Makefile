@@ -6,7 +6,7 @@
 #    By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/30 08:42:51 by clkuznie          #+#    #+#              #
-#    Updated: 2020/10/09 08:31:57 by clkuznie         ###   ########.fr        #
+#    Updated: 2020/10/09 19:53:30 by clkuznie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ triangle_parse.c\
 vector_parse.c
 
 RAY				:= \
-ray_gen.c
+camera_ray_gen.c
 
 RENDER			:= \
 render.c

@@ -6,71 +6,89 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 15:56:59 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/09 12:47:04 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/10/09 19:51:00 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static double
-    find_closest(t_ray *ray, t_info *info)
+void
+    ray_bounce(t_ray *ray, t_info *info, t_elem_list *hit_elem)
+{
+    if (hit_elem)
+    {
+        ray->color = (*(t_sphere *)(hit_elem->elem_detail)).color.r;
+        ray->color = (ray->color << 8) + (*(t_sphere *)(hit_elem->elem_detail)).color.g;
+        ray->color = (ray->color << 8) + (*(t_sphere *)(hit_elem->elem_detail)).color.b;
+    }
+    else
+    {
+        ray->color = info->ambiant->color.r * info->ambiant->lum;
+        ray->color = (ray->color << 8) + info->ambiant->color.g * info->ambiant->lum;
+        ray->color = (ray->color << 8) + info->ambiant->color.b * info->ambiant->lum;
+    }
+}
+
+static void
+    find_closest(t_ray *ray, t_info *info, double closest)
 {
     t_elem_list     *cur_elem;
     t_elem_list     *closest_elem;
-    double          closest;
-    (void)closest_elem;
     
     cur_elem = info->first_elem;
-    closest = 1000000000;
-    ray->color = info->ambiant->color.r * info->ambiant->lum;
-    ray->color = (ray->color << 8) + info->ambiant->color.g * info->ambiant->lum;
-    ray->color = (ray->color << 8) + info->ambiant->color.b * info->ambiant->lum;
+    closest_elem = NULL;
     while (cur_elem)
     {
         closest_elem =
             (*intersect_arr[cur_elem->id])(&closest, ray, cur_elem->elem_detail)
-            ? cur_elem : NULL;
+            ? cur_elem : closest_elem;
         cur_elem = cur_elem->next_elem;
     }
-    // printf("closest = %lf\n", closest);
-    return (closest);
+    ray_bounce(ray, info, closest_elem);
+    return ;
 }
 
 void
     screen_scan(t_info *info)
 {
-    int     x;
-    int     y;
     t_ray   ray;
+    double     x;
+    double     y;
+    char *pixel_color;
 
     x = 0;
-    ray.pos = info->cur_camera->pos;
-    ray.dir = info->cur_camera->dir;
-    // ray_gen(&ray, info);
-    // img_ptr = mlx_new_image(info->mlx, info->res->x, info->res->y);
     intersect_arr_init();
-
-    // char *data;
-    // int bits_per_pixel, line_length, endian;
-    char *pixel_color;
-    // data = mlx_get_data_addr(img_ptr, &bits_per_pixel, &line_length,
-    //                             &endian);
     while (x < info->res->x)
     {
         y = 0;
         while (y < info->res->y)
         {
-            ray.pos.x = x;
-            ray.pos.y = y;
-            find_closest(&ray, info);
+            camera_ray_gen(&ray, info, x, y);
+            find_closest(&ray, info, 1000000000);
             pixel_color = info->image.data +
-                (y * info->image.line_len +
-                x * (info->image.bits_per_pixel / 8));
+                ((int)y * info->image.line_len +
+                (int)x * (info->image.bits_per_pixel / 8));
             *(unsigned int *)pixel_color = ray.color;
+            camera_ray_gen(&ray, info, x + 0.5, y);
+            find_closest(&ray, info, 1000000000);
+            pixel_color = info->image.data +
+                ((int)y * info->image.line_len +
+                (int)x * (info->image.bits_per_pixel / 8));
+            *(unsigned int *)pixel_color = (ray.color + *(unsigned int *)pixel_color) / 2;
+            camera_ray_gen(&ray, info, x, y + 0.5);
+            find_closest(&ray, info, 1000000000);
+            pixel_color = info->image.data +
+                ((int)y * info->image.line_len +
+                (int)x * (info->image.bits_per_pixel / 8));
+            *(unsigned int *)pixel_color = (ray.color + *(unsigned int *)pixel_color) / 2;
+            camera_ray_gen(&ray, info, x + 0.5, y + 0.5);
+            find_closest(&ray, info, 1000000000);
+            pixel_color = info->image.data +
+                ((int)y * info->image.line_len +
+                (int)x * (info->image.bits_per_pixel / 8));
+            *(unsigned int *)pixel_color = (ray.color + *(unsigned int *)pixel_color) / 2;
             y++;
         }
         x++;
     }
-    // if (!info->do_save)
-    //     mlx_put_image_to_window (info->mlx, info->win, info->image.img, 0, 0);
 }

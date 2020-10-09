@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 08:26:07 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/09 12:49:11 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/10/09 19:33:51 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,11 @@ double
     sphere = elem_detail;
     if (!sphere)
         return (0);
-// printf("-----\n");
     v_origin_center = vecnew(ray->pos, sphere->pos);
-// print_vec3lf(v_origin_center);
     dist_origin_center_onray = vecdotprod(v_origin_center, ray->dir);
-// printf("distance from origin to center on ray %lf\n", dist_origin_center_onray);
     tmp = vecmag(v_origin_center);
-// printf("distance from ray origin to center %lf\n", dist_origin_center);
     dist_ray_center = vecprod(
         v_origin_center, ray->dir, vecangle(v_origin_center, ray->dir));
-// printf("distance from ray to center %lf\n", dist_ray_center);
     if (dist_ray_center > sphere->diameter)
         return (0);
     if (tmp)
@@ -42,23 +37,16 @@ double
             - dist_ray_center * dist_ray_center);
     else
         tmp = sphere->diameter;
-// printf("%lf\n", tmp);
     if ((tmp > 0.1f) && (tmp < *closest))
-    {
-ray->color = sphere->color.r;
-ray->color = (ray->color << 8) + sphere->color.g;
-ray->color = (ray->color << 8) + sphere->color.b;
         *closest = tmp;
-    }
 // printf("%lf\n", tmp + 2 * util_absvalue(dist_origin_center_onray));
-    tmp -= sqrt(sphere->diameter * sphere->diameter
-        - dist_ray_center * dist_ray_center) * 2;
-    if ((tmp > 0.1f) && (tmp < *closest))
-    {
-ray->color = sphere->color.r;
-ray->color = (ray->color << 8) + sphere->color.g;
-ray->color = (ray->color << 8) + sphere->color.b;
+    // tmp -= sqrt(sphere->diameter * sphere->diameter
+    //     - dist_ray_center * dist_ray_center) * 2;
+    else if ((tmp - sqrt(sphere->diameter * sphere->diameter
+        - dist_ray_center * dist_ray_center) * 2 > 0.1f) && (tmp - sqrt(sphere->diameter * sphere->diameter
+        - dist_ray_center * dist_ray_center) * 2 < *closest))
         *closest = tmp;
-    }
-    return (*closest);
+    else
+        return 0;
+    return (1);
 }

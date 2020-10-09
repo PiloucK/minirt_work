@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 08:23:31 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/09 12:37:52 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/10/09 19:15:05 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,5 @@ double
     (void)closest;
     (void)ray;
     (void)elem_detail;
-    return (*closest);
+    return (0);
 }

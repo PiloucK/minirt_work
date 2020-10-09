@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 14:12:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/09 12:38:09 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/10/09 19:19:20 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,6 @@ typedef struct	s_color
 	double      g;
 	double      b;
 }				t_color;
-
-typedef struct	s_ray
-{
-	t_vec3lf		pos;
-	t_vec3lf		dir;
-	int			color;
-}				t_ray;
 
 typedef struct  s_ambiant
 {
@@ -120,6 +113,13 @@ typedef struct  s_triangle
 	t_color     color;
 }               t_triangle;
 
+typedef struct	s_ray
+{
+	t_vec3lf		pos;
+	t_vec3lf		dir;
+	int			color;
+}				t_ray;
+
 typedef struct  s_elem_list
 {
 	int			id;
@@ -186,7 +186,8 @@ t_vec3lf			vector_parse(char *object_param, t_info *info);
 
 
 void			info_free(t_info *info);
-void			ray_gen(t_ray *ray, t_info *info);
+void			camera_ray_gen(t_ray *ray, t_info *info, int i, int j);
+void			ray_bounce(t_ray *ray, t_info *info, t_elem_list *hit_elem);
 void			camera_switch(t_info *info);
 double			intersect_ntdh(double *closest, t_ray *ray, void *elem_detail);
 double		    intersect_sphere(double *closest, t_ray *ray, void *elem_detail);
