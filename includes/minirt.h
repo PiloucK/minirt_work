@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 14:12:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/09 19:19:20 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/10/09 22:18:14 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ typedef enum    e_type
 	TR,
 }               t_type;
 
-typedef double  t_ratio;
-
 typedef struct	s_color
 {
 	double      r;
@@ -48,7 +46,7 @@ typedef struct	s_color
 
 typedef struct  s_ambiant
 {
-	t_ratio     lum;
+	double		ratio;
 	t_color     color;
 	int			status;
 }               t_ambiant;
@@ -70,7 +68,7 @@ typedef struct  s_camera
 typedef struct  s_light
 {
 	t_vec3lf       pos;
-	t_ratio     lum;
+	double		ratio;
 	t_color     color;
 }               t_light;
 
@@ -187,12 +185,13 @@ t_vec3lf			vector_parse(char *object_param, t_info *info);
 
 void			info_free(t_info *info);
 void			camera_ray_gen(t_ray *ray, t_info *info, int i, int j);
-void			ray_bounce(t_ray *ray, t_info *info, t_elem_list *hit_elem);
+void			ray_bounce(t_ray *ray, t_info *info, t_elem_list *hit_elem, double closest, int *i);
 void			camera_switch(t_info *info);
 double			intersect_ntdh(double *closest, t_ray *ray, void *elem_detail);
 double		    intersect_sphere(double *closest, t_ray *ray, void *elem_detail);
 void			intersect_arr_init();
 void		    print_vec3lf(t_vec3lf vec);
+double		    find_closest(t_ray *ray, t_info *info, double closest, int i);
 
 
 #endif

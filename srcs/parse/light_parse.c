@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 18:22:51 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/10 19:42:34 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/10/09 22:19:08 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void
     if (!(details = malloc(sizeof(*details))))
         err_print(2, info, NULL);
     details->pos = position_parse((*object_params)[1], info);
-    details->lum = double_parse_inrange((*object_params)[2], 0.0, 1.0, info);
+    details->ratio = double_parse_inrange((*object_params)[2], 0.0, 1.0, info);
     details->color = color_parse((*object_params)[3], info);
     util_addelem(info, details, L);
 }

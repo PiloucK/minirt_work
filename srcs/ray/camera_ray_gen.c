@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 18:44:24 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/09 18:57:08 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/10/09 23:31:21 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,5 @@ void
     ray->pos.x = i;
     ray->pos.y = j;
     ray->dir = info->cur_camera->dir;
+    ray->color = 0;
 }
