@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 15:56:59 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/08 18:45:46 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/10/09 12:03:06 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void
 
     // char *data;
     // int bits_per_pixel, line_length, endian;
-    char *dest;
+    char *pixel_color;
     // data = mlx_get_data_addr(img_ptr, &bits_per_pixel, &line_length,
     //                             &endian);
     while (x < info->res->x)
@@ -59,10 +59,10 @@ void
             ray.pos.x = x;
             ray.pos.y = y;
             find_closest(&ray, info);
-            dest = info->image.data +
+            pixel_color = info->image.data +
                 (y * info->image.line_len +
                 x * (info->image.bits_per_pixel / 8));
-            *(unsigned int *)dest = ray.color;
+            *(unsigned int *)pixel_color = ray.color;
             y++;
         }
         x++;

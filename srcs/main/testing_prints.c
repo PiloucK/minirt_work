@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:48:45 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/06 12:18:51 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/10/09 09:40:04 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,5 @@ void
     print_vec3lf(t_vec3lf vec)
 {
     printf("%lf | %lf | %lf\n", vec.x, vec.y, vec.z);
-    printf("%lf\n", vecmag(&(vec)));
+    printf("%lf\n", vecmag(vec));
 }

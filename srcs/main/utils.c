@@ -6,11 +6,17 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:57:56 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/29 19:33:44 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/10/09 10:37:16 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+double
+	util_absvalue(double lf)
+{
+	return (lf * (lf >= 0) + lf * (lf < 0) * -1);
+}
 
 int
 	util_object_params_count(char **object_params)

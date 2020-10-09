@@ -6,7 +6,7 @@
 #    By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/30 08:42:51 by clkuznie          #+#    #+#              #
-#    Updated: 2020/10/06 12:05:01 by clkuznie         ###   ########.fr        #
+#    Updated: 2020/10/09 08:31:57 by clkuznie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ vecnorm.c\
 vecprod.c\
 vecsub.c\
 vecsum.c\
+vectranslat.c\
 veczero.c
 
 SRCS			:= \

@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 14:12:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/08 15:35:14 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/10/09 11:53:44 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,8 @@ typedef struct  s_square
 
 typedef struct  s_cylinder
 {
-	t_vec3lf       pos;
-	t_vec3lf      dir;
+	t_vec3lf    pos;
+	t_vec3lf    dir;
 	double      diameter;
 	double      height;
 	t_color     color;
@@ -114,9 +114,9 @@ typedef struct  s_cylinder
 
 typedef struct  s_triangle
 {
-	t_vec3lf       first_point;
-	t_vec3lf       second_point;
-	t_vec3lf       third_point;
+	t_vec3lf    a;
+	t_vec3lf    b;
+	t_vec3lf	c;
 	t_color     color;
 }               t_triangle;
 
@@ -179,6 +179,7 @@ void            resolution_parse(char ***object_params, t_info *info);
 void			sphere_parse(char ***object_params, t_info *info);
 void			square_parse(char ***object_params, t_info *info);
 void			triangle_parse(char ***object_params, t_info *info);
+double			util_absvalue(double lf);
 void			util_addelem(t_info *info, void *details, int id);
 int             util_object_params_count(char **object_params_str);
 t_vec3lf			vector_parse(char *object_param, t_info *info);
