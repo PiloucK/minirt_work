@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 14:12:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/09 11:53:44 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/10/09 12:38:09 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ typedef	struct	s_info
 	void		*img;
 }				t_info;
 
-typedef double	(*t_intersect_fnct)(double closest, t_ray *ray, void *elem_detail);
+typedef double	(*t_intersect_fnct)(double *closest, t_ray *ray, void *elem_detail);
 
 t_intersect_fnct    intersect_arr[256];
 
@@ -188,8 +188,8 @@ t_vec3lf			vector_parse(char *object_param, t_info *info);
 void			info_free(t_info *info);
 void			ray_gen(t_ray *ray, t_info *info);
 void			camera_switch(t_info *info);
-double			intersect_rafl(double closest, t_ray *ray, void *elem_detail);
-double		    intersect_sphere(double closest, t_ray *ray, void *elem_detail);
+double			intersect_ntdh(double *closest, t_ray *ray, void *elem_detail);
+double		    intersect_sphere(double *closest, t_ray *ray, void *elem_detail);
 void			intersect_arr_init();
 void		    print_vec3lf(t_vec3lf vec);
 

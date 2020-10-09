@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 08:31:01 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/06 08:31:11 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/10/09 12:39:01 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@ void
     
     i = 0;
     while (i < 256)
-        intersect_arr[i++] = intersect_rafl;
+        intersect_arr[i++] = intersect_ntdh;
     intersect_arr[SP] = intersect_sphere;
 }

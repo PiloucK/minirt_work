@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 15:56:59 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/09 12:03:06 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/10/09 12:47:04 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ static double
     find_closest(t_ray *ray, t_info *info)
 {
     t_elem_list     *cur_elem;
+    t_elem_list     *closest_elem;
     double          closest;
+    (void)closest_elem;
     
     cur_elem = info->first_elem;
     closest = 1000000000;
@@ -25,7 +27,9 @@ static double
     ray->color = (ray->color << 8) + info->ambiant->color.b * info->ambiant->lum;
     while (cur_elem)
     {
-        closest = (*intersect_arr[cur_elem->id])(closest, ray, cur_elem->elem_detail);
+        closest_elem =
+            (*intersect_arr[cur_elem->id])(&closest, ray, cur_elem->elem_detail)
+            ? cur_elem : NULL;
         cur_elem = cur_elem->next_elem;
     }
     // printf("closest = %lf\n", closest);
