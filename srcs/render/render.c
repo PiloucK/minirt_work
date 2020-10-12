@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 15:56:59 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/12 13:25:14 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/10/12 15:36:59 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,14 @@ double
     return (a);
 }
 
+double
+    my_max(double a, double b)
+{
+    if (a < b)
+        return (b);
+    return (a);
+}
+
 void
     ray_bounce(t_ray *ray, t_info *info, t_elem_list *hit_elem, double closest, int *i)
 {
@@ -68,40 +76,42 @@ void
         final_color = (*(t_sphere *)(hit_elem->elem_detail)).color;
         origin = vectranslat(ray->pos, ray->dir, closest);
         cur_elem = info->first_elem;
-        // ray->color = final_color.r;
-        // ray->color = (ray->color << 8) + final_color.g;
-        // ray->color = (ray->color << 8) + final_color.b;
         while (cur_elem)
         {
             if (cur_elem->id == L)
             {
                 ray->pos = origin;
                 ray->dir = vecnorm(vecnew(origin, (*(t_light *)(cur_elem->elem_detail)).pos));
-                // printf("_________%lf\n", closest);
                 if (find_closest(ray, info, vecmag(vecnew(origin, (*(t_light *)(cur_elem->elem_detail)).pos)), *i) == vecmag(vecnew(origin, (*(t_light *)(cur_elem->elem_detail)).pos)))
                 {
-                    // final_color.r += final_color.r * (*(t_light *)(cur_elem->elem_detail)).ratio;
-                    // final_color.g += final_color.g * (*(t_light *)(cur_elem->elem_detail)).ratio;
-                    // final_color.b += final_color.b * (*(t_light *)(cur_elem->elem_detail)).ratio;
-                    // final_color.r = final_color.r < (*(t_light *)(cur_elem->elem_detail)).color.r ? (*(t_light *)(cur_elem->elem_detail)).color.r : final_color.r;
-                    // final_color.g = final_color.g < (*(t_light *)(cur_elem->elem_detail)).color.g ? (*(t_light *)(cur_elem->elem_detail)).color.g : final_color.g;
-                    // final_color.b = final_color.b < (*(t_light *)(cur_elem->elem_detail)).color.b ? (*(t_light *)(cur_elem->elem_detail)).color.b : final_color.b;
-                    final_color.r = my_min(255.0, ((final_color.r / 255) * ((*(t_light *)(cur_elem->elem_detail)).color.r * (*(t_light *)(cur_elem->elem_detail)).ratio) / 255) * 255);
-                    final_color.g = my_min(255.0, ((final_color.g / 255) * ((*(t_light *)(cur_elem->elem_detail)).color.g * (*(t_light *)(cur_elem->elem_detail)).ratio) / 255) * 255);
-                    final_color.b = my_min(255.0, ((final_color.b / 255) * ((*(t_light *)(cur_elem->elem_detail)).color.b * (*(t_light *)(cur_elem->elem_detail)).ratio) / 255) * 255);
+                    final_color.r = my_min(
+                        255.0,
+                        ((final_color.r / 255) * my_max(
+                            255.0,
+                            ((((*(t_light *)(cur_elem->elem_detail)).color.r * (*(t_light *)(cur_elem->elem_detail)).ratio) / 255 / (vecmag(vecnew(origin, (*(t_light *)(cur_elem->elem_detail)).pos)) * vecmag(vecnew(origin, (*(t_light *)(cur_elem->elem_detail)).pos)))) + (info->ambiant->color.r * info->ambiant->ratio / 255))) * 255));
+                    final_color.g = my_min(
+                        255.0,
+                        ((final_color.g / 255) * my_max(
+                            255.0,
+                            ((((*(t_light *)(cur_elem->elem_detail)).color.g * (*(t_light *)(cur_elem->elem_detail)).ratio) / 255 / (vecmag(vecnew(origin, (*(t_light *)(cur_elem->elem_detail)).pos)) * vecmag(vecnew(origin, (*(t_light *)(cur_elem->elem_detail)).pos)))) + (info->ambiant->color.g * info->ambiant->ratio / 255))) * 255));
+                    final_color.b = my_min(
+                        255.0,
+                        ((final_color.b / 255) * my_max(
+                            255.0,
+                            ((((*(t_light *)(cur_elem->elem_detail)).color.b * (*(t_light *)(cur_elem->elem_detail)).ratio) / 255 / (vecmag(vecnew(origin, (*(t_light *)(cur_elem->elem_detail)).pos)) * vecmag(vecnew(origin, (*(t_light *)(cur_elem->elem_detail)).pos)))) + (info->ambiant->color.b * info->ambiant->ratio / 255))) * 255));
                     ray->color = final_color.r;
                     ray->color = (ray->color << 8) + final_color.g;
                     ray->color = (ray->color << 8) + final_color.b;
                 }
                 else
                 {
-                    // ray->color = final_color.r;
-                    // ray->color = (ray->color << 8) + final_color.g;
-                    // ray->color = (ray->color << 8) + final_color.b;
-                    ray->color = 0;
+                    final_color.r = my_min(255.0, ((final_color.r / 255) * (info->ambiant->color.r * info->ambiant->ratio / 255)) * 255);
+                    final_color.g = my_min(255.0, ((final_color.g / 255) * (info->ambiant->color.r * info->ambiant->ratio / 255)) * 255);
+                    final_color.b = my_min(255.0, ((final_color.b / 255) * (info->ambiant->color.r * info->ambiant->ratio / 255)) * 255);
+                    ray->color = final_color.r;
+                    ray->color = (ray->color << 8) + final_color.g;
+                    ray->color = (ray->color << 8) + final_color.b;
                 }
-                // print_vec3lf(ray->pos);
-                // print_vec3lf(ray->dir);
             }
             cur_elem = cur_elem->next_elem;
         }
@@ -156,19 +166,19 @@ void
                 (int)x * (info->image.bits_per_pixel / 8));
             *(unsigned int *)pixel_color = ray.color;
             // camera_ray_gen(&ray, info, x + 0.5, y);
-            // find_closest(&ray, info, 1000000000);
+            // find_closest(&ray, info, 1000000000, 0);
             // pixel_color = info->image.data +
             //     ((int)y * info->image.line_len +
             //     (int)x * (info->image.bits_per_pixel / 8));
             // *(unsigned int *)pixel_color = (ray.color + *(unsigned int *)pixel_color) / 2;
             // camera_ray_gen(&ray, info, x, y + 0.5);
-            // find_closest(&ray, info, 1000000000);
+            // find_closest(&ray, info, 1000000000, 0);
             // pixel_color = info->image.data +
             //     ((int)y * info->image.line_len +
             //     (int)x * (info->image.bits_per_pixel / 8));
             // *(unsigned int *)pixel_color = (ray.color + *(unsigned int *)pixel_color) / 2;
             // camera_ray_gen(&ray, info, x + 0.5, y + 0.5);
-            // find_closest(&ray, info, 1000000000);
+            // find_closest(&ray, info, 1000000000, 0);
             // pixel_color = info->image.data +
             //     ((int)y * info->image.line_len +
             //     (int)x * (info->image.bits_per_pixel / 8));
