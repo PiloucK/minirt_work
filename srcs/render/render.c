@@ -6,11 +6,46 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 15:56:59 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/10 00:16:00 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/10/12 13:25:14 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+void
+    prefill_ambiant(t_info *info)
+{
+    int     x;
+    int     y;
+    char    *pixel_color;
+    int     color;
+
+    color = info->ambiant->color.r * info->ambiant->ratio;
+    color = (color << 8) + info->ambiant->color.g * info->ambiant->ratio;
+    color = (color << 8) + info->ambiant->color.b * info->ambiant->ratio;
+    x = 0;
+    while (x < info->res->x)
+    {
+        y = 0;
+        while (y < info->res->y)
+        {
+            pixel_color = info->image.data +
+                ((int)y * info->image.line_len +
+                (int)x * (info->image.bits_per_pixel / 8));
+            *(unsigned int *)pixel_color = color;
+            y++;
+        }
+        x++;
+    }
+}
+
+double
+    my_min(double a, double b)
+{
+    if (a > b)
+        return (b);
+    return (a);
+}
 
 void
     ray_bounce(t_ray *ray, t_info *info, t_elem_list *hit_elem, double closest, int *i)
@@ -48,16 +83,22 @@ void
                     // final_color.r += final_color.r * (*(t_light *)(cur_elem->elem_detail)).ratio;
                     // final_color.g += final_color.g * (*(t_light *)(cur_elem->elem_detail)).ratio;
                     // final_color.b += final_color.b * (*(t_light *)(cur_elem->elem_detail)).ratio;
-                    final_color.r = final_color.r < (*(t_light *)(cur_elem->elem_detail)).color.r ? (*(t_light *)(cur_elem->elem_detail)).color.r : final_color.r;
-                    final_color.g = final_color.g < (*(t_light *)(cur_elem->elem_detail)).color.g ? (*(t_light *)(cur_elem->elem_detail)).color.g : final_color.g;
-                    final_color.b = final_color.b < (*(t_light *)(cur_elem->elem_detail)).color.b ? (*(t_light *)(cur_elem->elem_detail)).color.b : final_color.b;
-                    // ray->color = 0;
-                }
-                else
-                {
+                    // final_color.r = final_color.r < (*(t_light *)(cur_elem->elem_detail)).color.r ? (*(t_light *)(cur_elem->elem_detail)).color.r : final_color.r;
+                    // final_color.g = final_color.g < (*(t_light *)(cur_elem->elem_detail)).color.g ? (*(t_light *)(cur_elem->elem_detail)).color.g : final_color.g;
+                    // final_color.b = final_color.b < (*(t_light *)(cur_elem->elem_detail)).color.b ? (*(t_light *)(cur_elem->elem_detail)).color.b : final_color.b;
+                    final_color.r = my_min(255.0, ((final_color.r / 255) * ((*(t_light *)(cur_elem->elem_detail)).color.r * (*(t_light *)(cur_elem->elem_detail)).ratio) / 255) * 255);
+                    final_color.g = my_min(255.0, ((final_color.g / 255) * ((*(t_light *)(cur_elem->elem_detail)).color.g * (*(t_light *)(cur_elem->elem_detail)).ratio) / 255) * 255);
+                    final_color.b = my_min(255.0, ((final_color.b / 255) * ((*(t_light *)(cur_elem->elem_detail)).color.b * (*(t_light *)(cur_elem->elem_detail)).ratio) / 255) * 255);
                     ray->color = final_color.r;
                     ray->color = (ray->color << 8) + final_color.g;
                     ray->color = (ray->color << 8) + final_color.b;
+                }
+                else
+                {
+                    // ray->color = final_color.r;
+                    // ray->color = (ray->color << 8) + final_color.g;
+                    // ray->color = (ray->color << 8) + final_color.b;
+                    ray->color = 0;
                 }
                 // print_vec3lf(ray->pos);
                 // print_vec3lf(ray->dir);
