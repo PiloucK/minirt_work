@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 08:26:07 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/09 21:46:49 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/10/14 15:31:28 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,22 @@ double
     else
         tmp = sphere->diameter;
     if ((tmp > 0.1f) && (tmp < *closest))
+    {
+        ray->color = sphere->color;
         *closest = tmp;
+    }
 // printf("%lf\n", tmp + 2 * util_absvalue(dist_origin_center_onray));
     // tmp -= sqrt(sphere->diameter * sphere->diameter
     //     - dist_ray_center * dist_ray_center) * 2;
     else if ((tmp - sqrt(sphere->diameter * sphere->diameter
         - dist_ray_center * dist_ray_center) * 2 > 0.1f) && (tmp - sqrt(sphere->diameter * sphere->diameter
         - dist_ray_center * dist_ray_center) * 2 < *closest))
+    {
+        ray->color = sphere->color;
         *closest = tmp - sqrt(sphere->diameter * sphere->diameter
-        - dist_ray_center * dist_ray_center) * 2;
+            - dist_ray_center * dist_ray_center) * 2;
+    }
     else
-        return 0;
+        return (0);
     return (1);
 }

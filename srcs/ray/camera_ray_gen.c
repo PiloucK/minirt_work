@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 18:44:24 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/12 13:23:55 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/10/14 15:30:42 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ void
     y = j / info->res->y;
     ray->pos.x = i;
     ray->pos.y = j;
-    ray->dir = info->cur_camera->dir;   
-    ray->color = 0;
+    ray->dir = info->cur_camera->dir;
+    ray->color = info->ambiant->color;
 }

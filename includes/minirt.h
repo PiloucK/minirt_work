@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 14:12:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/12 10:34:08 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/10/14 12:25:32 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,9 +113,9 @@ typedef struct  s_triangle
 
 typedef struct	s_ray
 {
-	t_vec3lf		pos;
-	t_vec3lf		dir;
-	int			color;
+	t_vec3lf	pos;
+	t_vec3lf	dir;
+	t_color		color;
 }				t_ray;
 
 typedef struct  s_elem_list

@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/31 19:39:32 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/11 16:06:06 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/10/14 12:17:28 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ double
     char    *c;
 
     d = strtod(value, &c);
-    if (min_range && max_range)
+    if (min_range || max_range)
     {
         if (d < min_range || d > max_range)
             err_print(3, info, "Wrong value in line (too big or too small)");
     }
     if (*c)
-        err_print(3, info, "Wrong float number format");
+        err_print(3, info, "Wrong float number format, decimal value is needed");
     return (d);
 }
