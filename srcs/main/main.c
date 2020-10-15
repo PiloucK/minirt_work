@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:46:24 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/14 16:41:30 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/10/15 11:03:15 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,50 @@
 
 // t_parse_fnct    parse_array[256];
 
+void
+    up_light(t_info *info)
+{
+    info->cur_light->pos.y -= 10;
+    screen_scan(info);
+    mlx_put_image_to_window(info->mlx, info->win, info->image.img, 0, 0);
+}
+
+void
+    left_light(t_info *info)
+{
+    info->cur_light->pos.x -= 10;
+    screen_scan(info);
+    mlx_put_image_to_window(info->mlx, info->win, info->image.img, 0, 0);
+}
+
+void
+    down_light(t_info *info)
+{
+    info->cur_light->pos.y += 10;
+    screen_scan(info);
+    mlx_put_image_to_window(info->mlx, info->win, info->image.img, 0, 0);
+}
+
+void
+    right_light(t_info *info)
+{
+    info->cur_light->pos.x += 10;
+    screen_scan(info);
+    mlx_put_image_to_window(info->mlx, info->win, info->image.img, 0, 0);
+}
+
 int		key_hooked(int key, void *arg)
 {
     ft_printf("key :%i\n", key);
 	if (key == 65363)
         camera_switch(arg);
-    else if (key == 46)
+    else if (key == 44)
         up_light(arg);
-    else if (key == 111)
+    else if (key == 97)
         left_light(arg);
-    else if (key == 101)
+    else if (key == 111)
         down_light(arg);
-    else if (key == 117);
+    else if (key == 101)
         right_light(arg);
 	else if (key == 65307)
     {

@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 14:12:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/14 12:25:32 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/10/15 15:38:48 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # include <errno.h>
 											#include <stdlib.h>
 											#include <stdio.h>
+
+# define PI 3.14159265359
 
 typedef enum    e_type
 {
@@ -142,6 +144,7 @@ typedef	struct	s_info
 	t_res		*res;
 	t_ambiant	*ambiant;
 	t_camera	*cur_camera;
+	t_light		*cur_light;
     t_elem_list *first_elem;
     int         do_save;
     char        *last_read_str;

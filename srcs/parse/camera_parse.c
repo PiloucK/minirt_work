@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 21:38:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/09 09:40:35 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/10/15 10:56:41 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void
     details->dir = vector_parse((*object_params)[2], info);
     details->dir = vecnorm(details->dir);
     details->fov = double_parse_inrange((*object_params)[3], 0, 180, info);
-    if (!info->cur_camera)
-        info->cur_camera = details;
+    info->cur_camera = details;
     util_addelem(info, details, C);
 }

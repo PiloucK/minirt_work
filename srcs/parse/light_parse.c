@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 18:22:51 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/09 22:19:08 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/10/15 10:57:09 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ void
     details->pos = position_parse((*object_params)[1], info);
     details->ratio = double_parse_inrange((*object_params)[2], 0.0, 1.0, info);
     details->color = color_parse((*object_params)[3], info);
+    info->cur_light = details;
     util_addelem(info, details, L);
 }

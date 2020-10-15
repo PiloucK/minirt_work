@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 15:56:59 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/14 15:33:44 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/10/15 18:59:00 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,23 +82,40 @@ void
             {
                 ray->pos = origin;
                 ray->dir = vecnorm(vecnew(origin, (*(t_light *)(cur_elem->elem_detail)).pos));
+// printf("---\n");
+// print_vec3lf(ray->dir);
+// print_vec3lf(vecnorm(vecnew(origin, (*(t_light *)(cur_elem->elem_detail)).pos)));
+// printf("%lf\n", vecangle(vecnorm(vecnew(origin, (*(t_light *)(cur_elem->elem_detail)).pos)), ray->dir));
+// if ((vecangle(vecnorm(vecnew(origin, (*(t_light *)(cur_elem->elem_detail)).pos)), ray->dir) * (180 / PI)) > 90)
+//     ray->dir = vecnorm(vecnew(origin, (*(t_light *)(cur_elem->elem_detail)).pos));
+// else
+// {
+//     ray->dir = vecnorm(vecnew(origin, (*(t_light *)(cur_elem->elem_detail)).pos));
+//     ray->dir.x *= -1;
+//     ray->dir.y *= -1;
+//     ray->dir.z *= -1;
+// }
+// print_vec3lf(ray->dir);
                 if (find_closest(ray, info, vecmag(vecnew(origin, (*(t_light *)(cur_elem->elem_detail)).pos)), *i) == vecmag(vecnew(origin, (*(t_light *)(cur_elem->elem_detail)).pos)))
                 {
-                    final_color.r = my_min(
-                        255.0,
-                        ((final_color.r) * my_max(
-                            255.0,
-                            ((((*(t_light *)(cur_elem->elem_detail)).color.r * (*(t_light *)(cur_elem->elem_detail)).ratio) / (vecmag(vecnew(origin, (*(t_light *)(cur_elem->elem_detail)).pos)) * vecmag(vecnew(origin, (*(t_light *)(cur_elem->elem_detail)).pos)))) + (info->ambiant->color.r * info->ambiant->ratio))) * 255));
-                    final_color.g = my_min(
-                        255.0,
-                        ((final_color.g) * my_max(
-                            255.0,
-                            ((((*(t_light *)(cur_elem->elem_detail)).color.g * (*(t_light *)(cur_elem->elem_detail)).ratio) / (vecmag(vecnew(origin, (*(t_light *)(cur_elem->elem_detail)).pos)) * vecmag(vecnew(origin, (*(t_light *)(cur_elem->elem_detail)).pos)))) + (info->ambiant->color.g * info->ambiant->ratio))) * 255));
-                    final_color.b = my_min(
-                        255.0,
-                        ((final_color.b) * my_max(
-                            255.0,
-                            ((((*(t_light *)(cur_elem->elem_detail)).color.b * (*(t_light *)(cur_elem->elem_detail)).ratio) / (vecmag(vecnew(origin, (*(t_light *)(cur_elem->elem_detail)).pos)) * vecmag(vecnew(origin, (*(t_light *)(cur_elem->elem_detail)).pos)))) + (info->ambiant->color.b * info->ambiant->ratio))) * 255));
+                    // final_color.r = my_min(
+                    //     255.0,
+                    //     ((final_color.r) * my_max(
+                    //         255.0,
+                    //         ((((*(t_light *)(cur_elem->elem_detail)).color.r * (*(t_light *)(cur_elem->elem_detail)).ratio) / (vecmag(vecnew(origin, (*(t_light *)(cur_elem->elem_detail)).pos)) * vecmag(vecnew(origin, (*(t_light *)(cur_elem->elem_detail)).pos)))) + (info->ambiant->color.r * info->ambiant->ratio))) * 255));
+                    // final_color.g = my_min(
+                    //     255.0,
+                    //     ((final_color.g) * my_max(
+                    //         255.0,
+                    //         ((((*(t_light *)(cur_elem->elem_detail)).color.g * (*(t_light *)(cur_elem->elem_detail)).ratio) / (vecmag(vecnew(origin, (*(t_light *)(cur_elem->elem_detail)).pos)) * vecmag(vecnew(origin, (*(t_light *)(cur_elem->elem_detail)).pos)))) + (info->ambiant->color.g * info->ambiant->ratio))) * 255));
+                    // final_color.b = my_min(
+                    //     255.0,
+                    //     ((final_color.b) * my_max(
+                    //         255.0,
+                    //         ((((*(t_light *)(cur_elem->elem_detail)).color.b * (*(t_light *)(cur_elem->elem_detail)).ratio) / (vecmag(vecnew(origin, (*(t_light *)(cur_elem->elem_detail)).pos)) * vecmag(vecnew(origin, (*(t_light *)(cur_elem->elem_detail)).pos)))) + (info->ambiant->color.b * info->ambiant->ratio))) * 255));
+                    final_color.r *= (*(t_light *)(cur_elem->elem_detail)).color.r * 255;
+                    final_color.g *= (*(t_light *)(cur_elem->elem_detail)).color.g * 255;
+                    final_color.b *= (*(t_light *)(cur_elem->elem_detail)).color.b * 255;
                     ray->color = final_color;
                 }
                 else
