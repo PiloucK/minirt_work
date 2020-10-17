@@ -139,6 +139,7 @@ void
 double
     find_closest(t_ray *ray, t_info *info, double closest, int i)
 {
+(void)i;
     t_elem_list     *cur_elem;
     t_elem_list     *closest_elem;
     
@@ -151,8 +152,8 @@ double
             ? cur_elem : closest_elem;
         cur_elem = cur_elem->next_elem;
     }
-    if (i < 1)
-        ray_bounce(ray, info, closest_elem, closest, &i);
+    // if (i < 1)
+    //     ray_bounce(ray, info, closest_elem, closest, &i);
     return (closest);
 }
 
@@ -172,7 +173,7 @@ void
         while (y < info->res->y)
         {
             camera_ray_gen(&ray, info, x, y);
-            find_closest(&ray, info, 1000000000, 0);
+            find_closest(&ray, info, 1000000000, MAX_DEPTH);
             pixel_color = info->image.data +
                 ((int)y * info->image.line_len +
                 (int)x * (info->image.bits_per_pixel / 8));

@@ -32,11 +32,17 @@ double
     if (dist_ray_center > sphere->diameter)
         return (0);
     dist_origin_proj = vecdotprod(v_origin_center, ray->dir);
+    // if (dist_origin_proj <= 0)
+    // {
+    //     dist_proj_intersection = dist_origin_proj +
+    //         sqrt(sphere->diameter * sphere->diameter
+    //         - dist_ray_center * dist_ray_center);
+    // }
     dist_origin_center = vecmag(v_origin_center);
     // if (dist_origin_center)
-        dist_origin_center = dist_origin_proj +
-            sqrt(sphere->diameter * sphere->diameter
-            - dist_ray_center * dist_ray_center);
+    dist_origin_center = dist_origin_proj +
+        sqrt(sphere->diameter * sphere->diameter
+        - dist_ray_center * dist_ray_center);
     // else
     //     dist_origin_center = sphere->diameter;
     if ((dist_origin_center > 0.1f) && (dist_origin_center < *closest))

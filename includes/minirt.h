@@ -25,6 +25,7 @@
 											#include <stdio.h>
 
 # define PI 3.14159265359
+# define MAX_DEPTH 0
 
 typedef enum    e_type
 {
