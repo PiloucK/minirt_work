@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 14:12:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/20 16:17:17 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/10/20 16:23:16 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,6 +184,7 @@ void			plane_parse(char ***object_params, t_info *info);
 t_vec3lf			position_parse(char *object_param, t_info *info);
 void            print_infos(t_info *info);
 void			screen_scan(t_info *info);
+void			test_scan(t_info *info);
 void            resolution_parse(char ***object_params, t_info *info);
 void			sphere_parse(char ***object_params, t_info *info);
 void			square_parse(char ***object_params, t_info *info);
@@ -202,7 +203,7 @@ double			intersect_ntdh(double *closest, t_ray *ray, void *elem_detail);
 double		    intersect_sphere(double *closest, t_ray *ray, void *elem_detail);
 void			intersect_arr_init();
 void		    print_vec3lf(t_vec3lf vec);
-int		    find_closest(t_ray *ray, t_info *info, double closest, int i);
+double		    find_closest(t_ray *ray, t_info *info, double closest, int i);
 
 
 #endif
