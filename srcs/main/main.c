@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:46:24 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/15 11:03:15 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/10/20 14:01:05 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ void
     i->img = mlx_new_image(info->mlx, info->res->x, info->res->y);
     i->data = mlx_get_data_addr(
         i->img, &i->bits_per_pixel, &i->line_len, &i->endian);
-    prefill_ambiant(info);
     screen_scan(info);
 }
 

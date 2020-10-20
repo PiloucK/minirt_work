@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 14:12:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/15 15:38:48 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/10/20 16:17:17 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 											#include <stdio.h>
 
 # define PI 3.14159265359
-# define MAX_DEPTH 0
+# define MAX_DEPTH 1
 
 typedef enum    e_type
 {
@@ -114,11 +114,18 @@ typedef struct  s_triangle
 	t_color     color;
 }               t_triangle;
 
+typedef struct	s_bounce
+{
+	t_vec3lf	pos;
+	t_vec3lf	surface_normal;
+}				t_bounce;
+
 typedef struct	s_ray
 {
 	t_vec3lf	pos;
 	t_vec3lf	dir;
 	t_color		color;
+	t_bounce	bounce;
 }				t_ray;
 
 typedef struct  s_elem_list
@@ -189,14 +196,13 @@ t_vec3lf			vector_parse(char *object_param, t_info *info);
 
 void			info_free(t_info *info);
 void			camera_ray_gen(t_ray *ray, t_info *info, int i, int j);
-void			ray_bounce(t_ray *ray, t_info *info, t_elem_list *hit_elem, double closest, int *i);
+void			ray_bounce(t_ray *ray, t_info *info, t_elem_list *hit_elem, int *i);
 void			camera_switch(t_info *info);
 double			intersect_ntdh(double *closest, t_ray *ray, void *elem_detail);
 double		    intersect_sphere(double *closest, t_ray *ray, void *elem_detail);
 void			intersect_arr_init();
 void		    print_vec3lf(t_vec3lf vec);
-double		    find_closest(t_ray *ray, t_info *info, double closest, int i);
-void			prefill_ambiant(t_info *info);
+int		    find_closest(t_ray *ray, t_info *info, double closest, int i);
 
 
 #endif
