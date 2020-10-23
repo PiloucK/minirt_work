@@ -6,7 +6,7 @@
 #    By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/30 08:42:51 by clkuznie          #+#    #+#              #
-#    Updated: 2020/10/09 19:53:30 by clkuznie         ###   ########.fr        #
+#    Updated: 2020/10/23 10:27:01 by clkuznie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,11 +52,14 @@ render.c
 
 VECTOR			:= \
 vecangle.c\
+veccross.c\
 vecdotprod.c\
 vecmag.c\
 vecnew.c\
+vecnewvalues.c\
 vecnorm.c\
 vecprod.c\
+vecscale.c\
 vecsub.c\
 vecsum.c\
 vectranslat.c\
@@ -106,11 +109,10 @@ libcomp:
 	make -C includes/libft
 	make -C includes/libmlx
 
-clean:			cleanlib
+clean:
 	$(RM) $(OBJS)
 
-fclean:			fcleanlib
-	$(RM) $(OBJS)
+fclean:			clean
 	$(RM) $(NAME)
 
 cleanlib:

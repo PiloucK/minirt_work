@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 14:12:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/20 16:23:16 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/10/23 11:07:15 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,7 +196,7 @@ t_vec3lf			vector_parse(char *object_param, t_info *info);
 
 
 void			info_free(t_info *info);
-void			camera_ray_gen(t_ray *ray, t_info *info, int i, int j);
+void			camera_ray_gen(t_ray *ray, t_info *info, double i, double	 j);
 void			ray_bounce(t_ray *ray, t_info *info, t_elem_list *hit_elem, int *i);
 void			camera_switch(t_info *info);
 double			intersect_ntdh(double *closest, t_ray *ray, void *elem_detail);

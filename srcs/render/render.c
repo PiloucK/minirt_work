@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 15:56:59 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/20 16:32:00 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/10/23 11:39:36 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ void
                 ray->pos = vectranslat(ray->bounce.pos, ray->bounce.surface_normal, 0.1);
                 ray->dir = vecnorm(vecnew(ray->pos, cur_light->pos));
                 light_dist = vecmag(vecnew(ray->pos, cur_light->pos));
-                // printf("light_dist = %lf\n", light_dist);
-                // printf("light_dist = %lf\n", find_closest(ray, info, light_dist, *i));
                 if (find_closest(ray, info, light_dist, *i) != light_dist)
                 {
                     final_color.r = my_min(1, ((final_color.r) * (info->ambiant->color.r * info->ambiant->ratio)));
@@ -75,9 +73,6 @@ void
                         ((final_color.b) * my_max(
                             1,
                             (((cur_light->color.b * cur_light->ratio) / (light_dist * light_dist)) + (info->ambiant->color.b * info->ambiant->ratio)))));
-                    // final_color.r *= cur_light->color.r;
-                    // final_color.g *= cur_light->color.g;
-                    // final_color.b *= cur_light->color.b;
                     ray->color = final_color;
                 }
             }
@@ -154,12 +149,15 @@ void
 
     x = 0;
     intersect_arr_init();
-    while (x < 1)
+    while (x < info->res->x)
     {
         y = 0;
         while (y < 1)
         {
+            printf("%i\n", x);
+            printf("%i\n", y);
             camera_ray_gen(&ray, info, x, y);
+            print_vec3lf(ray.dir);
             find_closest(&ray, info, 1000000000, MAX_DEPTH);
             pixel_color = info->image.data +
                 (y * info->image.line_len +
