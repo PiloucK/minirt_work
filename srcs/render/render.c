@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 15:56:59 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/23 11:39:36 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/10/25 00:41:40 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,27 @@ double
     return (a);
 }
 
+double
+    fast_clamp(double nb, double min, double max)
+{
+    int  dif;
+    int  dif_sign;
+
+    dif = nb - min;
+    dif_sign = dif >> 31;
+    nb = nb - (dif & dif_sign);
+    dif = nb - max;
+    dif_sign = dif >> 31;
+    return (nb + (dif & dif_sign));
+}
+
+double
+    my_clamp(double nb, double min, double max)
+{
+    nb = my_max(nb, min);
+    return (my_min(nb, max));
+}
+
 void
     ray_bounce(t_ray *ray, t_info *info, t_elem_list *hit_elem, int *i)
 {
@@ -35,6 +56,7 @@ void
     t_light         *cur_light;
     t_color         final_color;
     double          light_dist;
+    double          light_angle;
 
     *i -= 1;
     if (hit_elem)
@@ -51,28 +73,27 @@ void
                 light_dist = vecmag(vecnew(ray->pos, cur_light->pos));
                 if (find_closest(ray, info, light_dist, *i) != light_dist)
                 {
-                    final_color.r = my_min(1, ((final_color.r) * (info->ambiant->color.r * info->ambiant->ratio)));
-                    final_color.g = my_min(1, ((final_color.g) * (info->ambiant->color.g * info->ambiant->ratio)));
-                    final_color.b = my_min(1, ((final_color.b) * (info->ambiant->color.b * info->ambiant->ratio)));
+                    // final_color.r = my_clamp((final_color.r * info->ambiant->color.r * info->ambiant->ratio), 0, 1);
+                    // final_color.g = my_clamp((final_color.g * info->ambiant->color.g * info->ambiant->ratio), 0, 1);
+                    // final_color.b = my_clamp((final_color.b * info->ambiant->color.b * info->ambiant->ratio), 0, 1);
+                    final_color.r = 0;
+                    final_color.g = 0;
+                    final_color.b = 0;
                     ray->color = final_color;
                 }
                 else
                 {
-                    final_color.r = my_min(
-                        1,
-                        ((final_color.r) * my_max(
-                            1,
-                            (((cur_light->color.r * cur_light->ratio) / (light_dist * light_dist)) + (info->ambiant->color.r * info->ambiant->ratio)))));
-                    final_color.g = my_min(
-                        1,
-                        ((final_color.g) * my_max(
-                            1,
-                            (((cur_light->color.g * cur_light->ratio) / (light_dist * light_dist)) + (info->ambiant->color.g * info->ambiant->ratio)))));
-                    final_color.b = my_min(
-                        1,
-                        ((final_color.b) * my_max(
-                            1,
-                            (((cur_light->color.b * cur_light->ratio) / (light_dist * light_dist)) + (info->ambiant->color.b * info->ambiant->ratio)))));
+                    // printf("%lf\n", cos(vecangle(ray->dir, ray->bounce.surface_normal) / (PI / 180)));
+                    light_angle = vecangle(ray->dir, ray->bounce.surface_normal);
+                    final_color.r = my_clamp(
+                        ((final_color.r) * my_clamp(
+                            (((cur_light->color.r * cur_light->ratio) * cos(light_angle)) + (info->ambiant->color.r * info->ambiant->ratio)), 0, 1)), 0, 1);
+                    final_color.g = my_clamp(
+                        ((final_color.g) * my_clamp(
+                            (((cur_light->color.g * cur_light->ratio) * cos(light_angle)) + (info->ambiant->color.g * info->ambiant->ratio)), 0, 1)), 0, 1);
+                    final_color.b = my_clamp(
+                        ((final_color.b) * my_clamp(
+                            (((cur_light->color.b * cur_light->ratio) * cos(light_angle)) + (info->ambiant->color.b * info->ambiant->ratio)), 0, 1)), 0, 1);
                     ray->color = final_color;
                 }
             }
@@ -110,6 +131,11 @@ double
 void
     screen_scan(t_info *info)
 {
+    // printf("%lf\n%lf\n%lf\n%lf\n%lf\n", my_clamp(0.3, 0, 1),
+    // my_clamp(-0.3, 0, 1),
+    // my_clamp(1.3, 0, 1),
+    // my_clamp(1, 0, 1),
+    // my_clamp(0, 0, 1));
     t_ray   ray;
     int     x;
     int     y;
@@ -149,7 +175,7 @@ void
 
     x = 0;
     intersect_arr_init();
-    while (x < info->res->x)
+    while (x < 1)
     {
         y = 0;
         while (y < 1)
