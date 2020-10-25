@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 13:44:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/09 22:18:40 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/10/25 17:27:28 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ void
         err_print(2, info, NULL);
     info->ambiant->ratio =
         double_parse_inrange((*object_params)[1], 0.0, 1.0, info);
+    info->ambiant->ratio += 0.1 * !info->ambiant->ratio;
     info->ambiant->color = color_parse((*object_params)[2], info);
 }

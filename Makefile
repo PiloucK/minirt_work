@@ -6,7 +6,7 @@
 #    By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/30 08:42:51 by clkuznie          #+#    #+#              #
-#    Updated: 2020/10/23 10:27:01 by clkuznie         ###   ########.fr        #
+#    Updated: 2020/10/25 15:58:18 by clkuznie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ VECTOR			:= \
 vecangle.c\
 veccross.c\
 vecdotprod.c\
+vecis.c\
 vecmag.c\
 vecnew.c\
 vecnewvalues.c\

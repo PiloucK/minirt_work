@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 15:56:59 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/25 00:41:40 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/10/25 17:35:28 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,12 @@ void
                 light_dist = vecmag(vecnew(ray->pos, cur_light->pos));
                 if (find_closest(ray, info, light_dist, *i) != light_dist)
                 {
-                    // final_color.r = my_clamp((final_color.r * info->ambiant->color.r * info->ambiant->ratio), 0, 1);
-                    // final_color.g = my_clamp((final_color.g * info->ambiant->color.g * info->ambiant->ratio), 0, 1);
-                    // final_color.b = my_clamp((final_color.b * info->ambiant->color.b * info->ambiant->ratio), 0, 1);
-                    final_color.r = 0;
-                    final_color.g = 0;
-                    final_color.b = 0;
+                    final_color.r = my_clamp((final_color.r * info->ambiant->color.r * info->ambiant->ratio), 0, 1);
+                    final_color.g = my_clamp((final_color.g * info->ambiant->color.g * info->ambiant->ratio), 0, 1);
+                    final_color.b = my_clamp((final_color.b * info->ambiant->color.b * info->ambiant->ratio), 0, 1);
+                    // final_color.r = 0;
+                    // final_color.g = 0;
+                    // final_color.b = 0;
                     ray->color = final_color;
                 }
                 else
@@ -87,13 +87,13 @@ void
                     light_angle = vecangle(ray->dir, ray->bounce.surface_normal);
                     final_color.r = my_clamp(
                         ((final_color.r) * my_clamp(
-                            (((cur_light->color.r * cur_light->ratio) * cos(light_angle)) + (info->ambiant->color.r * info->ambiant->ratio)), 0, 1)), 0, 1);
+                            (my_clamp((cur_light->color.r * cur_light->ratio) * cos(light_angle), 0, 1) + (info->ambiant->color.r * info->ambiant->ratio)), 0, 1)), 0, 1);
                     final_color.g = my_clamp(
                         ((final_color.g) * my_clamp(
-                            (((cur_light->color.g * cur_light->ratio) * cos(light_angle)) + (info->ambiant->color.g * info->ambiant->ratio)), 0, 1)), 0, 1);
+                            (my_clamp((cur_light->color.g * cur_light->ratio) * cos(light_angle), 0, 1) + (info->ambiant->color.g * info->ambiant->ratio)), 0, 1)), 0, 1);
                     final_color.b = my_clamp(
                         ((final_color.b) * my_clamp(
-                            (((cur_light->color.b * cur_light->ratio) * cos(light_angle)) + (info->ambiant->color.b * info->ambiant->ratio)), 0, 1)), 0, 1);
+                            (my_clamp((cur_light->color.b * cur_light->ratio) * cos(light_angle), 0, 1) + (info->ambiant->color.b * info->ambiant->ratio)), 0, 1)), 0, 1);
                     ray->color = final_color;
                 }
             }
@@ -102,9 +102,12 @@ void
     }
     else
     {
-        ray->color.r = info->ambiant->color.r * info->ambiant->ratio;
-        ray->color.g = info->ambiant->color.g * info->ambiant->ratio;
-        ray->color.b = info->ambiant->color.b * info->ambiant->ratio;
+        // ray->color.r = info->ambiant->color.r * info->ambiant->ratio;
+        // ray->color.g = info->ambiant->color.g * info->ambiant->ratio;
+        // ray->color.b = info->ambiant->color.b * info->ambiant->ratio;
+        ray->color.r = 0;
+        ray->color.g = 0;
+        ray->color.b = 0;
     }
 }
 
@@ -175,10 +178,10 @@ void
 
     x = 0;
     intersect_arr_init();
-    while (x < 1)
+    while (x < info->res->x)
     {
         y = 0;
-        while (y < 1)
+        while (y < info->res->y)
         {
             printf("%i\n", x);
             printf("%i\n", y);
