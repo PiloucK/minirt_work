@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 15:56:59 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/25 17:35:28 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/11/01 18:12:09 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,11 +134,6 @@ double
 void
     screen_scan(t_info *info)
 {
-    // printf("%lf\n%lf\n%lf\n%lf\n%lf\n", my_clamp(0.3, 0, 1),
-    // my_clamp(-0.3, 0, 1),
-    // my_clamp(1.3, 0, 1),
-    // my_clamp(1, 0, 1),
-    // my_clamp(0, 0, 1));
     t_ray   ray;
     int     x;
     int     y;
@@ -164,6 +159,56 @@ void
             y++;
         }
         x++;
+    }
+}
+
+void
+    chunk_fill(t_color color, t_info *info, int x, int y)
+{
+    int     i;
+    int     j;
+    char    *pixel_address;
+    unsigned int    *pixel;
+
+    i = 0;
+    while (i < REDUC && x + i < info->res->x)
+    {
+        j = 0;
+        while (j < REDUC && y + j < info->res->y)
+        {
+            pixel_address = info->image.data +
+            ((y + j) * info->image.line_len +
+            (x + i) * (info->image.bits_per_pixel / 8));
+            pixel = (unsigned int *)pixel_address;
+            *pixel = color.r * 255;
+            *pixel = (*pixel << 8) + color.g * 255;
+            *pixel = (*pixel << 8) + color.b * 255;
+            j++;
+        }
+        i++;
+    }
+}
+
+void
+    pre_render(t_info *info)
+{
+    t_ray           ray;
+    int             x;
+    int             y;
+
+    x = 0;
+    intersect_arr_init();
+    while (x < info->res->x + REDUC)
+    {
+        y = 0;
+        while (y < info->res->y + REDUC)
+        {
+            camera_ray_gen(&ray, info, x + REDUC / 2, y + REDUC / 2);
+            find_closest(&ray, info, 1000000000, MAX_DEPTH);
+            chunk_fill(ray.color, info, x, y);
+            y += REDUC;
+        }
+        x += REDUC;
     }
 }
 

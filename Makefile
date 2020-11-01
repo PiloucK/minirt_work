@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+         #
+#    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/30 08:42:51 by clkuznie          #+#    #+#              #
-#    Updated: 2020/10/25 15:58:18 by clkuznie         ###   ########.fr        #
+#    Updated: 2020/11/01 12:48:40 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME			=  minirt
 
 INTERSECT		:= \
 intersect_ntdh.c\
+intersect_plane.c\
 intersect_setup.c\
 intersect_sphere.c
 

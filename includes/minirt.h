@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 14:12:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/23 11:07:15 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/11/01 18:45:27 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 
 # define PI 3.14159265359
 # define MAX_DEPTH 1
+# define REDUC 16
 
 typedef enum    e_type
 {
@@ -195,11 +196,13 @@ int             util_object_params_count(char **object_params_str);
 t_vec3lf			vector_parse(char *object_param, t_info *info);
 
 
+void			pre_render(t_info *info);
 void			info_free(t_info *info);
 void			camera_ray_gen(t_ray *ray, t_info *info, double i, double	 j);
 void			ray_bounce(t_ray *ray, t_info *info, t_elem_list *hit_elem, int *i);
 void			camera_switch(t_info *info);
 double			intersect_ntdh(double *closest, t_ray *ray, void *elem_detail);
+double		    intersect_plane(double *closest, t_ray *ray, void *elem_detail);
 double		    intersect_sphere(double *closest, t_ray *ray, void *elem_detail);
 void			intersect_arr_init();
 void		    print_vec3lf(t_vec3lf vec);

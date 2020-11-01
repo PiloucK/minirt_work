@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:46:24 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/25 16:20:49 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/11/01 17:36:52 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void
     i->img = mlx_new_image(info->mlx, info->res->x, info->res->y);
     i->data = mlx_get_data_addr(
         i->img, &i->bits_per_pixel, &i->line_len, &i->endian);
-    screen_scan(info);
+    pre_render(info);
 }
 
 void
