@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 14:12:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/11/01 18:45:27 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/07 17:55:57 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 # define PI 3.14159265359
 # define MAX_DEPTH 1
-# define REDUC 16
+# define REDUC 8
 
 typedef enum    e_type
 {
@@ -66,7 +66,10 @@ typedef struct  s_camera
 {
 	t_vec3lf      dir;
 	t_vec3lf       pos;
-	double      fov;
+	t_vec3lf	upguide;
+	t_vec3lf	v_right;
+	t_vec3lf	v_up;
+	double      w;
 }               t_camera;
 
 typedef struct  s_light
@@ -206,7 +209,7 @@ double		    intersect_plane(double *closest, t_ray *ray, void *elem_detail);
 double		    intersect_sphere(double *closest, t_ray *ray, void *elem_detail);
 void			intersect_arr_init();
 void		    print_vec3lf(t_vec3lf vec);
-double		    find_closest(t_ray *ray, t_info *info, double closest, int i);
+int		    find_closest(t_ray *ray, t_info *info, double closest, int i);
 
 
 #endif

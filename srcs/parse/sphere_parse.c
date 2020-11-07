@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere_parse.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 19:38:17 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/12 19:07:06 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/11/02 17:50:25 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void
     if (!(details = malloc(sizeof(*details))))
         err_print(2, info, NULL);
     details->pos = position_parse((*object_params)[1], info);
-    details->diameter = double_parse_inrange((*object_params)[2], 0, 0, info);
+    details->diameter = double_parse_inrange((*object_params)[2], 0, 0, info) / 2;
     details->color = color_parse((*object_params)[3], info);
     util_addelem(info, details, SP);
 }

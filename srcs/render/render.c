@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 15:56:59 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/11/01 18:12:09 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/07 22:34:43 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,64 +54,49 @@ void
 {
     t_elem_list     *cur_elem;
     t_light         *cur_light;
-    t_color         final_color;
+    t_color         lights_sum;
     double          light_dist;
-    double          light_angle;
+    double          energy;
+    t_ray           bounce;
 
     *i -= 1;
     if (hit_elem)
     {
-        final_color = ray->color;
+        lights_sum.r = my_clamp(info->ambiant->color.r * info->ambiant->ratio, 0, 1);
+        lights_sum.g = my_clamp(info->ambiant->color.g * info->ambiant->ratio, 0, 1);
+        lights_sum.b = my_clamp(info->ambiant->color.b * info->ambiant->ratio, 0, 1);
+        bounce.pos = vectranslat(ray->bounce.pos, ray->bounce.surface_normal, 0);
         cur_elem = info->first_elem;
         while (cur_elem)
         {
             if (cur_elem->id == L)
             {
                 cur_light = (t_light *)(cur_elem->elem_detail);
-                ray->pos = vectranslat(ray->bounce.pos, ray->bounce.surface_normal, 0.1);
-                ray->dir = vecnorm(vecnew(ray->pos, cur_light->pos));
-                light_dist = vecmag(vecnew(ray->pos, cur_light->pos));
-                if (find_closest(ray, info, light_dist, *i) != light_dist)
+                bounce.dir = vecnorm(vecnew(bounce.pos, cur_light->pos));
+                light_dist = vecmag(vecnew(bounce.pos, cur_light->pos));
+                if (find_closest(&bounce, info, light_dist, *i))
                 {
-                    final_color.r = my_clamp((final_color.r * info->ambiant->color.r * info->ambiant->ratio), 0, 1);
-                    final_color.g = my_clamp((final_color.g * info->ambiant->color.g * info->ambiant->ratio), 0, 1);
-                    final_color.b = my_clamp((final_color.b * info->ambiant->color.b * info->ambiant->ratio), 0, 1);
-                    // final_color.r = 0;
-                    // final_color.g = 0;
-                    // final_color.b = 0;
-                    ray->color = final_color;
-                }
-                else
-                {
-                    // printf("%lf\n", cos(vecangle(ray->dir, ray->bounce.surface_normal) / (PI / 180)));
-                    light_angle = vecangle(ray->dir, ray->bounce.surface_normal);
-                    final_color.r = my_clamp(
-                        ((final_color.r) * my_clamp(
-                            (my_clamp((cur_light->color.r * cur_light->ratio) * cos(light_angle), 0, 1) + (info->ambiant->color.r * info->ambiant->ratio)), 0, 1)), 0, 1);
-                    final_color.g = my_clamp(
-                        ((final_color.g) * my_clamp(
-                            (my_clamp((cur_light->color.g * cur_light->ratio) * cos(light_angle), 0, 1) + (info->ambiant->color.g * info->ambiant->ratio)), 0, 1)), 0, 1);
-                    final_color.b = my_clamp(
-                        ((final_color.b) * my_clamp(
-                            (my_clamp((cur_light->color.b * cur_light->ratio) * cos(light_angle), 0, 1) + (info->ambiant->color.b * info->ambiant->ratio)), 0, 1)), 0, 1);
-                    ray->color = final_color;
+                    energy = vecdotprod(bounce.dir, ray->bounce.surface_normal);
+                    lights_sum.r += my_clamp((cur_light->color.r * cur_light->ratio) * energy, 0, 1);
+                    lights_sum.g += my_clamp((cur_light->color.g * cur_light->ratio) * energy, 0, 1);
+                    lights_sum.b += my_clamp((cur_light->color.b * cur_light->ratio) * energy, 0, 1);
                 }
             }
             cur_elem = cur_elem->next_elem;
         }
+        ray->color.r = my_clamp(lights_sum.r * ray->color.r, 0, 1);
+        ray->color.g = my_clamp(lights_sum.g * ray->color.g, 0, 1);
+        ray->color.b = my_clamp(lights_sum.b * ray->color.b, 0, 1);
     }
     else
     {
-        // ray->color.r = info->ambiant->color.r * info->ambiant->ratio;
-        // ray->color.g = info->ambiant->color.g * info->ambiant->ratio;
-        // ray->color.b = info->ambiant->color.b * info->ambiant->ratio;
         ray->color.r = 0;
         ray->color.g = 0;
         ray->color.b = 0;
     }
 }
 
-double
+int
     find_closest(t_ray *ray, t_info *info, double closest, int i)
 {
     t_elem_list     *cur_elem;
@@ -128,7 +113,7 @@ double
     }
     if (i)
         ray_bounce(ray, info, closest_elem, &i);
-    return (closest);
+    return (!closest_elem);
 }
 
 void

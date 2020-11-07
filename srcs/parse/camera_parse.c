@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera_parse.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 21:38:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/15 10:56:41 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/11/07 14:16:18 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,13 @@ void
     details->pos = position_parse((*object_params)[1], info);
     details->dir = vector_parse((*object_params)[2], info);
     details->dir = vecnorm(details->dir);
-    details->fov = double_parse_inrange((*object_params)[3], 0, 180, info);
+    details->w = double_parse_inrange((*object_params)[3], 0, 180, info);
+    details->w = tan(details->w / 2 * (PI / 180));
+    details->upguide = vecnewvalues(0, 0, 1);
+    details->v_right = vecnorm(veccross(details->dir, details->upguide));
+    details->v_right.y = vecis(details->v_right, 0, 0, 0)
+        + details->v_right.y * !vecis(details->v_right, 0, 0, 0);
+    details->v_up = vecnorm(veccross(details->v_right, details->dir));
     info->cur_camera = details;
     util_addelem(info, details, C);
 }
