@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/30 17:06:02 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/25 15:57:59 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/11/08 22:31:50 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_vec3lf        veccross(const t_vec3lf a, const t_vec3lf b);
 double          vecdotprod(const t_vec3lf a, const t_vec3lf b);
 int             vecis(const t_vec3lf vector, const double x, const double y, const double z);
 double          vecmag(const t_vec3lf vector);
+t_vec3lf        vecmult(const t_vec3lf a, const t_vec3lf b);
 t_vec3lf        vecnew(const t_vec3lf origin, const t_vec3lf dest);
 t_vec3lf        vecnewvalues(const double x, const double y, const double z);
 t_vec3lf        vecnorm(const t_vec3lf vector);
