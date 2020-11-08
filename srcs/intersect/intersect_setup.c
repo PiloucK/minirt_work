@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 08:31:01 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/11/07 22:36:07 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/08 12:12:40 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,5 @@ void
         intersect_arr[i++] = intersect_ntdh;
     intersect_arr[SP] = intersect_sphere;
     intersect_arr[PL] = intersect_plane;
+    intersect_arr[TR] = intersect_triangle;
 }

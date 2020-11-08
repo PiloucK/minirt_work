@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:46:24 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/11/07 16:24:14 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/08 16:26:45 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ void
     do_render(t_info *info)
 {
     screen_scan(info);
-    printf("virtual screen width %lf\n", info->cur_camera->w);
-    printf("up vector\n");
-    print_vec3lf(info->cur_camera->v_up);
-    printf("forward vector\n");
-    print_vec3lf(info->cur_camera->dir);
-    printf("right vector\n");
-    print_vec3lf(info->cur_camera->v_right);
+    // printf("virtual screen width %lf\n", info->cur_camera->w);
+    // printf("up vector\n");
+    // print_vec3lf(info->cur_camera->v_up);
+    // printf("forward vector\n");
+    // print_vec3lf(info->cur_camera->dir);
+    // printf("right vector\n");
+    // print_vec3lf(info->cur_camera->v_right);
     mlx_put_image_to_window(info->mlx, info->win, info->image.img, 0, 0);
 }
 

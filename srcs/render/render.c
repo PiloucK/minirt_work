@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 15:56:59 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/11/07 22:34:43 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/08 18:17:40 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void
                 light_dist = vecmag(vecnew(bounce.pos, cur_light->pos));
                 if (find_closest(&bounce, info, light_dist, *i))
                 {
-                    energy = vecdotprod(bounce.dir, ray->bounce.surface_normal);
+                    energy = my_clamp(vecdotprod(bounce.dir, ray->bounce.surface_normal), 0, 1);
                     lights_sum.r += my_clamp((cur_light->color.r * cur_light->ratio) * energy, 0, 1);
                     lights_sum.g += my_clamp((cur_light->color.g * cur_light->ratio) * energy, 0, 1);
                     lights_sum.b += my_clamp((cur_light->color.b * cur_light->ratio) * energy, 0, 1);
@@ -206,17 +206,14 @@ void
     char *pixel_color;
     unsigned int    *pc;
 
-    x = 0;
+    x = 470;
     intersect_arr_init();
-    while (x < info->res->x)
+    while (x < 520)
     {
-        y = 0;
-        while (y < info->res->y)
+        y = 150;
+        while (y < 190)
         {
-            printf("%i\n", x);
-            printf("%i\n", y);
             camera_ray_gen(&ray, info, x, y);
-            print_vec3lf(ray.dir);
             find_closest(&ray, info, 1000000000, MAX_DEPTH);
             pixel_color = info->image.data +
                 (y * info->image.line_len +

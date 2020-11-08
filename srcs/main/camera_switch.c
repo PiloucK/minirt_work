@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera_switch.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 19:43:45 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/15 10:58:46 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/11/08 16:07:30 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,6 @@ void
     info->cur_camera = cur_elem->elem_detail;
 // printf("%lf\n", info->cur_camera->pos.x);
 // print_vec3lf(info->cur_camera->dir);
-    screen_scan(info);
+    pre_render(info);
     mlx_put_image_to_window (info->mlx, info->win, info->image.img, 0, 0);
 }

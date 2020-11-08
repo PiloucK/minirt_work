@@ -1,6 +1,6 @@
 # one plane, one sphere and one triangle
 
-R	820			420
+R	1900			800
 A	0.1			255,255,255
 
 c	0,2,2		0,-0.3,-1		60

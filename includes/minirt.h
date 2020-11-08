@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 14:12:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/11/07 17:55:57 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/08 18:52:49 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ typedef struct  s_triangle
 	t_vec3lf    b;
 	t_vec3lf	c;
 	t_color     color;
+	t_vec3lf	normal;
 }               t_triangle;
 
 typedef struct	s_bounce
@@ -207,9 +208,11 @@ void			camera_switch(t_info *info);
 double			intersect_ntdh(double *closest, t_ray *ray, void *elem_detail);
 double		    intersect_plane(double *closest, t_ray *ray, void *elem_detail);
 double		    intersect_sphere(double *closest, t_ray *ray, void *elem_detail);
+double		    intersect_triangle(double *closest, t_ray *ray, void *elem_detail);
 void			intersect_arr_init();
 void		    print_vec3lf(t_vec3lf vec);
 int		    find_closest(t_ray *ray, t_info *info, double closest, int i);
+double		plane_dist(double closest, t_ray *ray, t_vec3lf *plane_normal);
 
 
 #endif

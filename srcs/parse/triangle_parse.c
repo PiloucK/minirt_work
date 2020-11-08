@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   triangle_parse.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 20:12:01 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/09 12:39:55 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/11/08 17:09:12 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,7 @@ void
     details->b = position_parse((*object_params)[2], info);
     details->c = position_parse((*object_params)[3], info);
     details->color = color_parse((*object_params)[4], info);
+    details->normal = veccross(vecnew(details->a, details->b),
+        vecnew(details->b, details->c));
     util_addelem(info, details, TR);
 }
