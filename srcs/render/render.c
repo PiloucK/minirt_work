@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 15:56:59 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/11/08 18:17:40 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/09 21:04:26 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,19 @@ double
     return (a);
 }
 
-double
-    fast_clamp(double nb, double min, double max)
-{
-    int  dif;
-    int  dif_sign;
+// double
+//     fast_clamp(double nb, double min, double max)
+// {
+//     int  dif;
+//     int  dif_sign;
 
-    dif = nb - min;
-    dif_sign = dif >> 31;
-    nb = nb - (dif & dif_sign);
-    dif = nb - max;
-    dif_sign = dif >> 31;
-    return (nb + (dif & dif_sign));
-}
+//     dif = nb - min;
+//     dif_sign = dif >> 31;
+//     nb = nb - (dif & dif_sign);
+//     dif = nb - max;
+//     dif_sign = dif >> 31;
+//     return (nb + (dif & dif_sign));
+// }
 
 double
     my_clamp(double nb, double min, double max)
@@ -49,51 +49,62 @@ double
     return (my_min(nb, max));
 }
 
+t_color
+    colormult(t_color color, double ratio)
+{
+    color.r *= ratio;
+    color.g *= ratio;
+    color.b *= ratio;
+    return (color);
+}
+
+int
+    coloradd(t_color *color, t_color ratio)
+{
+    color->r = my_clamp(color->r + ratio.r, 0, 1);
+    color->g = my_clamp(color->g + ratio.g, 0, 1);
+    color->b = my_clamp(color->b + ratio.b, 0, 1);
+    return (!((color->r != 1) + (color->g != 1) + (color->b != 1)));
+}
+
+int
+    colorsub(t_color *color, t_color ratio)
+{
+    color->r = my_clamp(color->r * ratio.r, 0, 1);
+    color->g = my_clamp(color->g * ratio.g, 0, 1);
+    color->b = my_clamp(color->b * ratio.b, 0, 1);
+    return (!((color->r != 1) + (color->g != 1) + (color->b != 1)));
+}
+
 void
     ray_bounce(t_ray *ray, t_info *info, t_elem_list *hit_elem, int *i)
 {
-    t_elem_list     *cur_elem;
-    t_light         *cur_light;
+    t_light_list    *cur_light;
     t_color         lights_sum;
-    double          light_dist;
-    double          energy;
     t_ray           bounce;
 
-    *i -= 1;
-    if (hit_elem)
+    if (--*i >= 0 && hit_elem)
     {
-        lights_sum.r = my_clamp(info->ambiant->color.r * info->ambiant->ratio, 0, 1);
-        lights_sum.g = my_clamp(info->ambiant->color.g * info->ambiant->ratio, 0, 1);
-        lights_sum.b = my_clamp(info->ambiant->color.b * info->ambiant->ratio, 0, 1);
-        bounce.pos = vectranslat(ray->bounce.pos, ray->bounce.surface_normal, 0);
-        cur_elem = info->first_elem;
-        while (cur_elem)
+        lights_sum = colormult(info->ambiant->color, info->ambiant->ratio);
+        bounce.pos = vectranslat(ray->bounce.pos, ray->bounce.n, 0);
+        cur_light = info->first_light;
+        while (cur_light)
         {
-            if (cur_elem->id == L)
+            bounce.dir = vecnorm(vecnew(bounce.pos, cur_light->pos));
+            if (find_closest(&bounce, info,
+                vecmag(vecnew(bounce.pos, cur_light->pos)) - EPSY, *i))
             {
-                cur_light = (t_light *)(cur_elem->elem_detail);
-                bounce.dir = vecnorm(vecnew(bounce.pos, cur_light->pos));
-                light_dist = vecmag(vecnew(bounce.pos, cur_light->pos));
-                if (find_closest(&bounce, info, light_dist, *i))
-                {
-                    energy = my_clamp(vecdotprod(bounce.dir, ray->bounce.surface_normal), 0, 1);
-                    lights_sum.r += my_clamp((cur_light->color.r * cur_light->ratio) * energy, 0, 1);
-                    lights_sum.g += my_clamp((cur_light->color.g * cur_light->ratio) * energy, 0, 1);
-                    lights_sum.b += my_clamp((cur_light->color.b * cur_light->ratio) * energy, 0, 1);
-                }
+                if (coloradd(&lights_sum,
+                    colormult(colormult(cur_light->color, cur_light->ratio),
+                    my_clamp(vecdotprod(bounce.dir, ray->bounce.n), 0, 1))))
+                    break ;
             }
-            cur_elem = cur_elem->next_elem;
+            cur_light = cur_light->next_light;
         }
-        ray->color.r = my_clamp(lights_sum.r * ray->color.r, 0, 1);
-        ray->color.g = my_clamp(lights_sum.g * ray->color.g, 0, 1);
-        ray->color.b = my_clamp(lights_sum.b * ray->color.b, 0, 1);
+        colorsub(&(ray->color), lights_sum);
     }
     else
-    {
-        ray->color.r = 0;
-        ray->color.g = 0;
-        ray->color.b = 0;
-    }
+        ray->color = colormult(ray->color, 0);
 }
 
 int
@@ -125,12 +136,12 @@ void
     char *pixel_color;
     unsigned int    *pc;
 
-    x = 0;
+    x = 160;
     intersect_arr_init();
-    while (x < info->res->x)
+    while (x < 170)
     {
-        y = 0;
-        while (y < info->res->y)
+        y = 380;
+        while (y < 390)
         {
             camera_ray_gen(&ray, info, x, y);
             find_closest(&ray, info, 1000000000, MAX_DEPTH);

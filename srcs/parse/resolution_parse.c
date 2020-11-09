@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   resolution_parse.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:45:29 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/06 10:53:36 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/11/09 12:00:26 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void
         err_print(3, info, "Only digits are allowed");
     if (!(info->res = malloc(sizeof(t_res))))
         err_print(2, info, NULL);
-    info->res->x = ft_atoi((*object_params)[1]);
-    info->res->y = ft_atoi((*object_params)[2]);
+    info->res->x = double_parse_inrange((*object_params)[1], 0, 0, info);
+    info->res->y = double_parse_inrange((*object_params)[2], 0, 0, info);
     if (!info->do_save)
         resize(info);
     if (info->res->x <= 0 || info->res->y <= 0)

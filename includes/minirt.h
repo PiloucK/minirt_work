@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 14:12:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/11/08 21:36:56 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/09 18:43:30 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,11 @@
 											#include <stdlib.h>
 											#include <stdio.h>
 
-# define PI 3.14159265359
-# define MAX_DEPTH 1
-# define REDUC 8
+# define PI			3.14159265359
+# define MAX_DEPTH	1
+# define REDUC		8
+# define ROT_RATE	30
+# define EPSY		0.00001
 
 typedef enum    e_type
 {
@@ -57,8 +59,8 @@ typedef struct  s_ambiant
 
 typedef struct	s_res
 {
-	int			x;
-	int			y;
+	double			x;
+	double			y;
 	int         status;
 }				t_res;
 
@@ -82,7 +84,7 @@ typedef struct  s_light
 typedef struct  s_sphere
 {
 	t_vec3lf       pos;
-	double      diameter;
+	double      radius;
 	t_color     color;
 }               t_sphere;
 
@@ -105,7 +107,7 @@ typedef struct  s_cylinder
 {
 	t_vec3lf    pos;
 	t_vec3lf    dir;
-	double      diameter;
+	double      radius;
 	double      height;
 	t_color     color;
 }               t_cylinder;
@@ -122,7 +124,7 @@ typedef struct  s_triangle
 typedef struct	s_bounce
 {
 	t_vec3lf	pos;
-	t_vec3lf	surface_normal;
+	t_vec3lf	n;
 }				t_bounce;
 
 typedef struct	s_ray
@@ -132,6 +134,14 @@ typedef struct	s_ray
 	t_color		color;
 	t_bounce	bounce;
 }				t_ray;
+
+typedef struct	s_light_list
+{
+	t_vec3lf	pos;
+	double		ratio;
+	t_color     color;
+	void		*next_light;
+}				t_light_list;
 
 typedef struct  s_elem_list
 {
@@ -157,8 +167,8 @@ typedef	struct	s_info
 	t_res		*res;
 	t_ambiant	*ambiant;
 	t_camera	*cur_camera;
-	t_light		*cur_light;
     t_elem_list *first_elem;
+	t_light_list	*first_light;
     int         do_save;
     char        *last_read_str;
 	char		***splited_line;
@@ -213,7 +223,7 @@ double		    intersect_triangle(double *closest, t_ray *ray, void *elem_detail);
 void			intersect_arr_init();
 void		    print_vec3lf(t_vec3lf vec);
 int		    find_closest(t_ray *ray, t_info *info, double closest, int i);
-double		plane_dist(double closest, t_ray *ray, t_vec3lf *plane_normal);
+double		plane_dist(double closest, t_ray *ray, t_vec3lf *plane_normal, t_vec3lf o);
 
 
 #endif

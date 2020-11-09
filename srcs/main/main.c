@@ -6,57 +6,16 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:46:24 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/11/08 16:26:45 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/09 18:22:38 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-// t_parse_fnct    parse_array[256];
-
-void
-    up_light(t_info *info)
-{
-    info->cur_light->pos.y -= 10;
-    screen_scan(info);
-    mlx_put_image_to_window(info->mlx, info->win, info->image.img, 0, 0);
-}
-
-void
-    left_light(t_info *info)
-{
-    info->cur_light->pos.x -= 10;
-    screen_scan(info);
-    mlx_put_image_to_window(info->mlx, info->win, info->image.img, 0, 0);
-}
-
-void
-    down_light(t_info *info)
-{
-    info->cur_light->pos.y += 10;
-    screen_scan(info);
-    mlx_put_image_to_window(info->mlx, info->win, info->image.img, 0, 0);
-}
-
-void
-    right_light(t_info *info)
-{
-    info->cur_light->pos.x += 10;
-    screen_scan(info);
-    mlx_put_image_to_window(info->mlx, info->win, info->image.img, 0, 0);
-}
-
 void
     do_render(t_info *info)
 {
     screen_scan(info);
-    // printf("virtual screen width %lf\n", info->cur_camera->w);
-    // printf("up vector\n");
-    // print_vec3lf(info->cur_camera->v_up);
-    // printf("forward vector\n");
-    // print_vec3lf(info->cur_camera->dir);
-    // printf("right vector\n");
-    // print_vec3lf(info->cur_camera->v_right);
     mlx_put_image_to_window(info->mlx, info->win, info->image.img, 0, 0);
 }
 
@@ -111,11 +70,13 @@ void
 void
     right_rotation(t_info *info)
 {
-    info->cur_camera->dir = vecnorm(vecsum(vecscale(info->cur_camera->v_right, -0.1), info->cur_camera->dir));
-    info->cur_camera->v_right = vecnorm(veccross(info->cur_camera->dir, info->cur_camera->upguide));
-    info->cur_camera->v_right.y = vecis(info->cur_camera->v_right, 0, 0, 0)
-        + info->cur_camera->v_right.y * !vecis(info->cur_camera->v_right, 0, 0, 0);
-    info->cur_camera->v_up = vecnorm(veccross(info->cur_camera->v_right, info->cur_camera->dir));
+    t_vec3lf    tmp;
+
+    tmp = vecnorm(veccross(info->cur_camera->dir, info->cur_camera->v_up));
+    info->cur_camera->dir = vecnorm(vecsum(vecscale(info->cur_camera->dir, cos(10 * (PI / 180))), vecscale(tmp, sin(10 * (PI / 180)))));
+    tmp = vecnorm(veccross(info->cur_camera->v_right, info->cur_camera->v_up));
+    info->cur_camera->v_right = vecnorm(vecsum(vecscale(info->cur_camera->v_right, cos(10 * (PI / 180))), vecscale(tmp, sin(10 * (PI / 180)))));
+    info->cur_camera->v_up = vecscale(vecnorm(veccross(info->cur_camera->v_right, info->cur_camera->dir)), -1);
     pre_render(info);
     mlx_put_image_to_window(info->mlx, info->win, info->image.img, 0, 0);
 }
@@ -123,11 +84,13 @@ void
 void
     left_rotation(t_info *info)
 {
-    info->cur_camera->dir = vecnorm(vecsum(vecscale(info->cur_camera->v_right, 0.1), info->cur_camera->dir));
-    info->cur_camera->v_right = vecnorm(veccross(info->cur_camera->dir, info->cur_camera->upguide));
-    info->cur_camera->v_right.y = vecis(info->cur_camera->v_right, 0, 0, 0)
-        + info->cur_camera->v_right.y * !vecis(info->cur_camera->v_right, 0, 0, 0);
-    info->cur_camera->v_up = vecnorm(veccross(info->cur_camera->v_right, info->cur_camera->dir));
+    t_vec3lf    tmp;
+
+    tmp = vecnorm(veccross(info->cur_camera->dir, info->cur_camera->v_up));
+    info->cur_camera->dir = vecnorm(vecsum(vecscale(info->cur_camera->dir, cos(350 * (PI / 180))), vecscale(tmp, sin(350 * (PI / 180)))));
+    tmp = vecnorm(veccross(info->cur_camera->v_right, info->cur_camera->v_up));
+    info->cur_camera->v_right = vecnorm(vecsum(vecscale(info->cur_camera->v_right, cos(350 * (PI / 180))), vecscale(tmp, sin(350 * (PI / 180)))));
+    info->cur_camera->v_up = vecscale(vecnorm(veccross(info->cur_camera->v_right, info->cur_camera->dir)), -1);
     pre_render(info);
     mlx_put_image_to_window(info->mlx, info->win, info->image.img, 0, 0);
 }
@@ -139,22 +102,22 @@ int		key_hooked(int key, void *arg)
         camera_switch(arg);
     else if (key == 44)
         forward_translation(arg);
-    else if (key == 97)
-        left_translation(arg);
     else if (key == 111)
         backward_translation(arg);
+    else if (key == 97)
+        left_translation(arg);
     else if (key == 101)
         right_translation(arg);
     else if (key == 65505)
         up_translation(arg);
     else if (key == 65507)
         down_translation(arg);
-    else if (key == 32)
-        do_render(arg);
-    else if (key == 46)
-        right_rotation(arg);
     else if (key == 39)
         left_rotation(arg);
+    else if (key == 46)
+        right_rotation(arg);
+    else if (key == 32)
+        do_render(arg);
 	else if (key == 65307)
     {
         info_free(arg);

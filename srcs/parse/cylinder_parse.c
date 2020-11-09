@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 20:08:05 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/11/08 22:18:25 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/09 21:12:56 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void
         err_print(2, info, NULL);
     details->pos = position_parse((*object_params)[1], info);
     details->dir = vector_parse((*object_params)[2], info);
-    details->diameter = double_parse_inrange((*object_params)[3], 0, 0, info) / 2;
+    details->radius = double_parse_inrange((*object_params)[3], 0, 0, info) / 2;
     details->height = double_parse_inrange((*object_params)[4], 0, 0, info);
     details->color = color_parse((*object_params)[5], info);
     util_addelem(info, details, CY);

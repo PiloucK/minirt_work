@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean_space.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/09 13:48:24 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/14 12:20:35 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/11/09 17:26:33 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,14 @@ void
     free(first_elem);
 }
 
+void
+    clean_lights(t_light_list *first_light)
+{
+    if (first_light->next_light)
+        clean_lights(first_light->next_light);
+    free(first_light);
+}
+
 //  To check: cur_camera free
 void
     info_free(t_info *info)
@@ -51,6 +59,8 @@ void
     free(info->ambiant);
     if (info->first_elem)
         clean_list(info->first_elem);
+    if (info->first_light)
+        clean_lights(info->first_light);
     free(info->last_read_str);
     if (info->splited_line)
         arrfree(info->splited_line);

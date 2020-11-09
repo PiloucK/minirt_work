@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inits.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:00:25 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/14 12:15:00 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/11/09 16:50:00 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void
     (*info)->ambiant = NULL;
     (*info)->cur_camera = NULL;
     (*info)->first_elem = NULL;
+    (*info)->first_light = NULL;
     (*info)->do_save = (ac != 3 ? 0 : 1);
     (*info)->last_read_str = NULL;
     (*info)->splited_line = NULL;

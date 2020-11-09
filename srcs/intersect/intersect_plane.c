@@ -19,11 +19,11 @@ double
     double      dist;
 
     plane = (t_plane *)elem_detail;
-    if (!(dist = plane_dist(*closest, ray, &(plane->dir))))
+    if (!(dist = plane_dist(*closest, ray, &(plane->dir), plane->pos)))
         return (0);
     ray->color = plane->color;
     ray->bounce.pos = vectranslat(ray->pos, ray->dir, dist);
-    ray->bounce.surface_normal = plane->dir;
+    ray->bounce.n = vecscale(plane->dir, -1);
     *closest = dist;
     return (1);
 }
