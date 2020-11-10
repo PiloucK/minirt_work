@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 15:56:59 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/11/09 21:04:26 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/10 13:16:47 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,12 +136,12 @@ void
     char *pixel_color;
     unsigned int    *pc;
 
-    x = 160;
+    x = 0;
     intersect_arr_init();
-    while (x < 170)
+    while (x < info->res->x)
     {
-        y = 380;
-        while (y < 390)
+        y = 0;
+        while (y < info->res->y)
         {
             camera_ray_gen(&ray, info, x, y);
             find_closest(&ray, info, 1000000000, MAX_DEPTH);

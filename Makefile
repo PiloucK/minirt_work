@@ -6,7 +6,7 @@
 #    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/30 08:42:51 by clkuznie          #+#    #+#              #
-#    Updated: 2020/11/08 22:31:15 by user42           ###   ########.fr        #
+#    Updated: 2020/11/10 16:06:09 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ intersect_cylinder.c\
 intersect_ntdh.c\
 intersect_plane.c\
 intersect_setup.c\
+intersect_square.c\
 intersect_sphere.c\
 intersect_triangle.c
 

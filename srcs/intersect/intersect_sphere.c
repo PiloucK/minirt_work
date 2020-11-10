@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 08:26:07 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/11/09 17:34:27 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/10 15:26:36 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ double
     {
         if (dist_origin_center < sphere->radius - EPSY)
         {
-            dist_proj_intersection = sqrt(sphere->radius * sphere->radius
-            - dist_proj_center * dist_proj_center);
+            dist_proj_intersection = sqrt(pow(sphere->radius, 2)
+            - pow(dist_proj_center, 2));
             dist_origin_intersection = dist_origin_proj + dist_proj_intersection;
             ray->color = sphere->color;
             ray->bounce.pos = vectranslat(ray->pos, ray->dir, dist_origin_intersection);
@@ -50,8 +50,8 @@ double
         }
         return (0);
     }
-    dist_proj_intersection = sqrt(sphere->radius * sphere->radius
-        - dist_proj_center * dist_proj_center);
+    dist_proj_intersection =  sqrt(pow(sphere->radius, 2)
+            - pow(dist_proj_center, 2));
     dist_origin_intersection = dist_origin_proj - dist_proj_intersection;
     if ((dist_origin_intersection > EPSY) && (dist_origin_intersection < *closest))
     {

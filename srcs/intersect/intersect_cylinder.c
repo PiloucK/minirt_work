@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 21:02:07 by user42            #+#    #+#             */
-/*   Updated: 2020/11/09 21:18:10 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/10 16:46:31 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ double
     t_vec3lf    top;
     t_vec3lf    v_bottom_top;
     (void)v_bottom_top;
-    t_vec3lf    v_origin_bottom;
-    (void)v_origin_bottom;
+    t_vec3lf    v_bottom_origin;
+    (void)v_bottom_origin;
     t_vec3lf    cross1;
     (void)cross1;
     t_vec3lf    cross2;
@@ -79,18 +79,26 @@ double
     cylinder = (t_cylinder *)elem_detail;
     bottom = cylinder->pos;
     top = vectranslat(cylinder->pos, cylinder->dir, cylinder->height);
-    v_bottom_top = vecnew(bottom, top);
-    v_origin_bottom = vecnew(ray->pos, bottom);
-    cross1 = veccross(v_bottom_top, v_origin_bottom);
-    cross2 = veccross(ray->dir, v_bottom_top);
-    dot1 = vecdotprod(v_bottom_top, v_bottom_top);
-    dot2 = vecdotprod(cross2, cross2);
-    dot3 = 2 * vecdotprod(cross2, cross1);
-    dot4 = vecdotprod(cross1, cross1) * (cylinder->radius * cylinder->radius * dot1);
-    tmp = dot3 * dot3 - 4 * dot2 * dot4;
+    
+    v_bottom_top = vecnew(bottom, top); //AB
+    v_bottom_origin = vecnew(bottom, ray->pos); //A0
+    
+    cross1 = veccross(v_bottom_top, v_bottom_origin); //A0xAB
+    cross2 = veccross(ray->dir, v_bottom_top); //VxAB
+    
+    dot1 = vecdotprod(v_bottom_top, v_bottom_top); //ab2
+    
+    dot2 = vecdotprod(cross2, cross2); //a
+    dot3 = 2 * vecdotprod(cross2, cross1); //b
+    
+    dot4 = vecdotprod(cross1, cross1) - (pow(cylinder->radius, 2) * dot1); //c
+    tmp = dot3 * dot3 - 4 * dot2 * dot4; //d
     if (tmp < 0)
         ret = 0;
-    time = (-dot3 - sqrt(tmp)) / (2 * dot2);
+    // printf("-----------------\n");
+    // printf("%lf\n", tmp);
+    time = (dot3 - sqrt(tmp)) / (2 * dot2);
+    // printf("%lf\n", time);
     if (time < 0)
         ret = 0;
     hitpoint = vectranslat(ray->pos, ray->dir, time);
@@ -101,13 +109,43 @@ double
     //     )
     // ) < cylinder->radius)
     //     ret = 1;
-    printf("---------------------------------------\n");
-    double      test;
-    t_vec3lf    v_test;
-    v_test = vecnorm(veccross(cylinder->dir, ray->dir));
-    v_test = veccross(v_test, cylinder->dir);
-    test = plane_dist(*closest, ray, &v_test, cylinder->pos);
-    printf("%lf\n", test);
+// ((P(t) - A) x (B - A)) ^ 2 = r ^ 2 * ((B - A) . (B - A))
+    //--------------------------------------------------------------------------
+    // Ray : P(t) = O + V * t
+    // Cylinder [O, D, r].
+    // point Q on cylinder if ((Q - O) x D)^2 = r^2
+    //
+    // Cylinder [A, B, r].
+    // Point P on infinite cylinder if ((P - A) x (B - A))^2 = r^2 * (B - A)^2
+    // expand : ((O - A) x (B - A) + t * (V x (B - A)))^2 = r^2 * (B - A)^2
+    // equation in the form (X + t * Y)^2 = d
+    // where : 
+    //  X = (O - A) x (B - A)
+    //  Y = V x (B - A)
+    //  d = r^2 * (B - A)^2
+    // expand the equation :
+    // t^2 * (Y . Y) + t * (2 * (X . Y)) + (X . X) - d = 0
+    // => second order equation in the form : a*t^2 + b*t + c = 0 where
+    // a = (Y . Y)
+    // b = 2 * (X . Y)
+    // c = (X . X) - d
+    //--------------------------------------------------------------------------Vector AB = (B - A);Vector AO = (O - A);Vector AOxAB = (AO ^ AB); 
+    // cross productVector VxAB  = (V ^ AB); 
+    // cross productfloat  ab2   = (AB * AB); 
+    // dot productfloat a      = (VxAB * VxAB); 
+    // dot productfloat b      = 2 * (VxAB * AOxAB); 
+    // dot productfloat c      = (AOxAB * AOxAB) - (r*r * ab2);
+    // solve second order equation : a*t^2 + b*t + c = 0
+
+
+
+                                    // printf("---------------------------------------\n");
+                                    // double      test;
+                                    // t_vec3lf    v_test;
+                                    // v_test = vecnorm(veccross(cylinder->dir, ray->dir));
+                                    // v_test = veccross(v_test, cylinder->dir);
+                                    // test = plane_dist(*closest, ray, &v_test, cylinder->pos);
+                                    // printf("%lf\n", test);
     // print_vec3lf(vecscale(cylinder->dir, test));
     // disk_normal = cylinder->dir;
     // if (!(dist = intersect_disk(*closest, ray, &(cylinder->dir), cylinder->pos, cylinder->radius)) && !(intersect_disk(dist, ray, &disk_normal, vectranslat(cylinder->pos, cylinder->dir, cylinder->height), cylinder->radius)))

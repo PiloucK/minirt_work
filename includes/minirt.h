@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 14:12:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/11/09 18:43:30 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/10 16:05:39 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,6 +218,7 @@ void			camera_switch(t_info *info);
 double			intersect_cylinder(double *closest, t_ray *ray, void *elem_detail);
 double			intersect_ntdh(double *closest, t_ray *ray, void *elem_detail);
 double		    intersect_plane(double *closest, t_ray *ray, void *elem_detail);
+double		    intersect_square(double *closest, t_ray *ray, void *elem_detail);
 double		    intersect_sphere(double *closest, t_ray *ray, void *elem_detail);
 double		    intersect_triangle(double *closest, t_ray *ray, void *elem_detail);
 void			intersect_arr_init();
