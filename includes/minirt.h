@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 14:12:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/11/10 16:05:39 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/12 15:46:20 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,25 @@
 											#include <stdio.h>
 
 # define PI			3.14159265359
-# define MAX_DEPTH	1
-# define REDUC		8
-# define ROT_RATE	30
 # define EPSY		0.00001
+# define MAX_BOUNCE	1
+# define REDUC		8
+# define ROT_SPEED	30
+# define TRAN_SPEED	10
+# define MAX_DIST	1000000
+# define ARR_SIZE	16
 
 typedef enum    e_type
 {
-	R,
-	A,
-	C,
-	L,
-	SP,
+	CY = 1,
 	PL,
+	SP,
 	SQ,
-	CY,
 	TR,
+	C,
+	A,
+	L,
+	R,
 }               t_type;
 
 typedef struct	s_color
@@ -84,7 +87,7 @@ typedef struct  s_light
 typedef struct  s_sphere
 {
 	t_vec3lf       pos;
-	double      radius;
+	double      r;
 	t_color     color;
 }               t_sphere;
 
@@ -107,7 +110,7 @@ typedef struct  s_cylinder
 {
 	t_vec3lf    pos;
 	t_vec3lf    dir;
-	double      radius;
+	double      r;
 	double      height;
 	t_color     color;
 }               t_cylinder;
@@ -150,6 +153,16 @@ typedef struct  s_elem_list
 	void        *next_elem;
 }               t_elem_list;
 
+typedef struct	s_various
+{
+	int			max_bounce;
+	double		reduc;
+	double		rot_speed;
+	double		tran_speed;
+	double		max_dist;
+	int			rot;
+}				t_various;
+
 typedef struct	s_image
 {
 	void		*img;
@@ -167,18 +180,21 @@ typedef	struct	s_info
 	t_res		*res;
 	t_ambiant	*ambiant;
 	t_camera	*cur_camera;
+	void		*cur_object;
     t_elem_list *first_elem;
 	t_light_list	*first_light;
     int         do_save;
+	t_various	various;
     char        *last_read_str;
 	char		***splited_line;
 	char		***splited_value;
 	void		*img;
 }				t_info;
 
-typedef double	(*t_intersect_fnct)(double *closest, t_ray *ray, void *elem_detail);
-
-t_intersect_fnct    intersect_arr[256];
+typedef int	(*t_intersect_fnct)(double *closest, t_ray *ray, void *elem_detail);
+typedef void	(*t_movement_fnct)(void *elem_detail, int key);
+t_intersect_fnct	g_intersect_arr[ARR_SIZE];
+t_movement_fnct	g_movement_arr[ARR_SIZE];
 
 void            ambiant_parse(char ***object_params, t_info *info);
 void            arg_reading(int ac, char **av, t_info **info);
@@ -186,8 +202,7 @@ void			arrfree(char ***arrtofree);
 void			camera_parse(char ***object_params, t_info *info);
 t_color			color_parse(char *s, t_info *info);
 void			cylinder_parse(char ***object_params, t_info *info);
-double			double_parse_inrange(char *value,
-	double min_range, double max_range, t_info *info);
+double			double_parse_inrange(char *value, double min_range, double max_range, t_info *info);
 int             err_close(t_info *info);
 void            err_print(int code, t_info *info, char *extra_comment);
 void            init_infos(int ac, t_info **info);
@@ -209,22 +224,28 @@ void			util_addelem(t_info *info, void *details, int id);
 int             util_object_params_count(char **object_params_str);
 t_vec3lf			vector_parse(char *object_param, t_info *info);
 
-
-void			pre_render(t_info *info);
+void			fill_image(t_info *info);
 void			info_free(t_info *info);
 void			camera_ray_gen(t_ray *ray, t_info *info, double i, double	 j);
 void			ray_bounce(t_ray *ray, t_info *info, t_elem_list *hit_elem, int *i);
 void			camera_switch(t_info *info);
-double			intersect_cylinder(double *closest, t_ray *ray, void *elem_detail);
-double			intersect_ntdh(double *closest, t_ray *ray, void *elem_detail);
-double		    intersect_plane(double *closest, t_ray *ray, void *elem_detail);
-double		    intersect_square(double *closest, t_ray *ray, void *elem_detail);
-double		    intersect_sphere(double *closest, t_ray *ray, void *elem_detail);
-double		    intersect_triangle(double *closest, t_ray *ray, void *elem_detail);
+int			intersect_cylinder(double *closest, t_ray *ray, void *elem_detail);
+int			intersect_nothing(double *closest, t_ray *ray, void *elem_detail);
+int		    intersect_plane(double *closest, t_ray *ray, void *elem_detail);
+int		    intersect_square(double *closest, t_ray *ray, void *elem_detail);
+int		    intersect_sphere(double *closest, t_ray *ray, void *elem_detail);
+int		    intersect_triangle(double *closest, t_ray *ray, void *elem_detail);
 void			intersect_arr_init();
 void		    print_vec3lf(t_vec3lf vec);
 int		    find_closest(t_ray *ray, t_info *info, double closest, int i);
 double		plane_dist(double closest, t_ray *ray, t_vec3lf *plane_normal, t_vec3lf o);
+double			util_clamp(double nb, double min, double max);
 
+void			movement_arr_init();
+t_color			color_mult(t_color color, double ratio);
+int				color_add(t_color *color, t_color ratio);
+int				color_sub(t_color *color, t_color ratio);
+
+void			move_nothing(void *elem_detail, int key);
 
 #endif

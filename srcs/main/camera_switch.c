@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 19:43:45 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/11/08 16:07:30 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/12 11:21:52 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static t_elem_list  *
 }
 
 void
-    camera_switch(t_info *info)
+                    camera_switch(t_info *info)
 {
     t_elem_list     *cur_elem;
 
@@ -45,8 +45,6 @@ void
     if (cur_elem->elem_detail == info->cur_camera)
         return ;
     info->cur_camera = cur_elem->elem_detail;
-// printf("%lf\n", info->cur_camera->pos.x);
-// print_vec3lf(info->cur_camera->dir);
-    pre_render(info);
+    fill_image(info);
     mlx_put_image_to_window (info->mlx, info->win, info->image.img, 0, 0);
 }

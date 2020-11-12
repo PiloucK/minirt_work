@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/09 13:48:24 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/11/09 17:26:33 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/11 21:29:23 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,9 @@ void
     free(first_light);
 }
 
-//  To check: cur_camera free
 void
     info_free(t_info *info)
-    {
+{
     if (info->image.img)
         mlx_destroy_image(info->mlx, info->image.img);
     free(info->image.img);

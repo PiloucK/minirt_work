@@ -6,13 +6,13 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 21:02:07 by user42            #+#    #+#             */
-/*   Updated: 2020/11/10 16:46:31 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/12 12:00:57 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-double
+int
     intersect_disk(double *closest, t_ray *ray, t_cylinder *cylinder, t_vec3lf center)
 {
     double      dist;
@@ -23,7 +23,7 @@ double
     if (!(dist = plane_dist(*closest, ray, &disk_normal, center)))
         return (0);
     hitpoint = vectranslat(ray->pos, ray->dir, dist);
-    if (vecmag(vecnew(hitpoint, center)) > cylinder->radius)
+    if (vecmag(vecnew(hitpoint, center)) > cylinder->r)
         return (0);
     ray->bounce.pos = hitpoint;
     ray->bounce.n = vecscale(disk_normal, -1);
@@ -32,7 +32,7 @@ double
     return (1);
 }
 
-double
+int
     intersect_cylinder(double *closest, t_ray *ray, void *elem_detail)
 {
     double      ret;
@@ -65,6 +65,7 @@ double
     (void)proj;
     
     double      dist;
+    double      do_bounce;
 
 (void)cylinder;
 (void)hitpoint;
@@ -83,7 +84,7 @@ double
     v_bottom_top = vecnew(bottom, top); //AB
     v_bottom_origin = vecnew(bottom, ray->pos); //A0
     
-    cross1 = veccross(v_bottom_top, v_bottom_origin); //A0xAB
+    cross1 = veccross(v_bottom_origin, v_bottom_top); //A0xAB
     cross2 = veccross(ray->dir, v_bottom_top); //VxAB
     
     dot1 = vecdotprod(v_bottom_top, v_bottom_top); //ab2
@@ -91,78 +92,35 @@ double
     dot2 = vecdotprod(cross2, cross2); //a
     dot3 = 2 * vecdotprod(cross2, cross1); //b
     
-    dot4 = vecdotprod(cross1, cross1) - (pow(cylinder->radius, 2) * dot1); //c
-    tmp = dot3 * dot3 - 4 * dot2 * dot4; //d
+    dot4 = vecdotprod(cross1, cross1) - (pow(cylinder->r, 2) * dot1); //c
+    tmp = pow(dot3, 2) - 4 * dot2 * dot4; //d
     if (tmp < 0)
         ret = 0;
-    // printf("-----------------\n");
-    // printf("%lf\n", tmp);
-    time = (dot3 - sqrt(tmp)) / (2 * dot2);
-    // printf("%lf\n", time);
-    if (time < 0)
+    time = (-dot3 + sqrt(tmp)) / (2 * dot2);
+    if (time < EPSY || time > *closest)
         ret = 0;
+    else
+        do_bounce = time;
+    time = (-dot3 - sqrt(tmp)) / (2 * dot2);
+    if (time > EPSY && time < do_bounce)
+    {
+        ret = 1;
+       do_bounce = time;
+    }
     hitpoint = vectranslat(ray->pos, ray->dir, time);
-    proj = vecsum(bottom, vecscale(v_bottom_top, vecdotprod(v_bottom_top, vecsub(hitpoint, bottom))));
-    // if (vecmag(
-    //     vecnew(
-            
-    //     )
-    // ) < cylinder->radius)
-    //     ret = 1;
-// ((P(t) - A) x (B - A)) ^ 2 = r ^ 2 * ((B - A) . (B - A))
-    //--------------------------------------------------------------------------
-    // Ray : P(t) = O + V * t
-    // Cylinder [O, D, r].
-    // point Q on cylinder if ((Q - O) x D)^2 = r^2
-    //
-    // Cylinder [A, B, r].
-    // Point P on infinite cylinder if ((P - A) x (B - A))^2 = r^2 * (B - A)^2
-    // expand : ((O - A) x (B - A) + t * (V x (B - A)))^2 = r^2 * (B - A)^2
-    // equation in the form (X + t * Y)^2 = d
-    // where : 
-    //  X = (O - A) x (B - A)
-    //  Y = V x (B - A)
-    //  d = r^2 * (B - A)^2
-    // expand the equation :
-    // t^2 * (Y . Y) + t * (2 * (X . Y)) + (X . X) - d = 0
-    // => second order equation in the form : a*t^2 + b*t + c = 0 where
-    // a = (Y . Y)
-    // b = 2 * (X . Y)
-    // c = (X . X) - d
-    //--------------------------------------------------------------------------Vector AB = (B - A);Vector AO = (O - A);Vector AOxAB = (AO ^ AB); 
-    // cross productVector VxAB  = (V ^ AB); 
-    // cross productfloat  ab2   = (AB * AB); 
-    // dot productfloat a      = (VxAB * VxAB); 
-    // dot productfloat b      = 2 * (VxAB * AOxAB); 
-    // dot productfloat c      = (AOxAB * AOxAB) - (r*r * ab2);
-    // solve second order equation : a*t^2 + b*t + c = 0
-
-
-
-                                    // printf("---------------------------------------\n");
-                                    // double      test;
-                                    // t_vec3lf    v_test;
-                                    // v_test = vecnorm(veccross(cylinder->dir, ray->dir));
-                                    // v_test = veccross(v_test, cylinder->dir);
-                                    // test = plane_dist(*closest, ray, &v_test, cylinder->pos);
-                                    // printf("%lf\n", test);
-    // print_vec3lf(vecscale(cylinder->dir, test));
-    // disk_normal = cylinder->dir;
-    // if (!(dist = intersect_disk(*closest, ray, &(cylinder->dir), cylinder->pos, cylinder->radius)) && !(intersect_disk(dist, ray, &disk_normal, vectranslat(cylinder->pos, cylinder->dir, cylinder->height), cylinder->radius)))
-    //     return (0);
-    // disk_normal = cylinder->dir;
-    // if (intersect_disk(dist, ray, &disk_normal, vectranslat(cylinder->pos, cylinder->dir, cylinder->height), cylinder->radius))
-    // {
-    //     printf("toto");
-    //     dist = intersect_disk(dist, ray, &(cylinder->dir), vectranslat(cylinder->pos, cylinder->dir, cylinder->height), cylinder->radius);
-    // }
-    // hitpoint = vectranslat(ray->pos, ray->dir, dist);
+    proj = vecsum(cylinder->pos, vecscale(cylinder->dir, vecdotprod(cylinder->dir, vecnew(bottom, hitpoint))));
+    if (vecdotprod(cylinder->dir, vecnew(bottom, hitpoint)) > vecmag(v_bottom_top))
+        ret = 0;
+    if (vecdotprod(cylinder->dir, vecnew(bottom, hitpoint)) < 0)
+        ret = 0;
     if (ret)
     {
         ray->bounce.pos = hitpoint;
         ray->bounce.n = vecnorm(vecnew(proj, hitpoint));
+        if (vecdotprod(ray->bounce.n, ray->dir) > 0)
+            ray->bounce.n = vecscale(ray->bounce.n, -1);
         ray->color = cylinder->color;
-        *closest = time;
+        *closest = do_bounce;
     }
     double toto;
     toto = intersect_disk(closest, ray, cylinder, cylinder->pos);

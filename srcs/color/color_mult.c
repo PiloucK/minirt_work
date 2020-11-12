@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   testing_prints.c                                   :+:      :+:    :+:   */
+/*   color_mult.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/06 15:48:45 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/11/11 19:29:40 by user42           ###   ########.fr       */
+/*   Created: 2020/11/11 23:18:26 by user42            #+#    #+#             */
+/*   Updated: 2020/11/11 23:19:29 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void
-    print_vec3lf(t_vec3lf vec)
+t_color
+    color_mult(t_color color, double ratio)
 {
-    printf("| %+7lf | %+7lf | %+7lf |\n", vec.x, vec.y, vec.z);
+    color.r *= ratio;
+    color.g *= ratio;
+    color.b *= ratio;
+    return (color);
 }

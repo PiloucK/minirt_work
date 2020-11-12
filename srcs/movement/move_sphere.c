@@ -1,22 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   intersect_ntdh.c                                   :+:      :+:    :+:   */
+/*   move_sphere.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/06 08:23:31 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/09 19:15:05 by clkuznie         ###   ########.fr       */
+/*   Created: 2020/11/12 14:12:06 by user42            #+#    #+#             */
+/*   Updated: 2020/11/12 14:12:07 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
-
-double
-    intersect_ntdh(double *closest, t_ray *ray, void *elem_detail)
-{
-    (void)closest;
-    (void)ray;
-    (void)elem_detail;
-    return (0);
-}

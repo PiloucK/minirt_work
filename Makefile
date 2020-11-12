@@ -6,33 +6,42 @@
 #    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/30 08:42:51 by clkuznie          #+#    #+#              #
-#    Updated: 2020/11/10 16:06:09 by user42           ###   ########.fr        #
+#    Updated: 2020/11/12 15:46:20 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			=  minirt
 
+COLOR			:= \
+color_add.c\
+color_mult.c\
+color_sub.c
+
 INTERSECT		:= \
 intersect_cylinder.c\
-intersect_ntdh.c\
+intersect_nothing.c\
 intersect_plane.c\
-intersect_setup.c\
 intersect_square.c\
 intersect_sphere.c\
 intersect_triangle.c
 
 MAIN			:= \
-arg_reading.c\
 camera_switch.c\
 clean_space.c\
 error_handler.c\
-inits.c\
+fill_image.c\
 main.c\
 testing_prints.c\
 utils.c
 
+MOVEMENT		:= \
+move_nothing.c\
+rotate.c\
+translate.c
+
 PARSE			:= \
 ambiant_parse.c\
+arg_reading.c\
 camera_parse.c\
 color_parse.c\
 cylinder_parse.c\
@@ -49,10 +58,14 @@ triangle_parse.c\
 vector_parse.c
 
 RAY				:= \
-camera_ray_gen.c
+camera_ray_gen.c\
+find_closest.c\
+ray_bounce.c
 
-RENDER			:= \
-render.c
+SETUP			:= \
+inits.c\
+intersect_setup.c\
+movement_setup.c
 
 VECTOR			:= \
 vecangle.c\
@@ -72,11 +85,13 @@ vectranslat.c\
 veczero.c
 
 SRCS			:= \
+$(addprefix color/, $(COLOR))\
 $(addprefix intersect/, $(INTERSECT))\
 $(addprefix main/, $(MAIN))\
+$(addprefix movement/, $(MOVEMENT))\
 $(addprefix parse/, $(PARSE))\
 $(addprefix ray/, $(RAY))\
-$(addprefix render/, $(RENDER))\
+$(addprefix setup/, $(SETUP))\
 $(addprefix vector/, $(VECTOR))
 
 SRCS_FILES			:= \

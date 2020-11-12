@@ -6,31 +6,13 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 10:44:41 by user42            #+#    #+#             */
-/*   Updated: 2020/11/09 21:17:58 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/12 12:02:24 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-double
-    plane_dist(double closest, t_ray *ray, t_vec3lf *plane_normal, t_vec3lf o)
-{
-    double      dist;
-
-    // *plane_normal = vecnorm(*plane_normal);
-    dist = vecdotprod(ray->dir, *plane_normal);
-    if (!dist)
-        return (0);
-    if (dist < 0)
-        *plane_normal = vecscale(*plane_normal, -1);
-    dist = -vecdotprod(vecnew(o, ray->pos), *plane_normal)
-        / vecdotprod(ray->dir, *plane_normal);
-    if (dist < EPSY || dist > closest)
-        return (0);
-    return (dist);
-}
-
-double
+int
     intersect_triangle(double *closest, t_ray *ray, void *elem_detail)
 {
     t_triangle  *tr;
@@ -40,7 +22,7 @@ double
     double      dist;
     double      in;
 
-    tr = (t_triangle *)elem_detail;
+    tr = elem_detail;
     if (!(dist = plane_dist(*closest, ray, &(tr->normal), tr->a)))
         return (0);
     hitpoint = vectranslat(ray->pos, ray->dir, dist);

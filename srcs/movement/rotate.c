@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   testing_prints.c                                   :+:      :+:    :+:   */
+/*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/06 15:48:45 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/11/11 19:29:40 by user42           ###   ########.fr       */
+/*   Created: 2020/11/11 20:15:43 by user42            #+#    #+#             */
+/*   Updated: 2020/11/12 14:04:32 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void
-    print_vec3lf(t_vec3lf vec)
+t_vec3lf
+    rotate(t_vec3lf rot_vector, t_vec3lf dir, double rot_speed)
 {
-    printf("| %+7lf | %+7lf | %+7lf |\n", vec.x, vec.y, vec.z);
+    (void)rot_vector;
+    (void)rot_speed;
+    (void)dir;
+    return (rot_vector);
 }

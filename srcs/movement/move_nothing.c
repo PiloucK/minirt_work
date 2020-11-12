@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   testing_prints.c                                   :+:      :+:    :+:   */
+/*   move_nothing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/06 15:48:45 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/11/11 19:29:40 by user42           ###   ########.fr       */
+/*   Created: 2020/11/12 15:46:48 by user42            #+#    #+#             */
+/*   Updated: 2020/11/12 15:48:44 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 void
-    print_vec3lf(t_vec3lf vec)
+    move_nothing(void *elem_detail, int key)
 {
-    printf("| %+7lf | %+7lf | %+7lf |\n", vec.x, vec.y, vec.z);
+    (void)elem_detail;
+    (void)key;
+    printf("nothing to move");
 }

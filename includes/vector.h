@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/30 17:06:02 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/11/08 22:31:50 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/11 23:13:40 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ t_vec3lf        vecmult(const t_vec3lf a, const t_vec3lf b);
 t_vec3lf        vecnew(const t_vec3lf origin, const t_vec3lf dest);
 t_vec3lf        vecnewvalues(const double x, const double y, const double z);
 t_vec3lf        vecnorm(const t_vec3lf vector);
-double          vecprod(const t_vec3lf a, const t_vec3lf b,
-    const double angle);
+double          vecprod(const t_vec3lf a, const t_vec3lf b, const double angle);
 t_vec3lf        vecscale(t_vec3lf vector, const double i);
 t_vec3lf        vecsub(const t_vec3lf a, const t_vec3lf b);
 t_vec3lf        vecsum(const t_vec3lf a, const t_vec3lf b);

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 21:09:54 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/11/09 21:18:49 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/11 19:37:08 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ t_vec3lf
 	info->splited_value = NULL;
 	vector = vecnorm(vector);
 	if (vecis(vector, 0, 0, 0))
-		err_print(3, info, "No direction value");
+		err_print(3, info, "Can't use Null vectors");
 	return (vector);
 }
