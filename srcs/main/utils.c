@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:57:56 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/11/11 23:17:13 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/12 17:10:19 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,16 +65,7 @@ void
 {
 	t_elem_list *current_elem;
 
-	current_elem = info->first_elem;
-	while (current_elem)
-	{
-		if (current_elem->next_elem)
-			current_elem = current_elem->next_elem;
-		else
-			break ;
-	}
-	if (current_elem)
-		current_elem->next_elem = util_newelem(details, id, info);
-	else
-		info->first_elem = util_newelem(details, id, info);
+	current_elem = util_newelem(details, id, info);
+	current_elem->next_elem = info->first_elem;
+	info->first_elem = current_elem;
 }

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 23:23:19 by user42            #+#    #+#             */
-/*   Updated: 2020/11/12 11:48:18 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/13 00:38:58 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void
         while (cur_light)
         {
             bounce.dir = vecnorm(vecnew(bounce.pos, cur_light->pos));
-            if (find_closest(&bounce, info,
+            if (!find_closest(&bounce, info,
                 vecmag(vecnew(bounce.pos, cur_light->pos)) - EPSY, *i))
             {
                 if (color_add(&lights_sum,

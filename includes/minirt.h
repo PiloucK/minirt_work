@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 14:12:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/11/12 15:46:20 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/13 01:05:02 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 # define EPSY		0.00001
 # define MAX_BOUNCE	1
 # define REDUC		8
-# define ROT_SPEED	30
-# define TRAN_SPEED	10
+# define ROT_SPEED	10
+# define TRAN_SPEED	1
 # define MAX_DIST	1000000
 # define ARR_SIZE	16
 
@@ -74,15 +74,9 @@ typedef struct  s_camera
 	t_vec3lf	upguide;
 	t_vec3lf	v_right;
 	t_vec3lf	v_up;
+	double      fov;
 	double      w;
 }               t_camera;
-
-typedef struct  s_light
-{
-	t_vec3lf       pos;
-	double		ratio;
-	t_color     color;
-}               t_light;
 
 typedef struct  s_sphere
 {
@@ -158,7 +152,7 @@ typedef struct	s_various
 	int			max_bounce;
 	double		reduc;
 	double		rot_speed;
-	double		tran_speed;
+	int			tran_speed;
 	double		max_dist;
 	int			rot;
 }				t_various;
@@ -179,9 +173,10 @@ typedef	struct	s_info
 	t_image		image;
 	t_res		*res;
 	t_ambiant	*ambiant;
-	t_camera	*cur_camera;
-	void		*cur_object;
+	t_elem_list	*cur_camera;
+	t_elem_list	*cur_object;
     t_elem_list *first_elem;
+	t_light_list	*cur_light;
 	t_light_list	*first_light;
     int         do_save;
 	t_various	various;
@@ -192,9 +187,9 @@ typedef	struct	s_info
 }				t_info;
 
 typedef int	(*t_intersect_fnct)(double *closest, t_ray *ray, void *elem_detail);
-typedef void	(*t_movement_fnct)(void *elem_detail, int key);
+typedef void	(*t_change_fnct)(void *elem_detail, int key, t_info *info);
 t_intersect_fnct	g_intersect_arr[ARR_SIZE];
-t_movement_fnct	g_movement_arr[ARR_SIZE];
+t_change_fnct	g_change_arr[ARR_SIZE];
 
 void            ambiant_parse(char ***object_params, t_info *info);
 void            arg_reading(int ac, char **av, t_info **info);
@@ -237,15 +232,27 @@ int		    intersect_sphere(double *closest, t_ray *ray, void *elem_detail);
 int		    intersect_triangle(double *closest, t_ray *ray, void *elem_detail);
 void			intersect_arr_init();
 void		    print_vec3lf(t_vec3lf vec);
-int		    find_closest(t_ray *ray, t_info *info, double closest, int i);
+t_elem_list		*find_closest(t_ray *ray, t_info *info, double closest, int i);
 double		plane_dist(double closest, t_ray *ray, t_vec3lf *plane_normal, t_vec3lf o);
 double			util_clamp(double nb, double min, double max);
 
-void			movement_arr_init();
+void			change_arr_init();
 t_color			color_mult(t_color color, double ratio);
 int				color_add(t_color *color, t_color ratio);
 int				color_sub(t_color *color, t_color ratio);
 
-void			move_nothing(void *elem_detail, int key);
+t_vec3lf		rotate(t_vec3lf v, t_camera *camera, int key, t_info *info);
+t_vec3lf		translate(t_vec3lf pos, int key, t_info *info);
+void			change_nothing(void *elem_detail, int key, t_info *info);
+void			change_camera(void *elem_detail, int key, t_info *info);
+void			change_plane(void *elem_detail, int key, t_info *info);
+void			change_square(void *elem_detail, int key, t_info *info);
+void			change_cylinder(void *elem_detail, int key, t_info *info);
+void			change_triangle(void *elem_detail, int key, t_info *info);
+void			change_sphere(void *elem_detail, int key, t_info *info);
+void			change_light(void *elem_detail, int key, t_info *info);
+int				mouse_hooked(int button, int x, int y, void *arg);
+double			var_scale(double var, int key);
+void			light_switch(t_info *info);
 
 #endif

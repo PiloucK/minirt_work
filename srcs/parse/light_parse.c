@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 18:22:51 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/11/09 17:12:30 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/13 00:34:12 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,5 @@ void
     light->color = color_parse((*object_params)[3], info);
     light->next_light = info->first_light;
     info->first_light = light;
+    info->cur_light = light;
 }

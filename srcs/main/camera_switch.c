@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 19:43:45 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/11/12 11:21:52 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/12 22:49:23 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,18 @@ void
         cur_elem = next_camera(info->first_elem);
         if (!cur_elem)
             err_print(4, info, "No camera found");
-        info->cur_camera = cur_elem->elem_detail;
+        info->cur_camera = cur_elem;
         return ;
     }
-    while (cur_elem->elem_detail != info->cur_camera)
+    while (cur_elem != info->cur_camera)
         cur_elem = cur_elem->next_elem;
     cur_elem = next_camera(cur_elem->next_elem);
     if (!cur_elem)
         cur_elem = next_camera(info->first_elem);
-    if (cur_elem->elem_detail == info->cur_camera)
+    if (cur_elem == info->cur_camera)
         return ;
-    info->cur_camera = cur_elem->elem_detail;
+    info->cur_camera = cur_elem;
+    info->cur_object = cur_elem;
     fill_image(info);
     mlx_put_image_to_window (info->mlx, info->win, info->image.img, 0, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:00:25 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/11/12 15:22:42 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/13 00:48:16 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void
     (*info)->cur_camera = NULL;
     (*info)->cur_object = NULL;
     (*info)->first_elem = NULL;
+    (*info)->cur_light = NULL;
     (*info)->first_light = NULL;
     (*info)->do_save = (ac != 3 ? 0 : 1);
     (*info)->last_read_str = NULL;

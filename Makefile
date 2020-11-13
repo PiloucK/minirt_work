@@ -6,11 +6,24 @@
 #    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/30 08:42:51 by clkuznie          #+#    #+#              #
-#    Updated: 2020/11/12 15:46:20 by user42           ###   ########.fr        #
+#    Updated: 2020/11/13 00:47:00 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			=  minirt
+
+CHANGE			:= \
+change_camera.c\
+change_cylinder.c\
+change_light.c\
+change_nothing.c\
+change_plane.c\
+change_sphere.c\
+change_square.c\
+change_triangle.c\
+rotate.c\
+translate.c\
+var_scale.c
 
 COLOR			:= \
 color_add.c\
@@ -30,14 +43,12 @@ camera_switch.c\
 clean_space.c\
 error_handler.c\
 fill_image.c\
+key_hooked.c\
+light_switch.c\
 main.c\
+mouse_hooked.c\
 testing_prints.c\
 utils.c
-
-MOVEMENT		:= \
-move_nothing.c\
-rotate.c\
-translate.c
 
 PARSE			:= \
 ambiant_parse.c\
@@ -65,7 +76,7 @@ ray_bounce.c
 SETUP			:= \
 inits.c\
 intersect_setup.c\
-movement_setup.c
+change_setup.c
 
 VECTOR			:= \
 vecangle.c\
@@ -85,10 +96,10 @@ vectranslat.c\
 veczero.c
 
 SRCS			:= \
+$(addprefix change/, $(CHANGE))\
 $(addprefix color/, $(COLOR))\
 $(addprefix intersect/, $(INTERSECT))\
 $(addprefix main/, $(MAIN))\
-$(addprefix movement/, $(MOVEMENT))\
 $(addprefix parse/, $(PARSE))\
 $(addprefix ray/, $(RAY))\
 $(addprefix setup/, $(SETUP))\
