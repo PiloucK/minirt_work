@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 16:03:47 by user42            #+#    #+#             */
-/*   Updated: 2020/11/12 12:02:06 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/13 20:29:47 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ int
     v_right.x = vecis(v_right, 0, 0, 0)
         + v_right.x * !vecis(v_right, 0, 0, 0);
     v_up = vecnorm(veccross(square->dir, v_right));
-    if (vecdotprod(hitpoint, v_right) > square->height / 2
-        || -vecdotprod(hitpoint, v_right) > square->height / 2
-        || vecdotprod(hitpoint, v_up) > square->height / 2
-        || -vecdotprod(hitpoint, v_up) > square->height / 2)
+    if (vecdot(hitpoint, v_right) > square->height / 2
+        || -vecdot(hitpoint, v_right) > square->height / 2
+        || vecdot(hitpoint, v_up) > square->height / 2
+        || -vecdot(hitpoint, v_up) > square->height / 2)
         return (0);
-    ray->bounce.pos = hitpoint;
-    ray->bounce.n = vecscale(square->dir, -1);
+    ray->b.pos = hitpoint;
+    ray->b.n = vecscale(square->dir, -1);
     ray->color = square->color;
     *closest = dist;
     return (1);

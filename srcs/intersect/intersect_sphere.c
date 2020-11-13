@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 08:26:07 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/11/12 12:01:38 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/13 20:29:47 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void
     set_bounce(t_ray *ray, t_color color, t_vec3lf pos, t_vec3lf n)
 {
     ray->color = color;
-    ray->bounce.pos = pos;
-    if (vecdotprod(ray->dir, n) > 0)
-        ray->bounce.n = vecscale(vecnorm(n), -1);
-    ray->bounce.n = vecnorm(n);
+    ray->b.pos = pos;
+    if (vecdot(ray->dir, n) > 0)
+        ray->b.n = vecscale(vecnorm(n), -1);
+    ray->b.n = vecnorm(n);
 }
 
 // int
@@ -30,7 +30,7 @@ void
 //     t_vec3lf    hit;
 
 //     sphere = elem_detail;
-//     quad[0] = 2 * vecdotprod(ray->dir, ray->pos);
+//     quad[0] = 2 * vecdot(ray->dir, ray->pos);
 //     quad[1] = pow(vecmag(ray->pos), 2) - pow(sphere->r, 2);
 //     if ((pow(quad[0], 2) - (4 * quad[1])) < 0)
 //         return (0);
@@ -65,7 +65,7 @@ int
     dist_proj_center = vecprod(v_origin_center, ray->dir, vecangle(v_origin_center, ray->dir));
     if (dist_proj_center > sphere->r)
         return (0);
-    dist_origin_proj = vecdotprod(v_origin_center, ray->dir);
+    dist_origin_proj = vecdot(v_origin_center, ray->dir);
     dist_origin_center = vecmag(v_origin_center);
     if (dist_origin_proj <= 0)
     {
@@ -75,8 +75,8 @@ int
             - pow(dist_proj_center, 2));
             dist_origin_intersection = dist_origin_proj + dist_proj_intersection;
             ray->color = sphere->color;
-            ray->bounce.pos = vectranslat(ray->pos, ray->dir, dist_origin_intersection);
-            ray->bounce.n = vecnorm(vecnew(vectranslat(ray->pos, ray->dir, dist_origin_intersection), sphere->pos));
+            ray->b.pos = vectranslat(ray->pos, ray->dir, dist_origin_intersection);
+            ray->b.n = vecnorm(vecnew(vectranslat(ray->pos, ray->dir, dist_origin_intersection), sphere->pos));
             *closest = dist_origin_intersection;
             return (1);
         }
@@ -88,19 +88,19 @@ int
     if ((dist_origin_intersection > EPSY) && (dist_origin_intersection < *closest))
     {
         ray->color = sphere->color;
-        ray->bounce.n = vecnorm(vecnew(sphere->pos, vectranslat(ray->pos, ray->dir, dist_origin_intersection)));
-        ray->bounce.pos = vectranslat(ray->pos, ray->dir, dist_origin_intersection);
+        ray->b.n = vecnorm(vecnew(sphere->pos, vectranslat(ray->pos, ray->dir, dist_origin_intersection)));
+        ray->b.pos = vectranslat(ray->pos, ray->dir, dist_origin_intersection);
         *closest = dist_origin_intersection;
     }
     dist_origin_intersection = dist_origin_proj + dist_proj_intersection;
     if ((dist_origin_intersection > EPSY) && (dist_origin_intersection < *closest))
     {
         if (dist_origin_center < sphere->r - EPSY)
-            ray->bounce.n = vecnorm(vecnew(vectranslat(ray->pos, ray->dir, dist_origin_intersection), sphere->pos));
+            ray->b.n = vecnorm(vecnew(vectranslat(ray->pos, ray->dir, dist_origin_intersection), sphere->pos));
         else
-            ray->bounce.n = vecnorm(vecnew(sphere->pos, vectranslat(ray->pos, ray->dir, dist_origin_intersection)));
+            ray->b.n = vecnorm(vecnew(sphere->pos, vectranslat(ray->pos, ray->dir, dist_origin_intersection)));
         ray->color = sphere->color;
-        ray->bounce.pos = vectranslat(ray->pos, ray->dir, dist_origin_intersection);
+        ray->b.pos = vectranslat(ray->pos, ray->dir, dist_origin_intersection);
         *closest = dist_origin_intersection;
     }
     if (tmp != *closest)

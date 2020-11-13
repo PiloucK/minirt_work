@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:46:24 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/11/13 12:41:45 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/13 20:30:11 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int
     change_arr_init();
     if (!info->do_save)
         use_window(info);
-    else
-        save_image(info);
+    // else
+    //     save_image(info);
     info_free(info);
     err_close(NULL);
 }

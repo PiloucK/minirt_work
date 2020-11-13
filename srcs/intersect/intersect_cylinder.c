@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 21:02:07 by user42            #+#    #+#             */
-/*   Updated: 2020/11/13 14:22:57 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/13 20:29:47 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int
 	hitpoint = vectranslat(ray->pos, ray->dir, dist);
 	if (vecmag(vecnew(hitpoint, center)) > cylinder->r)
 		return (0);
-	ray->bounce.pos = hitpoint;
-	ray->bounce.n = vecscale(disk_normal, -1);
+	ray->b.pos = hitpoint;
+	ray->b.n = vecscale(disk_normal, -1);
 	ray->color = cylinder->color;
 	*closest = dist;
 	return (1);
@@ -87,12 +87,12 @@ int
 	cross1 = veccross(v_bottom_origin, v_bottom_top); //A0xAB
 	cross2 = veccross(ray->dir, v_bottom_top); //VxAB
 	
-	dot1 = vecdotprod(v_bottom_top, v_bottom_top); //ab2
+	dot1 = vecdot(v_bottom_top, v_bottom_top); //ab2
 	
-	dot2 = vecdotprod(cross2, cross2); //a
-	dot3 = 2 * vecdotprod(cross2, cross1); //b
+	dot2 = vecdot(cross2, cross2); //a
+	dot3 = 2 * vecdot(cross2, cross1); //b
 	
-	dot4 = vecdotprod(cross1, cross1) - (pow(cylinder->r, 2) * dot1); //c
+	dot4 = vecdot(cross1, cross1) - (pow(cylinder->r, 2) * dot1); //c
 	tmp = pow(dot3, 2) - 4 * dot2 * dot4; //d
 	if (tmp < 0)
 		ret = 0;
@@ -108,17 +108,17 @@ int
 	   do_bounce = time;
 	}
 	hitpoint = vectranslat(ray->pos, ray->dir, time);
-	proj = vecsum(cylinder->pos, vecscale(cylinder->dir, vecdotprod(cylinder->dir, vecnew(bottom, hitpoint))));
-	if (vecdotprod(cylinder->dir, vecnew(bottom, hitpoint)) > vecmag(v_bottom_top))
+	proj = vecsum(cylinder->pos, vecscale(cylinder->dir, vecdot(cylinder->dir, vecnew(bottom, hitpoint))));
+	if (vecdot(cylinder->dir, vecnew(bottom, hitpoint)) > vecmag(v_bottom_top))
 		ret = 0;
-	if (vecdotprod(cylinder->dir, vecnew(bottom, hitpoint)) < 0)
+	if (vecdot(cylinder->dir, vecnew(bottom, hitpoint)) < 0)
 		ret = 0;
 	if (ret)
 	{
-		ray->bounce.pos = hitpoint;
-		ray->bounce.n = vecnorm(vecnew(proj, hitpoint));
-		if (vecdotprod(ray->bounce.n, ray->dir) > 0)
-			ray->bounce.n = vecscale(ray->bounce.n, -1);
+		ray->b.pos = hitpoint;
+		ray->b.n = vecnorm(vecnew(proj, hitpoint));
+		if (vecdot(ray->b.n, ray->dir) > 0)
+			ray->b.n = vecscale(ray->b.n, -1);
 		ray->color = cylinder->color;
 		*closest = do_bounce;
 	}

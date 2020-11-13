@@ -18,13 +18,13 @@ double
     double      dist;
 
     *plane_normal = vecnorm(*plane_normal);
-    dist = vecdotprod(ray->dir, *plane_normal);
+    dist = vecdot(ray->dir, *plane_normal);
     if (!dist)
         return (0);
     if (dist < 0)
         *plane_normal = vecscale(*plane_normal, -1);
-    dist = -vecdotprod(vecnew(o, ray->pos), *plane_normal)
-        / vecdotprod(ray->dir, *plane_normal);
+    dist = -vecdot(vecnew(o, ray->pos), *plane_normal)
+        / vecdot(ray->dir, *plane_normal);
     if (dist < EPSY || dist > closest)
         return (0);
     return (dist);
@@ -40,8 +40,8 @@ int
     if (!(dist = plane_dist(*closest, ray, &(plane->dir), plane->pos)))
         return (0);
     ray->color = plane->color;
-    ray->bounce.pos = vectranslat(ray->pos, ray->dir, dist);
-    ray->bounce.n = vecscale(plane->dir, -1);
+    ray->b.pos = vectranslat(ray->pos, ray->dir, dist);
+    ray->b.n = vecscale(plane->dir, -1);
     *closest = dist;
     return (1);
 }

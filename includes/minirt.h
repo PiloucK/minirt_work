@@ -129,7 +129,7 @@ typedef struct		s_ray
 	t_vec3lf		pos;
 	t_vec3lf		dir;
 	t_color			color;
-	t_bounce		bounce;
+	t_bounce		b;
 }					t_ray;
 
 typedef struct		s_light_list
@@ -182,7 +182,7 @@ typedef	struct		s_info
 	t_various		various;
 	char			*last_read_str;
 	char			***splited_line;
-	char			**splited_value;
+	char			***splited_value;
 	void			*img;
 }					t_info;
 

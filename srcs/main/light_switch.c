@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/13 00:41:03 by user42            #+#    #+#             */
-/*   Updated: 2020/11/13 00:52:43 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/13 20:30:36 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void
     cur_light = cur_light->next_light;
     if (!cur_light)
         cur_light = info->first_light;
+    info->various.rot = 2;
     if (cur_light == info->cur_light)
         return ;
     info->cur_light = cur_light;
-    info->various.rot = 2;
 }

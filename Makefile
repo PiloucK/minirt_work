@@ -6,7 +6,7 @@
 #    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/30 08:42:51 by clkuznie          #+#    #+#              #
-#    Updated: 2020/11/13 00:47:00 by user42           ###   ########.fr        #
+#    Updated: 2020/11/13 20:29:47 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,7 +81,7 @@ change_setup.c
 VECTOR			:= \
 vecangle.c\
 veccross.c\
-vecdotprod.c\
+vecdot.c\
 vecis.c\
 vecmag.c\
 vecmult.c\

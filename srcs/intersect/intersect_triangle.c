@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 10:44:41 by user42            #+#    #+#             */
-/*   Updated: 2020/11/12 17:03:16 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/13 20:29:47 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,17 @@ int
     side = vecnew(tr->a, tr->b);
     v_vert_hitpoint = vecnew(tr->a, hitpoint);
     in = 0;
-    in += vecdotprod(tr->normal, veccross(side, v_vert_hitpoint)) > 0;
+    in += vecdot(tr->normal, veccross(side, v_vert_hitpoint)) > 0;
     side = vecnew(tr->b, tr->c);
     v_vert_hitpoint = vecnew(tr->b, hitpoint);
-    in += vecdotprod(tr->normal, veccross(side, v_vert_hitpoint)) > 0;
+    in += vecdot(tr->normal, veccross(side, v_vert_hitpoint)) > 0;
     side = vecnew(tr->c, tr->a);
     v_vert_hitpoint = vecnew(tr->c, hitpoint);
-    in += vecdotprod(tr->normal, veccross(side, v_vert_hitpoint)) > 0;
+    in += vecdot(tr->normal, veccross(side, v_vert_hitpoint)) > 0;
     if (in != 0 && in != 3)
         return (0);
-    ray->bounce.pos = hitpoint;
-    ray->bounce.n = vecscale(tr->normal, -1);
+    ray->b.pos = hitpoint;
+    ray->b.n = vecscale(tr->normal, -1);
     ray->color = tr->color;
     *closest = dist;
     return (1);
