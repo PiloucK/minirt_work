@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 14:12:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/11/13 01:05:02 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/13 14:26:52 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include <string.h>
 # include <fcntl.h>
 # include <errno.h>
-											#include <stdlib.h>
-											#include <stdio.h>
+# include <stdlib.h>
+# include <stdio.h>
 
 # define PI			3.14159265359
 # define EPSY		0.00001
@@ -33,7 +33,7 @@
 # define MAX_DIST	1000000
 # define ARR_SIZE	16
 
-typedef enum    e_type
+typedef enum		e_type
 {
 	CY = 1,
 	PL,
@@ -44,32 +44,32 @@ typedef enum    e_type
 	A,
 	L,
 	R,
-}               t_type;
+}               	t_type;
 
-typedef struct	s_color
+typedef struct		s_color
 {
-	double      r;
-	double      g;
-	double      b;
-}				t_color;
+	double      	r;
+	double      	g;
+	double      	b;
+}					t_color;
 
-typedef struct  s_ambiant
+typedef struct  	s_ambiant
 {
-	double		ratio;
-	t_color     color;
-	int			status;
-}               t_ambiant;
+	double			ratio;
+	t_color			color;
+	int				status;
+}					t_ambiant;
 
-typedef struct	s_res
+typedef struct		s_res
 {
 	double			x;
 	double			y;
-	int         status;
-}				t_res;
+	int         	status;
+}					t_res;
 
-typedef struct  s_camera
+typedef struct  	s_camera
 {
-	t_vec3lf      dir;
+	t_vec3lf		dir;
 	t_vec3lf       pos;
 	t_vec3lf	upguide;
 	t_vec3lf	v_right;
@@ -175,12 +175,12 @@ typedef	struct	s_info
 	t_ambiant	*ambiant;
 	t_elem_list	*cur_camera;
 	t_elem_list	*cur_object;
-    t_elem_list *first_elem;
+	t_elem_list *first_elem;
 	t_light_list	*cur_light;
 	t_light_list	*first_light;
-    int         do_save;
+	int         do_save;
 	t_various	various;
-    char        *last_read_str;
+	char        *last_read_str;
 	char		***splited_line;
 	char		***splited_value;
 	void		*img;
@@ -216,22 +216,22 @@ void			square_parse(char ***object_params, t_info *info);
 void			triangle_parse(char ***object_params, t_info *info);
 double			util_absvalue(double lf);
 void			util_addelem(t_info *info, void *details, int id);
-int             util_object_params_count(char **object_params_str);
-t_vec3lf			vector_parse(char *object_param, t_info *info);
+int				util_object_params_count(char **object_params_str);
+t_vec3lf		vector_parse(char *object_param, t_info *info);
 
 void			fill_image(t_info *info);
 void			info_free(t_info *info);
 void			camera_ray_gen(t_ray *ray, t_info *info, double i, double	 j);
 void			ray_bounce(t_ray *ray, t_info *info, t_elem_list *hit_elem, int *i);
 void			camera_switch(t_info *info);
-int			intersect_cylinder(double *closest, t_ray *ray, void *elem_detail);
-int			intersect_nothing(double *closest, t_ray *ray, void *elem_detail);
-int		    intersect_plane(double *closest, t_ray *ray, void *elem_detail);
-int		    intersect_square(double *closest, t_ray *ray, void *elem_detail);
-int		    intersect_sphere(double *closest, t_ray *ray, void *elem_detail);
-int		    intersect_triangle(double *closest, t_ray *ray, void *elem_detail);
+int				intersect_cylinder(double *closest, t_ray *ray, void *elem_detail);
+int				intersect_nothing(double *closest, t_ray *ray, void *elem_detail);
+int				intersect_plane(double *closest, t_ray *ray, void *elem_detail);
+int				intersect_square(double *closest, t_ray *ray, void *elem_detail);
+int				intersect_sphere(double *closest, t_ray *ray, void *elem_detail);
+int				intersect_triangle(double *closest, t_ray *ray, void *elem_detail);
 void			intersect_arr_init();
-void		    print_vec3lf(t_vec3lf vec);
+void			print_vec3lf(t_vec3lf vec);
 t_elem_list		*find_closest(t_ray *ray, t_info *info, double closest, int i);
 double		plane_dist(double closest, t_ray *ray, t_vec3lf *plane_normal, t_vec3lf o);
 double			util_clamp(double nb, double min, double max);
