@@ -15,8 +15,8 @@
 static int
 	mant_size_count(char *str, int *dotnexp, int *i)
 {
-	int     mant_size;
-	
+	int		mant_size;
+
 	*dotnexp = -1;
 	mant_size = 0;
 	while (1)
@@ -36,9 +36,9 @@ static int
 static int
 	half_max_collect(char *str, int *mant_size, int *i)
 {
-	int     frac;
-	int     limit;
-	char    c;
+	int		frac;
+	int		limit;
+	char	c;
 
 	frac = 0.0;
 	limit = (*mant_size > 9) ? 9 : 0;
@@ -59,10 +59,10 @@ static int
 static int
 	no_exp_value(char *str, int mant_size, int *dotnexp, int *i)
 {
-	int     frac1;
-	int     frac2;
-	int     exp_i;
-	int     frac_exp;
+	int		frac1;
+	int		frac2;
+	int		exp_i;
+	int		frac_exp;
 
 	exp_i = *i;
 	*i -= mant_size;
@@ -82,9 +82,9 @@ static int
 static int
 	skim_exp(char *str, int *dotnexp, int i, char **endptr)
 {
-	int     exp_sign;
-	int     exp;
-	
+	int		exp_sign;
+	int		exp;
+
 	exp_sign = 1;
 	exp = 0;
 	if (str[i] == 'E' || str[i] == 'e')
@@ -112,10 +112,10 @@ static int
 double
 	ft_strtod(char *str, char **endptr)
 {
-	double  d;
-	int     sign;
-	int     i;
-	int     dotnexp;
+	double	d;
+	int		sign;
+	int		i;
+	int		dotnexp;
 	int		mant_size;
 
 	sign = 1;

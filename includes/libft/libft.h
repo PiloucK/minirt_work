@@ -118,7 +118,7 @@ void			ladjust_print(int i, char *buf, t_flags *options);
 void			single_print(int c, t_flags *options);
 int				do_write(char c, int info);
 void			ft_altx_print(va_list *arg_ptr, t_flags *options);
-int             fill_nb_buf(va_list *arg_ptr, t_flags *options, char *buf);
+int				fill_nb_buf(va_list *arg_ptr, t_flags *options, char *buf);
 
 double			power_base_to2(int exp);
 double			ft_strtod(char *str, char **endptr);
