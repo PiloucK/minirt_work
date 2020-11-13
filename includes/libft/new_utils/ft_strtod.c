@@ -49,7 +49,7 @@ static int
 		if (str[*i] == '.')
 		{
 			c = str[*i];
-		++*i;
+			++*i;
 		}
 		frac = 10 * frac + (c - '0');
 	}

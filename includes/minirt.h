@@ -97,7 +97,7 @@ typedef struct		s_square
 	t_vec3lf		pos;
 	t_vec3lf		dir;
 	double			height;
-	t_color 		color;
+	t_color			color;
 }					t_square;
 
 typedef struct		s_cylinder
@@ -106,7 +106,7 @@ typedef struct		s_cylinder
 	t_vec3lf		dir;
 	double			r;
 	double			height;
-	t_color 		color;
+	t_color			color;
 }					t_cylinder;
 
 typedef struct		s_triangle
@@ -175,7 +175,7 @@ typedef	struct		s_info
 	t_ambiant		*ambiant;
 	t_elem_list		*cur_camera;
 	t_elem_list		*cur_object;
-	t_elem_list 	*first_elem;
+	t_elem_list		*first_elem;
 	t_light_list	*cur_light;
 	t_light_list	*first_light;
 	int				do_save;
@@ -225,7 +225,7 @@ t_vec3lf			vector_parse(char *object_param, t_info *info);
 void				fill_image(t_info *info);
 void				info_free(t_info *info);
 void				camera_ray_gen(t_ray *ray,
-	t_info *info, double i, double	 j);
+	t_info *info, double i, double j);
 void				ray_bounce(t_ray *ray,
 	t_info *info, t_elem_list *hit_elem, int *i);
 void				camera_switch(t_info *info);
