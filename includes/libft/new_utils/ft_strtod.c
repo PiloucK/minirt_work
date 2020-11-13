@@ -3,27 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtod.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 17:58:16 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/01 19:31:44 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/11/13 14:32:48 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static double
-g_powersof10[] = {
-	10.,
-	100.,
-	1.0e4,
-	1.0e8,
-	1.0e16,
-	1.0e32,
-	1.0e64,
-	1.0e128,
-	1.0e256,
-};
 
 static int
 	mant_size_count(char *str, int *dotnexp, int *i)
@@ -120,24 +107,6 @@ static int
 		return (-1);
 	else
 		return (1);
-}
-
-static double
-	power_base_to2(int exp)
-{
-	double	dexp;
-	double	*power;
-
-	dexp = 1.0;
-	power = g_powersof10;
-	while (exp != 0)
-	{
-		if (exp & 01)
-			dexp *= *power;
-		exp >>= 1;
-		power++;
-	}
-	return (dexp);
 }
 
 double

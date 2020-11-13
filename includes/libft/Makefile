@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+         #
+#    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/13 19:53:29 by clkuznie          #+#    #+#              #
-#    Updated: 2020/08/27 17:57:48 by clkuznie         ###   ########.fr        #
+#    Updated: 2020/11/13 14:31:56 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ GNL				:= \
 get_next_line.c
 
 NEW_UTILS		:= \
+power_base_to2.c\
 ft_strtod.c
 
 FILES			:= \
