@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 21:02:07 by user42            #+#    #+#             */
-/*   Updated: 2020/11/13 20:29:47 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/14 15:44:13 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,7 @@ int
 	hitpoint = vectranslat(ray->pos, ray->dir, dist);
 	if (vecmag(vecnew(hitpoint, center)) > cylinder->r)
 		return (0);
-	ray->b.pos = hitpoint;
-	ray->b.n = vecscale(disk_normal, -1);
-	ray->color = cylinder->color;
+	set_bounce(ray, cylinder->color, hitpoint, disk_normal);
 	*closest = dist;
 	return (1);
 }
@@ -107,6 +105,7 @@ int
 		ret = 1;
 	   do_bounce = time;
 	}
+	ret = 0;
 	hitpoint = vectranslat(ray->pos, ray->dir, time);
 	proj = vecsum(cylinder->pos, vecscale(cylinder->dir, vecdot(cylinder->dir, vecnew(bottom, hitpoint))));
 	if (vecdot(cylinder->dir, vecnew(bottom, hitpoint)) > vecmag(v_bottom_top))

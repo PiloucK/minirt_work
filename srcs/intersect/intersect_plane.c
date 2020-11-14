@@ -39,9 +39,8 @@ int
     plane = elem_detail;
     if (!(dist = plane_dist(*closest, ray, &(plane->dir), plane->pos)))
         return (0);
-    ray->color = plane->color;
-    ray->b.pos = vectranslat(ray->pos, ray->dir, dist);
-    ray->b.n = vecscale(plane->dir, -1);
     *closest = dist;
+    set_bounce(ray, plane->color, vectranslat(ray->pos, ray->dir, dist),
+        plane->dir);
     return (1);
 }

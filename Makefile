@@ -6,7 +6,7 @@
 #    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/30 08:42:51 by clkuznie          #+#    #+#              #
-#    Updated: 2020/11/13 20:29:47 by user42           ###   ########.fr        #
+#    Updated: 2020/11/14 14:22:44 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ intersect_nothing.c\
 intersect_plane.c\
 intersect_square.c\
 intersect_sphere.c\
-intersect_triangle.c
+intersect_triangle.c\
+set_bounce.c
 
 MAIN			:= \
 camera_switch.c\

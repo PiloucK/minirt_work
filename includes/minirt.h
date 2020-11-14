@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/13 20:36:16 by user42            #+#    #+#             */
-/*   Updated: 2020/11/13 20:36:22 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/14 14:27:09 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -268,5 +268,5 @@ void				change_light(void *elem_detail, int key, t_info *info);
 int					mouse_hooked(int button, int x, int y, void *arg);
 double				var_scale(double var, int key);
 void				light_switch(t_info *info);
-
+void				set_bounce(t_ray *ray, t_color color, t_vec3lf pos, t_vec3lf n);
 #endif

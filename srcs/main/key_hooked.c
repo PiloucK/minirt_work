@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 19:46:51 by user42            #+#    #+#             */
-/*   Updated: 2020/11/13 01:13:19 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/13 20:53:02 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,7 @@ int		key_hooked(int key, void *arg)
     else if (key == 32)
         info->various.reduc = 1;
 	else if (key == 65307)
-    {
-        info_free(arg);
-		exit (0);
-    }
+        err_close(info);
     else
         (*g_change_arr[(info->various.rot == 2 ? L : info->cur_object->id)])
             (info->cur_object->elem_detail, key, arg);

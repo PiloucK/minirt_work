@@ -6,21 +6,11 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 08:26:07 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/11/13 20:29:47 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/14 14:22:22 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-void
-    set_bounce(t_ray *ray, t_color color, t_vec3lf pos, t_vec3lf n)
-{
-    ray->color = color;
-    ray->b.pos = pos;
-    if (vecdot(ray->dir, n) > 0)
-        ray->b.n = vecscale(vecnorm(n), -1);
-    ray->b.n = vecnorm(n);
-}
 
 // int
 //     intersect_sphere(double *closest, t_ray *ray, void *elem_detail)

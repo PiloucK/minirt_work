@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:46:24 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/11/13 20:30:11 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/13 21:01:34 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,5 @@ int
         use_window(info);
     // else
     //     save_image(info);
-    info_free(info);
-    err_close(NULL);
+    err_close(info);
 }

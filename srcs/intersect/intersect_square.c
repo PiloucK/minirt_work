@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 16:03:47 by user42            #+#    #+#             */
-/*   Updated: 2020/11/13 20:29:47 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/14 14:47:21 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,7 @@ int
         || vecdot(hitpoint, v_up) > square->height / 2
         || -vecdot(hitpoint, v_up) > square->height / 2)
         return (0);
-    ray->b.pos = hitpoint;
-    ray->b.n = vecscale(square->dir, -1);
-    ray->color = square->color;
+    set_bounce(ray, square->color, hitpoint, square->dir);
     *closest = dist;
     return (1);
 }
