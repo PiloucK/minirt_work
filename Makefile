@@ -6,11 +6,11 @@
 #    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/30 08:42:51 by clkuznie          #+#    #+#              #
-#    Updated: 2020/11/14 14:22:44 by user42           ###   ########.fr        #
+#    Updated: 2020/11/19 11:15:19 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME			=  minirt
+NAME			=  miniRT
 
 CHANGE			:= \
 change_camera.c\
