@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 23:23:19 by user42            #+#    #+#             */
-/*   Updated: 2020/11/19 11:03:37 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/19 11:43:26 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void
             if (!find_closest(&b, info,
                 vecmag(vecnew(b.pos, light->pos)) - EPSY, *i))
             {
-        // printf("%lf | %lf | %lf\n", lights_sum.r, lights_sum.g, lights_sum.b);
+        // printf("%lf | %lf | %lf\n", light->color.r, light->color.g, light->color.b);
                 if (color_add(&lights_sum, color_mult(color_mult(light->color,
                     light->ratio), util_clamp(vecdot(b.dir, ray->b.n), 0, 1))))
                     break ;
