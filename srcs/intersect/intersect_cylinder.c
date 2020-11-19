@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 21:02:07 by user42            #+#    #+#             */
-/*   Updated: 2020/11/14 15:44:13 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/17 09:56:58 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,103 +30,67 @@ int
 	return (1);
 }
 
+double
+	intersect_cylinder_body(double *closest, t_ray *ray, t_cylinder *cylinder)
+{
+	double		quad[5];
+	t_vec3lf	v_bottom_top;
+	t_vec3lf	cross1;
+	t_vec3lf	cross2;
+
+	v_bottom_top = vecscale(cylinder->dir, cylinder->height);
+	cross1 = veccross(vecnew(cylinder->pos, ray->pos), v_bottom_top);
+	cross2 = veccross(ray->dir, v_bottom_top);
+	quad[0] = vecdot(cross2, cross2);
+	quad[1] = vecdot(cross2, cross1);
+	quad[2] = vecdot(cross1, cross1)
+		- (pow(cylinder->r, 2) * vecdot(v_bottom_top, v_bottom_top));
+	quad[4] = pow(quad[1], 2) - (4 * quad[0] * quad[2]);
+	if (quad[4] < 0)
+		return (0);
+	quad[2] = (quad[1] + sqrt(quad[4])) / (2 * quad[0]);
+	quad[3] = (quad[1] - sqrt(quad[4])) / (2 * quad[0]);
+	if (quad[3] > 0 && quad[2] > quad[3])
+		quad[2] = quad[3];
+	else if (quad[2] <= 0)
+		return (0);
+	if (*closest < quad[2] || quad[2] < EPSY)
+		return (0);
+	return (quad[2]);
+}
+
 int
 	intersect_cylinder(double *closest, t_ray *ray, void *elem_detail)
 {
-	double      ret;
+	double      dist;
+	double		ret;
 	t_cylinder  *cylinder;
 	t_vec3lf    hitpoint;
-	t_vec3lf    disk_normal;
-	t_vec3lf    bottom;
-	t_vec3lf    top;
-	t_vec3lf    v_bottom_top;
-	(void)v_bottom_top;
-	t_vec3lf    v_bottom_origin;
-	(void)v_bottom_origin;
-	t_vec3lf    cross1;
-	(void)cross1;
-	t_vec3lf    cross2;
-	(void)cross2;
-	double      dot1;
-	(void)dot1;
-	double      dot2;
-	(void)dot2;
-	double      dot3;
-	(void)dot3;
-	double      dot4;
-	(void)dot4;
-	double      tmp;
-	(void)tmp;
-	double      time;
-	(void)time;
 	t_vec3lf    proj;
-	(void)proj;
-	
-	double      dist;
-	double      do_bounce;
 
-(void)cylinder;
-(void)hitpoint;
-(void)disk_normal;
-(void)dist;
-(void)closest;
-(void)ray;
-(void)elem_detail;
-(void)bottom;
-(void)top;
-	ret = 1;
-	cylinder = (t_cylinder *)elem_detail;
-	bottom = cylinder->pos;
-	top = vectranslat(cylinder->pos, cylinder->dir, cylinder->height);
-	
-	v_bottom_top = vecnew(bottom, top); //AB
-	v_bottom_origin = vecnew(bottom, ray->pos); //A0
-	
-	cross1 = veccross(v_bottom_origin, v_bottom_top); //A0xAB
-	cross2 = veccross(ray->dir, v_bottom_top); //VxAB
-	
-	dot1 = vecdot(v_bottom_top, v_bottom_top); //ab2
-	
-	dot2 = vecdot(cross2, cross2); //a
-	dot3 = 2 * vecdot(cross2, cross1); //b
-	
-	dot4 = vecdot(cross1, cross1) - (pow(cylinder->r, 2) * dot1); //c
-	tmp = pow(dot3, 2) - 4 * dot2 * dot4; //d
-	if (tmp < 0)
-		ret = 0;
-	time = (-dot3 + sqrt(tmp)) / (2 * dot2);
-	if (time < EPSY || time > *closest)
-		ret = 0;
-	else
-		do_bounce = time;
-	time = (-dot3 - sqrt(tmp)) / (2 * dot2);
-	if (time > EPSY && time < do_bounce)
-	{
-		ret = 1;
-	   do_bounce = time;
-	}
 	ret = 0;
-	hitpoint = vectranslat(ray->pos, ray->dir, time);
-	proj = vecsum(cylinder->pos, vecscale(cylinder->dir, vecdot(cylinder->dir, vecnew(bottom, hitpoint))));
-	if (vecdot(cylinder->dir, vecnew(bottom, hitpoint)) > vecmag(v_bottom_top))
-		ret = 0;
-	if (vecdot(cylinder->dir, vecnew(bottom, hitpoint)) < 0)
-		ret = 0;
-	if (ret)
+	cylinder = elem_detail;
+	if ((dist = intersect_cylinder_body(closest, ray, cylinder)))
 	{
-		ray->b.pos = hitpoint;
-		ray->b.n = vecnorm(vecnew(proj, hitpoint));
-		if (vecdot(ray->b.n, ray->dir) > 0)
-			ray->b.n = vecscale(ray->b.n, -1);
-		ray->color = cylinder->color;
-		*closest = do_bounce;
+	printf("%lf\n", dist);
+		hitpoint = vectranslat(ray->pos, ray->dir, dist);
+		proj = vecsum(cylinder->pos, vecscale(cylinder->dir, vecdot(vecsub(ray->pos, cylinder->pos), cylinder->dir) / vecdot(cylinder->dir, cylinder->dir)));
+		// print_vec3lf(proj);
+		// printf("%lf\n", vecdot(vecsub(hitpoint, cylinder->pos), cylinder->dir));
+		// if ((vecmag(vecsub(proj, cylinder->pos)) + vecmag(vecsub(proj, vectranslat(cylinder->pos, cylinder->dir, cylinder->height)))) <= cylinder->height)
+		// {
+			ray->b.pos = hitpoint;
+			ray->b.n = vecnorm(vecnew(proj, hitpoint));
+			// print_vec3lf(ray->b.n);
+			if (vecdot(ray->b.n, ray->dir) < 0)
+				ray->b.n = vecscale(ray->b.n, -1);
+			ray->color = cylinder->color;
+			*closest = dist;
+			ret = 1;
+		// }
 	}
-	double toto;
-	toto = intersect_disk(closest, ray, cylinder, cylinder->pos);
-	if (toto)
-		ret = toto;
-	toto = intersect_disk(closest, ray, cylinder, vectranslat(cylinder->pos, cylinder->dir, cylinder->height));
-	if (toto)
-		ret = toto;
+	if (intersect_disk(closest, ray, cylinder, cylinder->pos) ||
+		intersect_disk(closest, ray, cylinder, vectranslat(cylinder->pos, cylinder->dir, cylinder->height)))
+		ret = 1;
 	return (ret);
 }

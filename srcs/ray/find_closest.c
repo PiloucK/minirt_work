@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 23:25:27 by user42            #+#    #+#             */
-/*   Updated: 2020/11/12 22:54:09 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/19 11:04:07 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ t_elem_list     *
     {
         if ((*g_intersect_arr[cur_elem->id])(&closest, ray,
             cur_elem->elem_detail))
+            {
+                printf("tto\n");
             closest_elem = cur_elem;
+            }
         cur_elem = cur_elem->next_elem;
     }
     if (i)

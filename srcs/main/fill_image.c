@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 23:28:47 by user42            #+#    #+#             */
-/*   Updated: 2020/11/12 11:45:48 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/19 11:04:47 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void
     while (i < info->various.reduc && x + i < info->res->x)
     {
         j = 0;
-        while (j < info->various.reduc && y + j < info->res->y)
+        while (j < info->various.reduc && y + j < 1)
         {
             pixel_address = info->image.data +
             ((y + j) * info->image.line_len +
@@ -33,6 +33,7 @@ void
             *pixel = color.r * 255;
             *pixel = (*pixel << 8) + color.g * 255;
             *pixel = (*pixel << 8) + color.b * 255;
+            // printf("%u\n", *pixel);
             j++;
         }
         i++;
@@ -51,7 +52,7 @@ void
     while (x < info->res->x + info->various.reduc)
     {
         y = 0;
-        while (y < info->res->y + info->various.reduc)
+        while (y < 1 + info->various.reduc)
         {
             camera_ray_gen(&ray, info,
                 x + info->various.reduc / 2, y + info->various.reduc / 2);

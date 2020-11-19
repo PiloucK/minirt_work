@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:46:24 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/11/13 21:01:34 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/19 10:53:41 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,16 @@ void
     fill_image(info);
 }
 
+int
+    update_window(void *param)
+{
+    t_info      *info;
+    
+    info = param;
+    mlx_put_image_to_window(info->mlx, info->win, info->image.img, 0, 0);
+    return (0);
+}
+
 void
     use_window(t_info *info)
 {
@@ -31,6 +41,7 @@ void
     mlx_put_image_to_window (info->mlx, info->win, info->image.img, 0, 0);
     mlx_mouse_hook(info->win, mouse_hooked, info);
     mlx_hook(info->win, 17, (1L << 17), err_close, info);
+    mlx_hook(info->win, 15, (1L << 16), update_window, info);
     mlx_key_hook(info->win, key_hooked, info);
     mlx_loop(info->mlx);
 }

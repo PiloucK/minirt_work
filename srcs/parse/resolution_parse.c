@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:45:29 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/11/09 12:00:26 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/17 11:20:35 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,7 @@ void
         err_print(2, info, NULL);
     info->res->x = double_parse_inrange((*object_params)[1], 0, 0, info);
     info->res->y = double_parse_inrange((*object_params)[2], 0, 0, info);
-    if (!info->do_save)
-        resize(info);
+    resize(info);
     if (info->res->x <= 0 || info->res->y <= 0)
         err_print(3, info, "Can't use suggested size");
 }

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:46:43 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/11/11 20:24:32 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/19 10:46:24 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ void
     int     fd;
     int     gnl_ret;
 
-    if ((ac != 2 && ac != 3) ||
-        (ac == 3 && ft_memcmp(av[2], "-save", 6)) ||
+    if ((ac != 2 && ac != 3) || (ac == 3 && ft_memcmp(av[2], "--save", 7)) ||
         is_wrong_file_format(av[1]))
         err_print(1, NULL, NULL);
     if ((fd = open(av[1], O_RDONLY)) < 0)
@@ -51,5 +50,6 @@ void
     }
     if (gnl_ret == -1)
         err_print(2, NULL, NULL);
-    close(fd);
+    if (close(fd) < 0)
+        err_print(2, *info, NULL);
 }
