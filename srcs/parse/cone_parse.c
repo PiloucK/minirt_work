@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 17:49:11 by user42            #+#    #+#             */
-/*   Updated: 2020/11/23 02:01:36 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/23 08:07:31 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ void
 	details->dir = vector_parse((*object_params)[2], info);
 	details->angle = double_parse_inrange((*object_params)[3], 0, 180, info)
 		/ 2 * (PI / 180);
+	if (!details->angle || double_parse_inrange((*object_params)[3], 0, 180,
+		info) == 180)
+		err_print(3, info, "Can't use angle value of 0 or 180");
 	details->color = color_parse((*object_params)[4], info);
 	util_addelem(info, details, CO);
 }

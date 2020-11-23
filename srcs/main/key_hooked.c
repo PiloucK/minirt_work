@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 19:46:51 by user42            #+#    #+#             */
-/*   Updated: 2020/11/23 07:28:55 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/23 08:10:56 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ int		key_hooked(int key, void *arg)
 			key, arg);
 	fill_image(arg);
 	mlx_put_image_to_window(info->mlx, info->win, info->image.img, 0, 0);
-	info->various.reduc = REDUC;
+	info->various.reduc = ((info->res->x * info->res->y) > 10000 ? REDUC : 1);
 	return (0);
 }

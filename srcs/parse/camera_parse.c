@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 21:38:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/11/23 01:55:54 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/23 08:05:58 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void
 	details->v_up = vecnorm(veccross(details->v_right, details->dir));
 	details->v_right = vecscale(details->v_right, -1);
 	util_addelem(info, details, C);
+	if (!details->fov || details->fov == 180)
+		err_print(3, info, "Can't use fov value of 0 or 180");
 	info->cur_camera = info->first_elem;
 	info->cur_object = info->first_elem;
 }
