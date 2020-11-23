@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vecdot.c                                       :+:      :+:    :+:   */
+/*   vecdot.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/30 19:43:11 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/09 09:30:42 by clkuznie         ###   ########.fr       */
+/*   Created: 2020/11/23 02:08:13 by user42            #+#    #+#             */
+/*   Updated: 2020/11/23 02:08:23 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
 
 double
-    vecdot(const t_vec3lf a, const t_vec3lf b)
+	vecdot(const t_vec3lf a, const t_vec3lf b)
 {
-    return (a.x * b.x + a.y * b.y + a.z * b.z);
+	return (a.x * b.x + a.y * b.y + a.z * b.z);
 }

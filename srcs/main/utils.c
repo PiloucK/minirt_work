@@ -6,34 +6,20 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:57:56 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/11/12 17:10:19 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/23 03:14:38 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-// double
-//     fast_clamp(double nb, double min, double max)
-// {
-//     int  dif;
-//     int  dif_sign;
-
-//     dif = nb - min;
-//     dif_sign = dif >> 31;
-//     nb = nb - (dif & dif_sign);
-//     dif = nb - max;
-//     dif_sign = dif >> 31;
-//     return (nb + (dif & dif_sign));
-// }
-
 double
-    util_clamp(double nb, double min, double max)
+	util_clamp(double nb, double min, double max)
 {
-    if (nb < min)
-        nb = min;
-    if (nb > max)
-        nb = max;
-    return (nb);
+	if (nb < min)
+		nb = min;
+	if (nb > max)
+		nb = max;
+	return (nb);
 }
 
 int
@@ -47,11 +33,11 @@ int
 	return (i);
 }
 
-static t_elem_list *
-	util_newelem(void *details, int id, t_info *info)
+static t_elem_list
+	*util_newelem(void *details, int id, t_info *info)
 {
 	t_elem_list	*newelem;
-	
+
 	if (!(newelem = malloc(sizeof(*newelem))))
 		err_print(2, info, NULL);
 	newelem->id = id;
@@ -63,7 +49,7 @@ static t_elem_list *
 void
 	util_addelem(t_info *info, void *details, int id)
 {
-	t_elem_list *current_elem;
+	t_elem_list	*current_elem;
 
 	current_elem = util_newelem(details, id, info);
 	current_elem->next_elem = info->first_elem;

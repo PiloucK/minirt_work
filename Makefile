@@ -6,7 +6,7 @@
 #    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/30 08:42:51 by clkuznie          #+#    #+#              #
-#    Updated: 2020/11/19 11:27:25 by user42           ###   ########.fr        #
+#    Updated: 2020/11/23 07:02:20 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME			=  miniRT
 
 CHANGE			:= \
 change_camera.c\
+change_cone.c\
 change_cylinder.c\
 change_light.c\
 change_nothing.c\
@@ -27,10 +28,12 @@ var_scale.c
 
 COLOR			:= \
 color_add.c\
+color_add_no_limit.c\
 color_mult.c\
 color_sub.c
 
 INTERSECT		:= \
+intersect_cone.c\
 intersect_cylinder.c\
 intersect_nothing.c\
 intersect_plane.c\
@@ -48,6 +51,7 @@ key_hooked.c\
 light_switch.c\
 main.c\
 mouse_hooked.c\
+save_image.c\
 testing_prints.c\
 utils.c
 
@@ -56,6 +60,7 @@ ambiant_parse.c\
 arg_reading.c\
 camera_parse.c\
 color_parse.c\
+cone_parse.c\
 cylinder_parse.c\
 double_parse_inrange.c\
 light_parse.c\
@@ -111,11 +116,14 @@ $(addprefix srcs/, $(SRCS))
 
 OBJS			= $(SRCS_FILES:%.c=%.o)
 
+HEADERS			= \
+includes/minirt.h\
+includes/vector.h
+
 INCLUDES		= \
 -I includes/libmlx\
--I includes/libmlx/X11\
 -I includes\
--I includes/libft\
+-I includes/libft
 
 LIB_SRCS		= \
 includes/libft/libft.a\
@@ -130,27 +138,27 @@ RM				= rm -f
 
 all:			$(NAME)
 
-$(NAME):		libcomp $(OBJS)
+$(NAME):		$(LIB_SRCS) $(OBJS)
 	@echo "\n\033[0;33mCompiling..."
 	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LIB_SRCS) $(MLX_LINKS)
 
-%.o:			%.c
+%.o:			%.c $(HEADERS)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@ -g
 
-libcomp:
+$(LIB_SRCS):
 	@echo "\n\033[0;33mLib_Compiling..."
 	make -C includes/libft
 	make -C includes/libmlx
 
-clean:
+clean:			cleanlib
 	$(RM) $(OBJS)
 
-fclean:			clean
+fclean:			fcleanlib
+	$(RM) $(OBJS)
 	$(RM) $(NAME)
 
 cleanlib:
 	make --directory=includes/libft clean
-	make --directory=includes/libmlx clean
 
 fcleanlib:
 	make --directory=includes/libft fclean

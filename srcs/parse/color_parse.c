@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   color_parse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/01 17:08:10 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/10/14 12:07:10 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/11/23 01:58:34 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 t_color
-    color_parse(char *object_param, t_info *info)
+	color_parse(char *object_param, t_info *info)
 {
-    char	**values;
-	t_color  colors;
+	char	**values;
+	t_color	colors;
 
 	values = ft_split(object_param, ',');
 	info->splited_value = &values;

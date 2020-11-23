@@ -6,19 +6,19 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 22:30:06 by user42            #+#    #+#             */
-/*   Updated: 2020/11/08 22:30:51 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/23 02:06:14 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
 
 t_vec3lf
-    vecmult(const t_vec3lf a, const t_vec3lf b)
+	vecmult(const t_vec3lf a, const t_vec3lf b)
 {
-    t_vec3lf    mult;
-    
-    mult.x = a.x * b.x;
-    mult.y = a.y * b.y;
-    mult.z = a.z * b.z;
-    return (mult);
+	t_vec3lf	mult;
+
+	mult.x = a.x * b.x;
+	mult.y = a.y * b.y;
+	mult.z = a.z * b.z;
+	return (mult);
 }

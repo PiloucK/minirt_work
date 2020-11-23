@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/13 20:36:16 by user42            #+#    #+#             */
-/*   Updated: 2020/11/14 14:27:09 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/23 07:01:58 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define MINIRT_H
 
 # include "libft.h"
-# include "key_codes.h"
 # include "vector.h"
 # include <math.h>
 # include <mlx.h>
@@ -30,12 +29,13 @@
 # define REDUC		8
 # define ROT_SPEED	10
 # define TRAN_SPEED	1
-# define MAX_DIST	1000000
+# define MAX_DIST	1000000000
 # define ARR_SIZE	16
 
 typedef enum		e_type
 {
-	CY = 1,
+	CO,
+	CY,
 	PL,
 	SP,
 	SQ,
@@ -108,6 +108,14 @@ typedef struct		s_cylinder
 	double			height;
 	t_color			color;
 }					t_cylinder;
+
+typedef struct		s_cone
+{
+	t_vec3lf		apex;
+	t_vec3lf		dir;
+	double			angle;
+	t_color			color;
+}					t_cone;
 
 typedef struct		s_triangle
 {
@@ -198,6 +206,7 @@ void				arg_reading(int ac, char **av, t_info **info);
 void				arrfree(char ***arrtofree);
 void				camera_parse(char ***object_params, t_info *info);
 t_color				color_parse(char *s, t_info *info);
+void				cone_parse(char ***object_params, t_info *info);
 void				cylinder_parse(char ***object_params, t_info *info);
 double				double_parse_inrange(char *value,
 	double min_range, double max_range, t_info *info);
@@ -229,6 +238,8 @@ void				camera_ray_gen(t_ray *ray,
 void				ray_bounce(t_ray *ray,
 	t_info *info, t_elem_list *hit_elem, int *i);
 void				camera_switch(t_info *info);
+int					intersect_cone(double *closest,
+	t_ray *ray, void *elem_detail);
 int					intersect_cylinder(double *closest,
 	t_ray *ray, void *elem_detail);
 int					intersect_nothing(double *closest,
@@ -252,6 +263,7 @@ double				util_clamp(double nb, double min, double max);
 void				change_arr_init();
 t_color				color_mult(t_color color, double ratio);
 int					color_add(t_color *color, t_color ratio);
+t_color				color_add_no_limit(t_color color1, t_color color2);
 int					color_sub(t_color *color, t_color ratio);
 
 t_vec3lf			rotate(t_vec3lf v,
@@ -261,6 +273,7 @@ void				change_nothing(void *elem_detail, int key, t_info *info);
 void				change_camera(void *elem_detail, int key, t_info *info);
 void				change_plane(void *elem_detail, int key, t_info *info);
 void				change_square(void *elem_detail, int key, t_info *info);
+void				change_cone(void *elem_detail, int key, t_info *info);
 void				change_cylinder(void *elem_detail, int key, t_info *info);
 void				change_triangle(void *elem_detail, int key, t_info *info);
 void				change_sphere(void *elem_detail, int key, t_info *info);
@@ -268,5 +281,8 @@ void				change_light(void *elem_detail, int key, t_info *info);
 int					mouse_hooked(int button, int x, int y, void *arg);
 double				var_scale(double var, int key);
 void				light_switch(t_info *info);
-void				set_bounce(t_ray *ray, t_color color, t_vec3lf pos, t_vec3lf n);
+void				save_image(t_info *info);
+void				set_bounce(t_ray *ray, t_color color, t_vec3lf pos,
+	t_vec3lf n);
+
 #endif

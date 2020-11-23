@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   veczero.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/30 19:04:26 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/09/30 19:07:05 by clkuznie         ###   ########.fr       */
+/*   Updated: 2020/11/23 02:07:41 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
 
 t_vec3lf
-    veczero(void)
+	veczero(void)
 {
-    t_vec3lf    zero;
+	t_vec3lf	zero;
 
-    zero.x = 0;
-    zero.y = 0;
-    zero.z = 0;
-    return (zero);
+	zero.x = 0;
+	zero.y = 0;
+	zero.z = 0;
+	return (zero);
 }

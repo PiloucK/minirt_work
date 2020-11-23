@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 21:09:54 by clkuznie          #+#    #+#             */
-/*   Updated: 2020/11/11 19:37:08 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/23 02:00:23 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 t_vec3lf
 	vector_parse(char *object_param, t_info *info)
 {
-	char	**values;
-	t_vec3lf  vector;
+	char		**values;
+	t_vec3lf	vector;
 
 	values = ft_split(object_param, ',');
 	info->splited_value = &values;
