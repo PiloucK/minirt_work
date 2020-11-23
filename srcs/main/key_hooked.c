@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 19:46:51 by user42            #+#    #+#             */
-/*   Updated: 2020/11/23 08:10:56 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/23 08:51:09 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@ int		key_hooked(int key, void *arg)
 	t_info		*info;
 
 	info = arg;
+printf("%d\n", key);
 	if (key == 65363)
 		camera_switch(arg);
 	else if (key == 65361)
 		light_switch(arg);
 	else if (key == 65293)
 		info->various.rot = 0;
-	else if (key == 112)
+	else if (key == 114)
 		info->various.rot = !info->various.rot;
 	else if (key == 32)
 		info->various.reduc = -1;

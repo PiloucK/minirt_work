@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 20:15:43 by user42            #+#    #+#             */
-/*   Updated: 2020/11/23 02:16:31 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/23 08:52:12 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,15 @@ t_vec3lf
 t_vec3lf
 	select_axis(t_camera *camera, int key, double *ratio, t_info *info)
 {
-	*ratio = ((key == 44 * 1.0) * (2.0 * PI - info->various.rot_speed))
-	+ ((key == 111 * 1.0) * info->various.rot_speed)
+	*ratio = ((key == 119 * 1.0) * (2.0 * PI - info->various.rot_speed))
+	+ ((key == 115 * 1.0) * info->various.rot_speed)
 	+ ((key == 97 * 1.0) * (2.0 * PI - info->various.rot_speed))
-	+ ((key == 101 * 1.0) * info->various.rot_speed)
+	+ ((key == 100 * 1.0) * info->various.rot_speed)
 	+ ((key == 65507 * 1.0) * (2.0 * PI - info->various.rot_speed))
 	+ ((key == 65505 * 1.0) * info->various.rot_speed);
-	if (key == 44 || key == 111)
+	if (key == 119 || key == 115)
 		return (camera->v_right);
-	if (key == 97 || key == 101)
+	if (key == 97 || key == 100)
 		return (camera->v_up);
 	return (camera->dir);
 }
